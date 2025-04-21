@@ -19,6 +19,11 @@
     <!-- Content -->
 
     <div class="container-xxl">
+        <div style="position: absolute; top: 20px; left: 20px; z-index: 9999;">
+            <a href="{{ url()->previous() }}" class="text-primary fa fa-arrow-left"
+                style="font-size: 2.5rem; text-decoration: none;">
+            </a>
+        </div>
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner py-4">
                 <!-- Login -->

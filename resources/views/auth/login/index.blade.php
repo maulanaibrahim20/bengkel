@@ -53,7 +53,8 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                    {{-- <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button> --}}
+                    <a class="btn btn-primary d-grid w-100" href="{{ url('/admin/dashboard') }}">Sign in</a>
                 </div>
             </form>
 
@@ -67,18 +68,9 @@
             <div class="divider my-4">
                 <div class="divider-text">or</div>
             </div>
-
             <div class="d-flex justify-content-center">
-                <a href="javascript:;" class="btn btn-icon btn-label-facebook me-3">
-                    <i class="tf-icons fa-brands fa-facebook-f fs-5"></i>
-                </a>
-
                 <a href="javascript:;" class="btn btn-icon btn-label-google-plus me-3">
                     <i class="tf-icons fa-brands fa-google fs-5"></i>
-                </a>
-
-                <a href="javascript:;" class="btn btn-icon btn-label-twitter">
-                    <i class="tf-icons fa-brands fa-twitter fs-5"></i>
                 </a>
             </div>
         </div>

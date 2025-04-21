@@ -7,16 +7,24 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="{{ url('/') }}" class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
-            <a href="{{ url('/about') }}" class="nav-item nav-link {{ Request::is('about') ? 'active' : '' }}">About</a>
-            <a href="{{ url('/service') }}"
-                class="nav-item nav-link {{ Request::is('service') ? 'active' : '' }}">Layanan</a>
-            <a href="{{ url('/booking') }}"
-                class="nav-item nav-link {{ Request::is('booking') ? 'active' : '' }}">Booking</a>
-            <a href="{{ url('/contact') }}"
-                class="nav-item nav-link {{ Request::is('contact') ? 'active' : '' }}">Contact</a>
+            <a href="{{ url('/') }}" class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">
+                <i class="fa fa-home me-2"></i>Home
+            </a>
+            <a href="{{ url('/about') }}" class="nav-item nav-link {{ Request::is('about') ? 'active' : '' }}">
+                <i class="fa fa-info-circle me-2"></i>About
+            </a>
+            <a href="{{ url('/service') }}" class="nav-item nav-link {{ Request::is('service') ? 'active' : '' }}">
+                <i class="fa fa-tools me-2"></i>Service
+            </a>
+            <a href="{{ url('/booking') }}" class="nav-item nav-link {{ Request::is('booking') ? 'active' : '' }}">
+                <i class="fa fa-calendar-check me-2"></i>Booking
+            </a>
+            <a href="{{ url('/contact') }}" class="nav-item nav-link {{ Request::is('contact') ? 'active' : '' }}">
+                <i class="fa fa-envelope me-2"></i>Contact
+            </a>
         </div>
-        <a href="{{ url('/login') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Login<i
-                class="fa fa-sign-in ms-2"></i></a>
+        <a href="{{ url('/login') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
+            Login <i class="fa fa-sign-in-alt ms-2"></i>
+        </a>
     </div>
 </nav>

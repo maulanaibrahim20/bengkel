@@ -21,8 +21,8 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/register', [RegisterController::class, 'register']);
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::group(['prefix' => 'admin'], function () {
-        Route::get('/dashboard', [DashboardController::class, 'admin']);
-    });
+// Route::middleware(['auth'])->group(function () {
+Route::group(['prefix' => '/admin'], function () {
+    Route::get('/dashboard', [DashboardController::class, 'admin']);
 });
+// });
