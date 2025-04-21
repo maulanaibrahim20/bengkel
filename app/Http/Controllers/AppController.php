@@ -6,5 +6,28 @@ use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
-    public function index(Request $request) {}
+    public function home(Request $request)
+    {
+        return view('landing.pages.home.index');
+    }
+
+    public function about(Request $request)
+    {
+        return view('landing.pages.about.index');
+    }
+
+    public function service(Request $request)
+    {
+        return view('landing.pages.service.index');
+    }
+
+    public function booking(Request $request)
+    {
+        return view('landing.pages.booking.index');
+    }
+
+    public function contact(Request $request)
+    {
+        return view('landing.pages.contact.index');
+    }
 }

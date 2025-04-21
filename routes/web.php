@@ -1,13 +1,18 @@
 <?php
 
+use App\Http\Controllers\AppController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('landing.index');
-});
+Route::get('/', [AppController::class, 'home']);
+Route::get('/about', [AppController::class, 'about']);
+Route::get('/service', [AppController::class, 'service']);
+Route::get('/booking', [AppController::class, 'booking']);
+Route::get('/contact', [AppController::class, 'contact']);
+
+
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index']);
     Route::post('/login', [LoginController::class, 'login']);
