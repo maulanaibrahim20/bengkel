@@ -1,0 +1,23 @@
+<?php
+
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('landing.index');
+});
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [LoginController::class, 'index']);
+    Route::post('/login', [LoginController::class, 'login']);
+
+    Route::get('/register', [RegisterController::class, 'index']);
+    Route::post('/register', [RegisterController::class, 'register']);
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::group(['prefix' => 'admin'], function () {
+        Route::get('/dashboard', [DashboardController::class, 'admin']);
+    });
+});
