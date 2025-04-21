@@ -22,3 +22,41 @@
 
 <!-- Page JS -->
 <script src="{{url('/assets')}}/js/pages-auth.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+@if (session('success'))
+    <script>
+        toastr.options.timeOut = 50000;
+        toastr.success("{{ session('success') }}");
+        var audio = new Audio('audio.mp3');
+        audio.play();
+    </script>
+@endif
+
+@if (session('warning'))
+    <script>
+        toastr.options.timeOut = 50000;
+        toastr.warning("{{ session('warning') }}");
+        var audio = new Audio('audio.mp3');
+        audio.play();
+    </script>
+@endif
+
+@if (session('info'))
+    <script>
+        toastr.options.timeOut = 50000;
+        toastr.info("{{ session('info') }}");
+        var audio = new Audio('audio.mp3');
+        audio.play();
+    </script>
+@endif
+
+@if (session('error'))
+    <script>
+        toastr.options.timeOut = 50000;
+        toastr.error("{{ session('error') }}");
+        var audio = new Audio('audio.mp3');
+        audio.play();
+    </script>
+@endif

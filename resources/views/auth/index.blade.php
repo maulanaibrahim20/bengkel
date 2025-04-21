@@ -13,6 +13,7 @@
     <meta name="description" content="" />
 
     @include('auth.component.style_css')
+
 </head>
 
 <body>
