@@ -34,6 +34,7 @@ class RegisterController extends Controller
         ]);
 
         if ($validate->fails()) {
+            DB::rollBack();
             return back()->with('error', $validate->errors()->first());
         };
 

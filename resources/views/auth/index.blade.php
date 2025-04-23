@@ -13,7 +13,6 @@
     <meta name="description" content="" />
 
     @include('auth.component.style_css')
-
 </head>
 
 <body>
@@ -21,7 +20,7 @@
 
     <div class="container-xxl">
         <div style="position: absolute; top: 20px; left: 20px; z-index: 9999;">
-            <a href="{{ url()->previous() }}" class="text-primary fa fa-arrow-left"
+            <a href="{{ url('/') }}" class="text-primary fa fa-arrow-left"
                 style="font-size: 2.5rem; text-decoration: none;">
             </a>
         </div>
@@ -33,6 +32,7 @@
         </div>
     </div>
     @include('auth.component.style_js')
+    @yield('js')
 </body>
 
 </html>

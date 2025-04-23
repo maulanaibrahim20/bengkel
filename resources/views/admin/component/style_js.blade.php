@@ -23,3 +23,42 @@
 
 <!-- Page JS -->
 <script src="{{url('/assets')}}/js/dashboards-analytics.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+@if (session('success'))
+    <script>
+        toastr.options.timeOut = 5000;
+        toastr.options.progressBar = true;
+        toastr.success("{{ session('success') }}");
+        var audio = new Audio('audio.mp3');
+        audio.play();
+    </script>
+@endif
+
+@if (session('warning'))
+    <script>
+        toastr.options.timeOut = 5000;
+        toastr.options.progressBar = true;
+        toastr.warning("{{ session('warning') }}");
+        var audio = new Audio('audio.mp3');
+    </script>
+@endif
+
+@if (session('info'))
+    <script>
+        toastr.options.timeOut = 5000;
+        toastr.options.progressBar = true;
+        toastr.info("{{ session('info') }}");
+        var audio = new Audio('audio.mp3');
+    </script>
+@endif
+
+@if (session('error'))
+    <script>
+        toastr.options.timeOut = 5000;
+        toastr.options.progressBar = true;
+        toastr.error("{{ session('error') }}");
+        var audio = new Audio('audio.mp3');
+    </script>
+@endif

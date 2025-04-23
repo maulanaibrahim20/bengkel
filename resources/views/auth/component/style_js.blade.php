@@ -27,7 +27,8 @@
 
 @if (session('success'))
     <script>
-        toastr.options.timeOut = 50000;
+        toastr.options.timeOut = 5000;
+        toastr.options.progressBar = true;
         toastr.success("{{ session('success') }}");
         var audio = new Audio('audio.mp3');
         audio.play();
@@ -36,27 +37,27 @@
 
 @if (session('warning'))
     <script>
-        toastr.options.timeOut = 50000;
+        toastr.options.timeOut = 5000;
+        toastr.options.progressBar = true;
         toastr.warning("{{ session('warning') }}");
         var audio = new Audio('audio.mp3');
-        audio.play();
     </script>
 @endif
 
 @if (session('info'))
     <script>
-        toastr.options.timeOut = 50000;
+        toastr.options.timeOut = 5000;
+        toastr.options.progressBar = true;
         toastr.info("{{ session('info') }}");
         var audio = new Audio('audio.mp3');
-        audio.play();
     </script>
 @endif
 
 @if (session('error'))
     <script>
-        toastr.options.timeOut = 50000;
+        toastr.options.timeOut = 5000;
+        toastr.options.progressBar = true;
         toastr.error("{{ session('error') }}");
         var audio = new Audio('audio.mp3');
-        audio.play();
     </script>
 @endif

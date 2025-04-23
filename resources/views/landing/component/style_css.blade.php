@@ -23,3 +23,5 @@
 
 <!-- Template Stylesheet -->
 <link href="{{url('/landing')}}/css/style.css" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">

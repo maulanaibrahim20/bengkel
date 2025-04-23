@@ -26,10 +26,11 @@
             <h4 class="mb-1 pt-2">Welcome to Vuexy! 👋</h4>
             <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
-            <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+            <form id="formAuthentication" class="mb-3" action="{{ url('/login') }}" method="POST">
+                @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Email or Username</label>
-                    <input type="text" class="form-control" id="email" name="email-username"
+                    <input type="text" class="form-control" id="email" name="email"
                         placeholder="Enter your email or username" autofocus />
                 </div>
                 <div class="mb-3 form-password-toggle">
@@ -53,11 +54,9 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    {{-- <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button> --}}
-                    <a class="btn btn-primary d-grid w-100" href="{{ url('/admin/dashboard') }}">Sign in</a>
+                    <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                 </div>
             </form>
-
             <p class="text-center">
                 <span>New on our platform?</span>
                 <a href="{{ url('/register') }}">
