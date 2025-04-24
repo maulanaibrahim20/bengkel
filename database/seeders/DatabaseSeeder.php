@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\CmsComponent;
-use App\Models\CmsPages;
 use App\Models\Role;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
