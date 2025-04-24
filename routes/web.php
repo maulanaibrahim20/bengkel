@@ -36,6 +36,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('brand-engine', [BrandEngineController::class, 'index']);
             Route::get('brand-engine/create', [BrandEngineController::class, 'create']);
             Route::post('brand-engine/create', [BrandEngineController::class, 'store']);
+            Route::get('brand-engine/{id}/edit', [BrandEngineController::class, 'edit']);
+            Route::put('brand-engine/{id}/update', [BrandEngineController::class, 'update']);
+            Route::delete('brand-engine/{id}/delete', [BrandEngineController::class, 'destroy']);
         });
     });
 

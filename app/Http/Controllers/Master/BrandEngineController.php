@@ -33,6 +33,7 @@ class BrandEngineController extends Controller
     public function store(Request $request)
     {
         DB::beginTransaction();
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
         ]);
@@ -51,6 +52,70 @@ class BrandEngineController extends Controller
         } catch (\Exception) {
             DB::rollBack();
             return back()->with('error', 'Something went wrong.');
+        }
+    }
+
+    public function edit($id)
+    {
+        $brandEngine = $this->brandEngine->find($id);
+
+        if (!$brandEngine) {
+            return back()->with('error', 'Brand Engine not found.');
+        }
+
+        return view('admin.pages.master.brand_engine.edit', compact('brandEngine'));
+    }
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            DB::rollBack();
+            return back()->with('error', $validator->errors()->first());
+        }
+
+        try {
+            $brandEngine = $this->brandEngine->find($id);
+
+            if (!$brandEngine) {
+                DB::rollBack();
+                return back()->with('error', 'Brand Engine not found.');
+            }
+
+            $brandEngine->update([
+                'name' => $request->name,
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Brand Engine has been updated successfully.');
+        } catch (\Exception) {
+            DB::rollBack();
+            return back()->with('error', 'Something went wrong while updating.');
+        }
+    }
+    public function destroy($id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $brandEngine = $this->brandEngine->find($id);
+
+            if (!$brandEngine) {
+                DB::rollBack();
+                return back()->with('error', 'Brand Engine not found.');
+            }
+
+            $brandEngine->delete();
+
+            DB::commit();
+            return back()->with('success', 'Brand Engine has been deleted successfully.');
+        } catch (\Exception) {
+            DB::rollBack();
+            return back()->with('error', 'Something went wrong while deleting.');
         }
     }
 }
