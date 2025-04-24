@@ -3,16 +3,16 @@
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
-                <h3 class="page-title">Brand Engine</h3>
+                <h3 class="page-title">Technician</h3>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="admin-dashboard.html">Dashboard</a></li>
                     <li class="breadcrumb-item text-2xl">Master</li>
-                    <li class="breadcrumb-item active">Brand Engine</li>
+                    <li class="breadcrumb-item active">Technician</li>
                 </ul>
             </div>
             <div class="col-auto float-end ms-auto">
                 <a href="#" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_salary"><i
-                        class="fa fa-plus"></i> Add Brand Engine</a>
+                        class="fa fa-plus"></i> Add Technician</a>
             </div>
         </div>
     </div>
@@ -26,21 +26,23 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Name</th>
+                                    <th>Username</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($brandEngine as $data)
+                                @foreach ($technicians as $data)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$data->name}}</td>
+                                        <td>{{$data->username}}</td>
                                         <td class="text-center">
                                             <button type="button" class="btn br-7 btn-warning" data-bs-toggle="modal"
                                                 data-bs-target="#add_salary-edit" onclick="editModal('{{ $data['id'] }}')">
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                             <form id="deleteForm{{ $data['id'] }}"
-                                                action="{{ url('/super-admin/master/brand-engine/' . $data['id'] . '/delete') }}"
+                                                action="{{ url('/super-admin/master/technician/' . $data['id'] . '/delete') }}"
                                                 style="display: inline;" method="POST">
                                                 @method('DELETE')
                                                 @csrf
@@ -58,13 +60,13 @@
         </div>
     </div>
 
-    @include('admin.pages.master.brand_engine.create')
+    @include('admin.pages.master.technician.create')
 
     <div id="add_salary-edit" class="modal custom-modal fade" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Staff Salary</h5>
+                    <h5 class="modal-title">Edit Teknisi</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -81,9 +83,51 @@
 
 @section('script')
     <script>
+        $(document).ready(function () {
+            $('#username').on('input', function () {
+                $('#submit-btn').prop('disabled', true);
+                $('#username').removeClass('is-invalid');
+                $('#username-feedback').addClass('d-none');
+            });
+
+            $('#check-username').on('click', function () {
+                var username = $('#username').val();
+
+                if (username.trim() === '') {
+                    toastr.warning("Username tidak boleh kosong");
+                    return;
+                }
+
+                $.ajax({
+                    url: "{{ url('/super-admin/master/technician/check-username') }}",
+                    method: "GET",
+                    data: { username: username },
+                    success: function (response) {
+                        if (response.exists) {
+                            $('#username').addClass('is-invalid');
+                            $('#username-feedback').removeClass('d-none');
+                            $('#submit-btn').prop('disabled', true);
+
+                            toastr.error("Username sudah digunakan");
+                        } else {
+                            $('#username').removeClass('is-invalid');
+                            $('#username-feedback').addClass('d-none');
+                            $('#submit-btn').prop('disabled', false);
+
+                            toastr.success("Username tersedia");
+                        }
+                    },
+                    error: function () {
+                        toastr.error("Gagal memeriksa username");
+                        $('#submit-btn').prop('disabled', true);
+                    }
+                });
+            });
+        });
+
         function editModal(id) {
             $.ajax({
-                url: '/super-admin/master/brand-engine/' + id + '/edit',
+                url: '/super-admin/master/technician/' + id + '/edit',
                 type: 'GET',
                 data: {
                     id: id

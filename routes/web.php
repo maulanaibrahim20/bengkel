@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Cms\PageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BrandEngineController;
+use App\Http\Controllers\Master\TechnicianController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AppController::class, 'home']);
@@ -32,13 +33,26 @@ Route::middleware(['auth'])->group(function () {
             Route::get('cms/pages/datatables', [PageController::class, 'getDatatable'])->name('pages.cms.datatable');
             Route::resource('pages', PageController::class);
         });
+
         Route::prefix('master')->group(function () {
-            Route::get('brand-engine', [BrandEngineController::class, 'index']);
-            Route::get('brand-engine/create', [BrandEngineController::class, 'create']);
-            Route::post('brand-engine/create', [BrandEngineController::class, 'store']);
-            Route::get('brand-engine/{id}/edit', [BrandEngineController::class, 'edit']);
-            Route::put('brand-engine/{id}/update', [BrandEngineController::class, 'update']);
-            Route::delete('brand-engine/{id}/delete', [BrandEngineController::class, 'destroy']);
+            Route::group(['prefix' => 'brand-engine', 'controller' => BrandEngineController::class], function () {
+                Route::get('/', 'index');
+                Route::get('/create', 'create');
+                Route::post('/create', 'store');
+                Route::get('/{id}/edit', 'edit');
+                Route::put('/{id}/update', 'update');
+                Route::delete('/{id}/delete', 'destroy');
+            });
+
+            Route::group(['prefix' => 'technician', 'controller' => TechnicianController::class], function () {
+                Route::get('/', 'index');
+                Route::get('/create', 'create');
+                Route::post('/create', 'store');
+                Route::get('/{id}/edit', 'edit');
+                Route::put('/{id}/update', 'update');
+                Route::delete('/{id}/delete', 'destroy');
+                Route::get('/check-username', 'checkUsername');
+            });
         });
     });
 

@@ -28,7 +28,8 @@
                     <ul style="display: none;">
                         <li><a class="{{ Request::segment(3) == 'brand-engine' ? 'active' : '' }}"
                                 href="{{ url('/super-admin/master/brand-engine') }}">Brand Engine</a></li>
-                        <li><a href="employee-dashboard.html">Employee Dashboard</a></li>
+                        <li><a class="{{ Request::segment(3) == 'technician' ? 'active' : '' }}"
+                                href="{{ url('/super-admin/master/technician') }}">Technician</a></li>
                     </ul>
                 </li>
             </ul>
