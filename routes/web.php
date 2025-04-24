@@ -4,6 +4,7 @@ use App\Http\Controllers\AppController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Cms\PageController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,8 +25,12 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::group(['prefix' => '/super-admin'], function () {
+    Route::group(['prefix' => 'super-admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'admin']);
+        Route::group(['prefix' => 'cms'], function () {
+            Route::get('cms/pages/datatables', [PageController::class, 'getDatatable'])->name('pages.cms.datatable');
+            Route::resource('pages', PageController::class);
+        });
     });
 
     Route::group(['prefix' => '/admin'], function () {

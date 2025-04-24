@@ -1,27 +1,25 @@
-<!-- Core JS -->
-<script src="{{url('/assets')}}/vendor/libs/jquery/jquery.js"></script>
-<script src="{{url('/assets')}}/vendor/libs/popper/popper.js"></script>
-<script src="{{url('/assets')}}/vendor/js/bootstrap.js"></script>
-<script src="{{url('/assets')}}/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="{{url('/assets')}}/vendor/libs/node-waves/node-waves.js"></script>
+<!-- jQuery -->
+<script src="{{url('/assets')}}/js/jquery-3.6.0.min.js"></script>
 
-<script src="{{url('/assets')}}/vendor/libs/hammer/hammer.js"></script>
-<script src="{{url('/assets')}}/vendor/libs/i18n/i18n.js"></script>
-<script src="{{url('/assets')}}/vendor/libs/typeahead-js/typeahead.js"></script>
+<!-- Bootstrap Core JS -->
+<script src="{{url('/assets')}}/js/bootstrap.bundle.min.js"></script>
 
-<script src="{{url('/assets')}}/vendor/js/menu.js"></script>
-<!-- endbuild -->
+<!-- Slimscroll JS -->
+<script src="{{url('/assets')}}/js/jquery.slimscroll.min.js"></script>
 
-<!-- Vendors JS -->
-<script src="{{url('/assets')}}/vendor/libs/formvalidation/dist/js/FormValidation.min.js"></script>
-<script src="{{url('/assets')}}/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js"></script>
-<script src="{{url('/assets')}}/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js"></script>
+<!-- Chart JS -->
+<script src="{{url('/assets')}}/plugins/morris/morris.min.js"></script>
+<script src="{{url('/assets')}}/plugins/raphael/raphael.min.js"></script>
+<script src="{{url('/assets')}}/js/chart.js"></script>
+<script src="{{url('/assets')}}/js/greedynav.js"></script>
 
-<!-- Main JS -->
-<script src="{{url('/assets')}}/js/main.js"></script>
+<!-- Theme Settings JS -->
+<script src="{{url('/assets')}}/js/layout.js"></script>
+<script src="{{url('/assets')}}/js/theme-settings.js"></script>
 
-<!-- Page JS -->
-<script src="{{url('/assets')}}/js/pages-auth.js"></script>
+<!-- Custom JS -->
+<script src="{{url('/assets')}}/js/app.js"></script>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 

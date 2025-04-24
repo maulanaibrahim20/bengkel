@@ -1,486 +1,813 @@
 @extends('index')
 @section('content')
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">Welcome Admin!</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
     <div class="row">
-        <!-- Website Analytics -->
-        <div class="col-lg-6 mb-4">
-            <div class="swiper-container swiper-container-horizontal swiper swiper-card-advance-bg"
-                id="swiper-with-pagination-cards">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="row">
-                            <div class="col-12">
-                                <h5 class="text-white mb-0 mt-2">Website Analytics</h5>
-                                <small>Total 28.5% Conversion Rate</small>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-7 col-md-9 col-12 order-2 order-md-1">
-                                    <h6 class="text-white mt-0 mt-md-3 mb-3">Traffic</h6>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="d-flex mb-4 align-items-center">
-                                                    <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">28%</p>
-                                                    <p class="mb-0">Sessions</p>
-                                                </li>
-                                                <li class="d-flex align-items-center mb-2">
-                                                    <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">1.2k</p>
-                                                    <p class="mb-0">Leads</p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-6">
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="d-flex mb-4 align-items-center">
-                                                    <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">3.1k</p>
-                                                    <p class="mb-0">Page Views</p>
-                                                </li>
-                                                <li class="d-flex align-items-center mb-2">
-                                                    <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">12%</p>
-                                                    <p class="mb-0">Conversions</p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
-                                    <img src="{{url('/assets')}}/img/illustrations/card-website-analytics-1.png"
-                                        alt="Website Analytics" width="170" class="card-website-analytics-img" />
-                                </div>
-                            </div>
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
+                    <div class="dash-widget-info">
+                        <h3>112</h3>
+                        <span>Projects</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
+                    <div class="dash-widget-info">
+                        <h3>44</h3>
+                        <span>Clients</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <span class="dash-widget-icon"><i class="fa fa-diamond"></i></span>
+                    <div class="dash-widget-info">
+                        <h3>37</h3>
+                        <span>Tasks</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+            <div class="card dash-widget">
+                <div class="card-body">
+                    <span class="dash-widget-icon"><i class="fa fa-user"></i></span>
+                    <div class="dash-widget-info">
+                        <h3>218</h3>
+                        <span>Employees</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Total Revenue</h3>
+                            <div id="bar-charts"></div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="row">
-                            <div class="col-12">
-                                <h5 class="text-white mb-0 mt-2">Website Analytics</h5>
-                                <small>Total 28.5% Conversion Rate</small>
-                            </div>
-                            <div class="col-lg-7 col-md-9 col-12 order-2 order-md-1">
-                                <h6 class="text-white mt-0 mt-md-3 mb-3">Spending</h6>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="d-flex mb-4 align-items-center">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">12h</p>
-                                                <p class="mb-0">Spend</p>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-2">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">127</p>
-                                                <p class="mb-0">Order</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="d-flex mb-4 align-items-center">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">18</p>
-                                                <p class="mb-0">Order Size</p>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-2">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">2.3k</p>
-                                                <p class="mb-0">Items</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
-                                <img src="{{url('/assets')}}/img/illustrations/card-website-analytics-2.png"
-                                    alt="Website Analytics" width="170" class="card-website-analytics-img" />
-                            </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Sales Overview</h3>
+                            <div id="line-charts"></div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="row">
-                            <div class="col-12">
-                                <h5 class="text-white mb-0 mt-2">Website Analytics</h5>
-                                <small>Total 28.5% Conversion Rate</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card-group m-b-30">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <span class="d-block">New Employees</span>
                             </div>
-                            <div class="col-lg-7 col-md-9 col-12 order-2 order-md-1">
-                                <h6 class="text-white mt-0 mt-md-3 mb-3">Revenue Sources</h6>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="d-flex mb-4 align-items-center">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">268</p>
-                                                <p class="mb-0">Direct</p>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-2">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">62</p>
-                                                <p class="mb-0">Referral</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="d-flex mb-4 align-items-center">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">890</p>
-                                                <p class="mb-0">Organic</p>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-2">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">1.2k</p>
-                                                <p class="mb-0">Campaign</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                            <div>
+                                <span class="text-success">+10%</span>
                             </div>
-                            <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
-                                <img src="{{url('/assets')}}/img/illustrations/card-website-analytics-3.png"
-                                    alt="Website Analytics" width="170" class="card-website-analytics-img" />
+                        </div>
+                        <h3 class="mb-3">10</h3>
+                        <div class="progress mb-2" style="height: 5px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;" aria-valuenow="40"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="mb-0">Overall Employees 218</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <span class="d-block">Earnings</span>
+                            </div>
+                            <div>
+                                <span class="text-success">+12.5%</span>
+                            </div>
+                        </div>
+                        <h3 class="mb-3">$1,42,300</h3>
+                        <div class="progress mb-2" style="height: 5px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;" aria-valuenow="40"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="mb-0">Previous Month <span class="text-muted">$1,15,852</span></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <span class="d-block">Expenses</span>
+                            </div>
+                            <div>
+                                <span class="text-danger">-2.8%</span>
+                            </div>
+                        </div>
+                        <h3 class="mb-3">$8,500</h3>
+                        <div class="progress mb-2" style="height: 5px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;" aria-valuenow="40"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="mb-0">Previous Month <span class="text-muted">$7,500</span></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <span class="d-block">Profit</span>
+                            </div>
+                            <div>
+                                <span class="text-danger">-75%</span>
+                            </div>
+                        </div>
+                        <h3 class="mb-3">$1,12,000</h3>
+                        <div class="progress mb-2" style="height: 5px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;" aria-valuenow="40"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="mb-0">Previous Month <span class="text-muted">$1,42,000</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Widget -->
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xl-4 d-flex">
+            <div class="card flex-fill dash-statistics">
+                <div class="card-body">
+                    <h5 class="card-title">Statistics</h5>
+                    <div class="stats-list">
+                        <div class="stats-info">
+                            <p>Today Leave <strong>4 <small>/ 65</small></strong></p>
+                            <div class="progress">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 31%"
+                                    aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="stats-info">
+                            <p>Pending Invoice <strong>15 <small>/ 92</small></strong></p>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 31%"
+                                    aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="stats-info">
+                            <p>Completed Projects <strong>85 <small>/ 112</small></strong></p>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 62%"
+                                    aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="stats-info">
+                            <p>Open Tickets <strong>190 <small>/ 212</small></strong></p>
+                            <div class="progress">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 62%" aria-valuenow="62"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="stats-info">
+                            <p>Closed Tickets <strong>22 <small>/ 212</small></strong></p>
+                            <div class="progress">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 22%" aria-valuenow="22"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-pagination"></div>
             </div>
         </div>
-        <!--/ Website Analytics -->
 
-        <!-- Sales Overview -->
-        <div class="col-lg-3 col-sm-6 mb-4">
-            <div class="card">
+        <div class="col-md-12 col-lg-6 col-xl-4 d-flex">
+            <div class="card flex-fill">
+                <div class="card-body">
+                    <h4 class="card-title">Task Statistics</h4>
+                    <div class="statistics">
+                        <div class="row">
+                            <div class="col-md-6 col-6 text-center">
+                                <div class="stats-box mb-4">
+                                    <p>Total Tasks</p>
+                                    <h3>385</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-6 text-center">
+                                <div class="stats-box mb-4">
+                                    <p>Overdue Tasks</p>
+                                    <h3>19</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress mb-4">
+                        <div class="progress-bar bg-purple" role="progressbar" style="width: 30%" aria-valuenow="30"
+                            aria-valuemin="0" aria-valuemax="100">30%</div>
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 22%" aria-valuenow="18"
+                            aria-valuemin="0" aria-valuemax="100">22%</div>
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 24%" aria-valuenow="12"
+                            aria-valuemin="0" aria-valuemax="100">24%</div>
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 26%" aria-valuenow="14"
+                            aria-valuemin="0" aria-valuemax="100">21%</div>
+                        <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="14"
+                            aria-valuemin="0" aria-valuemax="100">10%</div>
+                    </div>
+                    <div>
+                        <p><i class="fa fa-dot-circle-o text-purple me-2"></i>Completed Tasks <span
+                                class="float-end">166</span></p>
+                        <p><i class="fa fa-dot-circle-o text-warning me-2"></i>Inprogress Tasks <span
+                                class="float-end">115</span></p>
+                        <p><i class="fa fa-dot-circle-o text-success me-2"></i>On Hold Tasks <span
+                                class="float-end">31</span></p>
+                        <p><i class="fa fa-dot-circle-o text-danger me-2"></i>Pending Tasks <span
+                                class="float-end">47</span></p>
+                        <p class="mb-0"><i class="fa fa-dot-circle-o text-info me-2"></i>Review Tasks <span
+                                class="float-end">5</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-lg-6 col-xl-4 d-flex">
+            <div class="card flex-fill">
+                <div class="card-body">
+                    <h4 class="card-title">Today Absent <span class="badge bg-inverse-danger ms-2">5</span>
+                    </h4>
+                    <div class="leave-info-box">
+                        <div class="media d-flex align-items-center">
+                            <a href="profile.html" class="avatar"><img alt="" src="{{url('/assets')}}/img/user.jpg"></a>
+                            <div class="media-body flex-grow-1">
+                                <div class="text-sm my-0">Martin Lewis</div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-3">
+                            <div class="col-6">
+                                <h6 class="mb-0">4 Sep 2019</h6>
+                                <span class="text-sm text-muted">Leave Date</span>
+                            </div>
+                            <div class="col-6 text-end">
+                                <span class="badge bg-inverse-danger">Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="leave-info-box">
+                        <div class="media d-flex align-items-center">
+                            <a href="profile.html" class="avatar"><img alt="" src="{{url('/assets')}}/img/user.jpg"></a>
+                            <div class="media-body flex-grow-1">
+                                <div class="text-sm my-0">Martin Lewis</div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-3">
+                            <div class="col-6">
+                                <h6 class="mb-0">4 Sep 2019</h6>
+                                <span class="text-sm text-muted">Leave Date</span>
+                            </div>
+                            <div class="col-6 text-end">
+                                <span class="badge bg-inverse-success">Approved</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="load-more text-center">
+                        <a class="text-dark" href="javascript:void(0);">Load More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Statistics Widget -->
+
+    <div class="row">
+        <div class="col-md-6 d-flex">
+            <div class="card card-table flex-fill">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <small class="d-block mb-1 text-muted">Sales Overview</small>
-                        <p class="card-text text-success">+18.2%</p>
-                    </div>
-                    <h4 class="card-title mb-1">$42.5k</h4>
+                    <h3 class="card-title mb-0">Invoices</h3>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="d-flex gap-2 align-items-center mb-2">
-                                <span class="badge bg-label-info p-1 rounded"><i
-                                        class="ti ti-shopping-cart ti-xs"></i></span>
-                                <p class="mb-0">Order</p>
-                            </div>
-                            <h5 class="mb-0 pt-1 text-nowrap">62.2%</h5>
-                            <small class="text-muted">6,440</small>
-                        </div>
-                        <div class="col-4">
-                            <div class="divider divider-vertical">
-                                <div class="divider-text">
-                                    <span class="badge-divider-bg bg-label-secondary">VS</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end">
-                            <div class="d-flex gap-2 justify-content-end align-items-center mb-2">
-                                <p class="mb-0">Visits</p>
-                                <span class="badge bg-label-primary p-1 rounded"><i class="ti ti-link ti-xs"></i></span>
-                            </div>
-                            <h5 class="mb-0 pt-1 text-nowrap ms-lg-n3 ms-xl-0">25.5%</h5>
-                            <small class="text-muted">12,749</small>
-                        </div>
+                    <div class="table-responsive">
+                        <table class="table table-nowrap custom-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Invoice ID</th>
+                                    <th>Client</th>
+                                    <th>Due Date</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="invoice-view.html">#INV-0001</a></td>
+                                    <td>
+                                        <h2><a href="#">Global Technologies</a></h2>
+                                    </td>
+                                    <td>11 Mar 2019</td>
+                                    <td>$380</td>
+                                    <td>
+                                        <span class="badge bg-inverse-warning">Partially Paid</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="invoice-view.html">#INV-0002</a></td>
+                                    <td>
+                                        <h2><a href="#">Delta Infotech</a></h2>
+                                    </td>
+                                    <td>8 Feb 2019</td>
+                                    <td>$500</td>
+                                    <td>
+                                        <span class="badge bg-inverse-success">Paid</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="invoice-view.html">#INV-0003</a></td>
+                                    <td>
+                                        <h2><a href="#">Cream Inc</a></h2>
+                                    </td>
+                                    <td>23 Jan 2019</td>
+                                    <td>$60</td>
+                                    <td>
+                                        <span class="badge bg-inverse-danger">Unpaid</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="d-flex align-items-center mt-4">
-                        <div class="progress w-100" style="height: 8px">
-                            <div class="progress-bar bg-info" style="width: 70%" role="progressbar" aria-valuenow="70"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 30%" aria-valuenow="30"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="invoices.html">View all invoices</a>
                 </div>
             </div>
         </div>
-        <!--/ Sales Overview -->
-
-        <!-- Revenue Generated -->
-        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-            <div class="card">
-                <div class="card-body pb-0">
-                    <div class="card-icon">
-                        <span class="badge bg-label-success rounded-pill p-2">
-                            <i class="ti ti-credit-card ti-sm"></i>
-                        </span>
-                    </div>
-                    <h5 class="card-title mb-0 mt-2">97.5k</h5>
-                    <small>Revenue Generated</small>
-                </div>
-                <div id="revenueGenerated"></div>
-            </div>
-        </div>
-        <!--/ Revenue Generated -->
-
-        <!-- Earning Reports -->
-        <div class="col-lg-6 mb-4">
-            <div class="card h-100">
-                <div class="card-header pb-0 d-flex justify-content-between mb-lg-n4">
-                    <div class="card-title mb-0">
-                        <h5 class="mb-0">Earning Reports</h5>
-                        <small class="text-muted">Weekly Earnings Overview</small>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn p-0" type="button" id="earningReportsId" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="earningReportsId">
-                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                        </div>
-                    </div>
-                    <!-- </div> -->
+        <div class="col-md-6 d-flex">
+            <div class="card card-table flex-fill">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">Payments</h3>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-md-4 d-flex flex-column align-self-end">
-                            <div class="d-flex gap-2 align-items-center mb-2 pb-1 flex-wrap">
-                                <h1 class="mb-0">$468</h1>
-                                <div class="badge rounded bg-label-success">+4.2%</div>
-                            </div>
-                            <small class="text-muted">You informed of this week compared to last week</small>
-                        </div>
-                        <div class="col-12 col-md-8">
-                            <div id="weeklyEarningReports"></div>
-                        </div>
+                    <div class="table-responsive">
+                        <table class="table custom-table table-nowrap mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Invoice ID</th>
+                                    <th>Client</th>
+                                    <th>Payment Type</th>
+                                    <th>Paid Date</th>
+                                    <th>Paid Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="invoice-view.html">#INV-0001</a></td>
+                                    <td>
+                                        <h2><a href="#">Global Technologies</a></h2>
+                                    </td>
+                                    <td>Paypal</td>
+                                    <td>11 Mar 2019</td>
+                                    <td>$380</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="invoice-view.html">#INV-0002</a></td>
+                                    <td>
+                                        <h2><a href="#">Delta Infotech</a></h2>
+                                    </td>
+                                    <td>Paypal</td>
+                                    <td>8 Feb 2019</td>
+                                    <td>$500</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="invoice-view.html">#INV-0003</a></td>
+                                    <td>
+                                        <h2><a href="#">Cream Inc</a></h2>
+                                    </td>
+                                    <td>Paypal</td>
+                                    <td>23 Jan 2019</td>
+                                    <td>$60</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="border rounded p-3 mt-2">
-                        <div class="row gap-4 gap-sm-0">
-                            <div class="col-12 col-sm-4">
-                                <div class="d-flex gap-2 align-items-center">
-                                    <div class="badge rounded bg-label-primary p-1">
-                                        <i class="ti ti-currency-dollar ti-sm"></i>
-                                    </div>
-                                    <h6 class="mb-0">Earnings</h6>
-                                </div>
-                                <h4 class="my-2 pt-1">$545.69</h4>
-                                <div class="progress w-75" style="height: 4px">
-                                    <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="d-flex gap-2 align-items-center">
-                                    <div class="badge rounded bg-label-info p-1"><i class="ti ti-chart-pie-2 ti-sm"></i>
-                                    </div>
-                                    <h6 class="mb-0">Profit</h6>
-                                </div>
-                                <h4 class="my-2 pt-1">$256.34</h4>
-                                <div class="progress w-75" style="height: 4px">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="d-flex gap-2 align-items-center">
-                                    <div class="badge rounded bg-label-danger p-1">
-                                        <i class="ti ti-brand-paypal ti-sm"></i>
-                                    </div>
-                                    <h6 class="mb-0">Expense</h6>
-                                </div>
-                                <h4 class="my-2 pt-1">$74.19</h4>
-                                <div class="progress w-75" style="height: 4px">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 65%"
-                                        aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="payments.html">View all payments</a>
                 </div>
             </div>
         </div>
-        <!--/ Earning Reports -->
+    </div>
 
-        <!-- Support Tracker -->
-        <div class="col-md-6 mb-4">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between pb-0">
-                    <div class="card-title mb-0">
-                        <h5 class="mb-0">Support Tracker</h5>
-                        <small class="text-muted">Last 7 Days</small>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn p-0" type="button" id="supportTrackerMenu" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="supportTrackerMenu">
-                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-md-6 d-flex">
+            <div class="card card-table flex-fill">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">Clients</h3>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                            <div class="mt-lg-4 mt-lg-2 mb-lg-4 mb-2 pt-1">
-                                <h1 class="mb-0">164</h1>
-                                <p class="mb-0">Total Tickets</p>
-                            </div>
-                            <ul class="p-0 m-0">
-                                <li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
-                                    <div class="badge rounded bg-label-primary p-1"><i class="ti ti-ticket ti-sm"></i>
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-0 text-nowrap">New Tickets</h6>
-                                        <small class="text-muted">142</small>
-                                    </div>
-                                </li>
-                                <li class="d-flex gap-3 align-items-center mb-lg-3 pb-1">
-                                    <div class="badge rounded bg-label-info p-1">
-                                        <i class="ti ti-circle-check ti-sm"></i>
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-0 text-nowrap">Open Tickets</h6>
-                                        <small class="text-muted">28</small>
-                                    </div>
-                                </li>
-                                <li class="d-flex gap-3 align-items-center pb-1">
-                                    <div class="badge rounded bg-label-warning p-1"><i class="ti ti-clock ti-sm"></i>
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-0 text-nowrap">Response Time</h6>
-                                        <small class="text-muted">1 Day</small>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-12 col-sm-8 col-md-12 col-lg-8">
-                            <div id="supportTracker"></div>
-                        </div>
+                    <div class="table-responsive">
+                        <table class="table custom-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="#" class="avatar"><img alt=""
+                                                    src="{{url('/assets')}}/img/profiles/avatar-19.jpg"></a>
+                                            <a href="client-profile.html">Barry Cuda <span>CEO</span></a>
+                                        </h2>
+                                    </td>
+                                    <td>barrycuda@example.com</td>
+                                    <td>
+                                        <div class="dropdown action-label">
+                                            <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-dot-circle-o text-success"></i> Active
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="fa fa-dot-circle-o text-success"></i>
+                                                    Active</a>
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="fa fa-dot-circle-o text-danger"></i>
+                                                    Inactive</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="#" class="avatar"><img alt=""
+                                                    src="{{url('/assets')}}/img/profiles/avatar-19.jpg"></a>
+                                            <a href="client-profile.html">Tressa Wexler
+                                                <span>Manager</span></a>
+                                        </h2>
+                                    </td>
+                                    <td>tressawexler@example.com</td>
+                                    <td>
+                                        <div class="dropdown action-label">
+                                            <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-dot-circle-o text-danger"></i> Inactive
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="fa fa-dot-circle-o text-success"></i>
+                                                    Active</a>
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="fa fa-dot-circle-o text-danger"></i>
+                                                    Inactive</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="client-profile.html" class="avatar"><img alt=""
+                                                    src="{{url('/assets')}}/img/profiles/avatar-07.jpg"></a>
+                                            <a href="client-profile.html">Ruby Bartlett <span>CEO</span></a>
+                                        </h2>
+                                    </td>
+                                    <td>rubybartlett@example.com</td>
+                                    <td>
+                                        <div class="dropdown action-label">
+                                            <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-dot-circle-o text-danger"></i> Inactive
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="fa fa-dot-circle-o text-success"></i>
+                                                    Active</a>
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="fa fa-dot-circle-o text-danger"></i>
+                                                    Inactive</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="client-profile.html" class="avatar"><img alt=""
+                                                    src="{{url('/assets')}}/img/profiles/avatar-06.jpg"></a>
+                                            <a href="client-profile.html"> Misty Tison <span>CEO</span></a>
+                                        </h2>
+                                    </td>
+                                    <td>mistytison@example.com</td>
+                                    <td>
+                                        <div class="dropdown action-label">
+                                            <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-dot-circle-o text-success"></i> Active
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="fa fa-dot-circle-o text-success"></i>
+                                                    Active</a>
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="fa fa-dot-circle-o text-danger"></i>
+                                                    Inactive</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="client-profile.html" class="avatar"><img alt=""
+                                                    src="{{url('/assets')}}/img/profiles/avatar-14.jpg"></a>
+                                            <a href="client-profile.html"> Daniel Deacon
+                                                <span>CEO</span></a>
+                                        </h2>
+                                    </td>
+                                    <td>danieldeacon@example.com</td>
+                                    <td>
+                                        <div class="dropdown action-label">
+                                            <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-dot-circle-o text-danger"></i> Inactive
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="fa fa-dot-circle-o text-success"></i>
+                                                    Active</a>
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="fa fa-dot-circle-o text-danger"></i>
+                                                    Inactive</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+                </div>
+                <div class="card-footer">
+                    <a href="clients.html">View all clients</a>
                 </div>
             </div>
         </div>
-        <!--/ Support Tracker -->
-
-        <!-- Sales By Country -->
-        <div class="col-xl-4 col-md-6 mb-4">
-            <div class="card h-100">
-                <div class="card-header d-flex justify-content-between">
-                    <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">Sales by Countries</h5>
-                        <small class="text-muted">Monthly Sales Overview</small>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn p-0" type="button" id="salesByCountry" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="salesByCountry">
-                            <a class="dropdown-item" href="javascript:void(0);">Download</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                        </div>
-                    </div>
+        <div class="col-md-6 d-flex">
+            <div class="card card-table flex-fill">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">Recent Projects</h3>
                 </div>
                 <div class="card-body">
-                    <ul class="p-0 m-0">
-                        <li class="d-flex align-items-center mb-4">
-                            <img src="{{url('/assets')}}/svg/flags/us.svg" alt="User" class="rounded-circle me-3"
-                                width="34" />
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="mb-0 me-1">$8,567k</h6>
-                                    </div>
-                                    <small class="text-muted">United states</small>
-                                </div>
-                                <div class="user-progress">
-                                    <p class="text-success fw-semibold mb-0">
-                                        <i class="ti ti-chevron-up"></i>
-                                        25.8%
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex align-items-center mb-4">
-                            <img src="{{url('/assets')}}/svg/flags/br.svg" alt="User" class="rounded-circle me-3"
-                                width="34" />
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="mb-0 me-1">$2,415k</h6>
-                                    </div>
-                                    <small class="text-muted">Brazil</small>
-                                </div>
-                                <div class="user-progress">
-                                    <p class="text-danger fw-semibold mb-0">
-                                        <i class="ti ti-chevron-down"></i>
-                                        6.2%
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex align-items-center mb-4">
-                            <img src="{{url('/assets')}}/svg/flags/in.svg" alt="User" class="rounded-circle me-3"
-                                width="34" />
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="mb-0 me-1">$865k</h6>
-                                    </div>
-                                    <small class="text-muted">India</small>
-                                </div>
-                                <div class="user-progress">
-                                    <p class="text-success fw-semibold">
-                                        <i class="ti ti-chevron-up"></i>
-                                        12.4%
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex align-items-center mb-4">
-                            <img src="{{url('/assets')}}/svg/flags/au.svg" alt="User" class="rounded-circle me-3"
-                                width="34" />
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="mb-0 me-1">$745k</h6>
-                                    </div>
-                                    <small class="text-muted">Australia</small>
-                                </div>
-                                <div class="user-progress">
-                                    <p class="text-danger fw-semibold mb-0">
-                                        <i class="ti ti-chevron-down"></i>
-                                        11.9%
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex align-items-center mb-4">
-                            <img src="{{url('/assets')}}/svg/flags/fr.svg" alt="User" class="rounded-circle me-3"
-                                width="34" />
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="mb-0 me-1">$45</h6>
-                                    </div>
-                                    <small class="text-muted">France</small>
-                                </div>
-                                <div class="user-progress">
-                                    <p class="text-success fw-semibold mb-0">
-                                        <i class="ti ti-chevron-up"></i>
-                                        16.2%
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex align-items-center">
-                            <img src="{{url('/assets')}}/svg/flags/cn.svg" alt="User" class="rounded-circle me-3"
-                                width="34" />
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="mb-0 me-1">$12k</h6>
-                                    </div>
-                                    <small class="text-muted">China</small>
-                                </div>
-                                <div class="user-progress">
-                                    <p class="text-success fw-semibold mb-0">
-                                        <i class="ti ti-chevron-up"></i>
-                                        14.8%
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                    <div class="table-responsive">
+                        <table class="table custom-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Project Name </th>
+                                    <th>Progress</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <h2><a href="project-view.html">Office Management</a></h2>
+                                        <small class="block text-ellipsis">
+                                            <span>1</span> <span class="text-muted">open tasks, </span>
+                                            <span>9</span> <span class="text-muted">tasks completed</span>
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <div class="progress progress-xs progress-striped">
+                                            <div class="progress-bar" role="progressbar" data-bs-toggle="tooltip"
+                                                title="65%" style="width: 65%">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2><a href="project-view.html">Project Management</a></h2>
+                                        <small class="block text-ellipsis">
+                                            <span>2</span> <span class="text-muted">open tasks, </span>
+                                            <span>5</span> <span class="text-muted">tasks completed</span>
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <div class="progress progress-xs progress-striped">
+                                            <div class="progress-bar" role="progressbar" data-bs-toggle="tooltip"
+                                                title="15%" style="width: 15%">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2><a href="project-view.html">Video Calling App</a></h2>
+                                        <small class="block text-ellipsis">
+                                            <span>3</span> <span class="text-muted">open tasks, </span>
+                                            <span>3</span> <span class="text-muted">tasks completed</span>
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <div class="progress progress-xs progress-striped">
+                                            <div class="progress-bar" role="progressbar" data-bs-toggle="tooltip"
+                                                title="49%" style="width: 49%">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2><a href="project-view.html">Hospital Administration</a></h2>
+                                        <small class="block text-ellipsis">
+                                            <span>12</span> <span class="text-muted">open tasks, </span>
+                                            <span>4</span> <span class="text-muted">tasks completed</span>
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <div class="progress progress-xs progress-striped">
+                                            <div class="progress-bar" role="progressbar" data-bs-toggle="tooltip"
+                                                title="88%" style="width: 88%">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h2><a href="project-view.html">Digital Marketplace</a></h2>
+                                        <small class="block text-ellipsis">
+                                            <span>7</span> <span class="text-muted">open tasks, </span>
+                                            <span>14</span> <span class="text-muted">tasks completed</span>
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <div class="progress progress-xs progress-striped">
+                                            <div class="progress-bar" role="progressbar" data-bs-toggle="tooltip"
+                                                title="100%" style="width: 100%">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                                        class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="projects.html">View all projects</a>
                 </div>
             </div>
         </div>
-        <!--/ Sales By Country -->
     </div>
 @endsection

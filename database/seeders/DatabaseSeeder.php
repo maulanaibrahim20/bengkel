@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\CmsComponent;
+use App\Models\CmsPages;
 use App\Models\Role;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -37,6 +39,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'User',
             'email' => 'user@gmail.com',
             'role_id' => 3,
+        ]);
+
+        $this->call([
+            CmsSeeder::class,
         ]);
     }
 }
