@@ -15,25 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            UserSeeder::class,
             RoleSeeder::class,
             CmsSeeder::class,
-        ]);
-        User::factory()->create([
-            'name' => 'Super Admin',
-            'email' => 'superadmin@gmail.com',
-            'role_id' => 1,
-        ]);
-
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'role_id' => 2,
-        ]);
-
-        User::factory()->create([
-            'name' => 'User',
-            'email' => 'user@gmail.com',
-            'role_id' => 3,
         ]);
     }
 }
