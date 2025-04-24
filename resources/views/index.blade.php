@@ -404,6 +404,8 @@
 
     @include('admin.component.style_js')
 
+    @yield('script')
+
 </body>
 
 </html>

@@ -7,7 +7,7 @@
             @csrf
             <div class="form-group">
                 <label>Email Address</label>
-                <input class="form-control" type="text" name="email" value="admin@gmail.com">
+                <input class="form-control" type="text" name="email" value="superadmin@gmail.com">
             </div>
             <div class="form-group">
                 <div class="row">

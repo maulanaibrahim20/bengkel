@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Cms\PageController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Master\BrandEngineController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AppController::class, 'home']);
@@ -30,6 +31,11 @@ Route::middleware(['auth'])->group(function () {
         Route::group(['prefix' => 'cms'], function () {
             Route::get('cms/pages/datatables', [PageController::class, 'getDatatable'])->name('pages.cms.datatable');
             Route::resource('pages', PageController::class);
+        });
+        Route::prefix('master')->group(function () {
+            Route::get('brand-engine', [BrandEngineController::class, 'index']);
+            Route::get('brand-engine/create', [BrandEngineController::class, 'create']);
+            Route::post('brand-engine/create', [BrandEngineController::class, 'store']);
         });
     });
 

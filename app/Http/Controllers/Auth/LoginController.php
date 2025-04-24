@@ -54,7 +54,7 @@ class LoginController extends Controller
 
                 if ($user->role_id == $this->user::SUPER_ADMIN) {
                     DB::commit();
-                    return redirect('/admin/dashboard')->with('success', 'Login successful.');
+                    return redirect('/super-admin/dashboard')->with('success', 'Login successful.');
                 } elseif ($user->role_id == $this->user::ADMIN) {
                     DB::commit();
                     return redirect('/admin/dashboard')->with('success', 'Login successful.');

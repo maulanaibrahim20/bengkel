@@ -23,6 +23,15 @@
 <!-- Main CSS -->
 <link rel="stylesheet" href="{{url('/assets')}}/css/style.css">
 
+<!-- Datatable CSS -->
+<link rel="stylesheet" href="{{url('/assets')}}/css/dataTables.bootstrap4.min.css">
+
+<!-- Select2 CSS -->
+<link rel="stylesheet" href="{{url('/assets')}}/css/select2.min.css">
+
+<!-- Datetimepicker CSS -->
+<link rel="stylesheet" href="{{url('/assets')}}/css/bootstrap-datetimepicker.min.css">
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">
 <!-- DataTables CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">

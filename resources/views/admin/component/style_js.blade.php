@@ -20,6 +20,17 @@
 <!-- Custom JS -->
 <script src="{{url('/assets')}}/js/app.js"></script>
 
+<!-- Select2 JS -->
+<script src="{{url('/assets')}}/js/select2.min.js"></script>
+
+<!-- Datetimepicker JS -->
+<script src="{{url('/assets')}}/js/moment.min.js"></script>
+<script src="{{url('/assets')}}/js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- Datatable JS -->
+<script src="{{url('/assets')}}/js/jquery.dataTables.min.js"></script>
+<script src="{{url('/assets')}}/js/dataTables.bootstrap4.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 @if (session('success'))
