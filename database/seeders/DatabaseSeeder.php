@@ -14,13 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $role = ['Super Admin', 'Admin', 'User'];
-        foreach ($role as $r) {
-            Role::create([
-                'name' => $r,
-            ]);
-        }
-
+        $this->call([
+            RoleSeeder::class,
+            CmsSeeder::class,
+        ]);
         User::factory()->create([
             'name' => 'Super Admin',
             'email' => 'superadmin@gmail.com',
@@ -37,10 +34,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'User',
             'email' => 'user@gmail.com',
             'role_id' => 3,
-        ]);
-
-        $this->call([
-            CmsSeeder::class,
         ]);
     }
 }
