@@ -1,5 +1,5 @@
-<form action="{{ url('/super-admin/master/technician/' . $technician['id'] . '/update') }}" method="POST"
-    enctype="multipart/form-data">
+<form id="form-edit-technician" action="{{ url('/super-admin/master/technician/' . $technician['id'] . '/update') }}"
+    method="POST" enctype="multipart/form-data">
     @method('PUT')
     @csrf
     <div class="row">
@@ -24,14 +24,41 @@
 </form>
 
 <script>
-    $(document).ready(function () {
-        $('#username-edit').on('input', function () {
+    $(document).on('submit', '#form-edit-technician', function(e) {
+        e.preventDefault();
+
+        let form = $(this);
+        let url = form.attr('action');
+        let formData = new FormData(this);
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                $('#add_salary-edit').modal('hide');
+                toastr.success('success', 'Berhasil mengupdate data!');
+                $('#technician-table').DataTable().ajax.reload(null, false);
+            },
+            error: function(xhr) {
+                let errMsg = 'Terjadi kesalahan.';
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errMsg = xhr.responseJSON.message;
+                }
+                Swal.fire('Gagal!', errMsg, 'error');
+            }
+        });
+    });
+    $(document).ready(function() {
+        $('#username-edit').on('input', function() {
             $('#submit-btn-edit').prop('disabled', true);
             $('#username-edit').removeClass('is-invalid');
             $('#username-feedback-edit').addClass('d-none');
         });
 
-        $('#check-username-edit').on('click', function () {
+        $('#check-username-edit').on('click', function() {
             var username = $('#username-edit').val();
 
             if (username.trim() === '') {
@@ -42,8 +69,11 @@
             $.ajax({
                 url: "{{ url('/super-admin/master/technician/check-username') }}",
                 method: "GET",
-                data: { username: username, except_id: {{ $technician->id }} }, // jika kamu ingin mengabaikan username milik user itu sendiri
-                success: function (response) {
+                data: {
+                    username: username,
+                    except_id: {{ $technician->id }}
+                }, // jika kamu ingin mengabaikan username milik user itu sendiri
+                success: function(response) {
                     if (response.exists) {
                         $('#username-edit').addClass('is-invalid');
                         $('#username-feedback-edit').removeClass('d-none');
@@ -58,7 +88,7 @@
                         toastr.success("Username tersedia");
                     }
                 },
-                error: function () {
+                error: function() {
                     toastr.error("Gagal memeriksa username");
                     $('#submit-btn-edit').prop('disabled', true);
                 }

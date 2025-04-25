@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Cms\PageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BrandEngineController;
+use App\Http\Controllers\Master\ProductCategoryController;
 use App\Http\Controllers\Master\TechnicianController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
             });
 
             Route::group(['prefix' => 'technician', 'controller' => TechnicianController::class], function () {
+                Route::get('/datatable', [TechnicianController::class, 'getDataTable']);
                 Route::get('/', 'index');
                 Route::get('/create', 'create');
                 Route::post('/create', 'store');
@@ -58,6 +60,16 @@ Route::middleware(['auth'])->group(function () {
                 Route::put('/{id}/update', 'update');
                 Route::delete('/{id}/delete', 'destroy');
                 Route::get('/check-username', 'checkUsername');
+            });
+
+            Route::group(['prefix' => 'product-category', 'controller' => ProductCategoryController::class], function () {
+                Route::get('/datatable', [ProductCategoryController::class, 'getDataTable']);
+                Route::get('/', 'index');
+                Route::get('/create', 'create');
+                Route::post('/create', 'store');
+                Route::get('/{id}/edit', 'edit');
+                Route::put('/{id}/update', 'update');
+                Route::delete('/{id}/delete', 'destroy');
             });
         });
     });

@@ -8,8 +8,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('/super-admin/master/technician/create') }}" method="POST"
-                    enctype="multipart/form-data">
+                <form id="createTechnicianForm" action="{{ url('/super-admin/master/technician/create') }}"
+                    method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="form-group">
@@ -35,3 +35,34 @@
         </div>
     </div>
 </div>
+<script>
+    $('#createTechnicianForm').on('submit', function(e) {
+        e.preventDefault();
+
+        let form = $(this);
+        let url = form.attr('action');
+        let formData = new FormData(this);
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                $('#add_salary').modal('hide');
+
+                form[0].reset();
+                toastr.success(response.message);
+                $('#technician-table').DataTable().ajax.reload();
+            },
+            error: function(xhr) {
+                let errMsg = 'Terjadi kesalahan.';
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errMsg = xhr.responseJSON.message;
+                }
+            }
+        });
+
+    });
+</script>

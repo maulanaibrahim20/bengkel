@@ -7,6 +7,7 @@ use App\Models\Technician;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 class TechnicianController extends Controller
 {
@@ -15,6 +16,26 @@ class TechnicianController extends Controller
     public function __construct(Technician $technician)
     {
         $this->technician = $technician;
+    }
+
+    public function getDataTable(Request $request)
+    {
+        $data = $this->technician->select(['id', 'name', 'username']);
+
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                $editBtn = "<button type='button' class='btn br-7 btn-warning editBtn' data-id='{$row->id}' data-bs-toggle='modal' data-bs-target='#add_salary-edit'><i class='fa fa-edit'></i></button>";
+
+                $deleteForm = "<form id='deleteForm{$row->id}' action='" . url("/super-admin/master/technician/{$row->id}/delete") . "' method='POST' style='display: inline;'>
+                " . csrf_field() . method_field('DELETE') . "
+                <button type='submit' class='btn btn-danger deleteBtn' data-id='{$row->id}'><i class='fa fa-trash'></i></button>
+            </form>";
+
+                return $editBtn . ' ' . $deleteForm;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 
     public function index()
@@ -39,6 +60,11 @@ class TechnicianController extends Controller
 
         if ($validator->fails()) {
             DB::rollBack();
+
+            if ($request->ajax()) {
+                return response()->json(['message' => $validator->errors()->first()], 422);
+            }
+
             return back()->with('error', $validator->errors()->first());
         }
 
@@ -48,9 +74,19 @@ class TechnicianController extends Controller
                 'username' => $request->username,
             ]);
             DB::commit();
-            return back()->with('success', 'Technician has been created successfully.');
+
+            if ($request->ajax()) {
+                return response()->json(['message' => 'Brand Engine berhasil ditambahkan.']);
+            }
+
+            return back()->with('success', 'Brand Engine berhasil ditambahkan.');
         } catch (\Exception) {
             DB::rollBack();
+
+            if ($request->ajax()) {
+                return response()->json(['message' => 'Terjadi kesalahan saat menyimpan data.'], 500);
+            }
+
             return back()->with('error', 'Something went wrong.');
         }
     }
@@ -110,16 +146,16 @@ class TechnicianController extends Controller
 
             if (!$technician) {
                 DB::rollBack();
-                return back()->with('error', 'Technician not found.');
+                return response()->json(['error', 'Technician not found.'], 400);
             }
 
             $technician->delete();
 
             DB::commit();
-            return back()->with('success', 'Technician has been deleted successfully.');
+            return response()->json(['success', 'Technician has been deleted successfully.']);
         } catch (\Exception) {
             DB::rollBack();
-            return back()->with('error', 'Something went wrong while deleting.');
+            return response()->json(['error', 'Something went wrong while deleting.']);
         }
     }
 

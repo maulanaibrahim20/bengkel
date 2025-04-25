@@ -9,8 +9,8 @@
                     <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span
                             class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
-                        <li><a href="employee-dashboard.html">Employee Dashboard</a></li>
+                        <li><a class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}"
+                                href="{{ url('/super-admin/dashboard') }}">Admin Dashboard</a></li>
                     </ul>
                 </li>
                 <li class="menu-title">

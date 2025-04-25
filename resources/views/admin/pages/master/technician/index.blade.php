@@ -21,7 +21,7 @@
             <div class="card mb-0">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="datatable table table-stripped mb-0">
+                        <table class="table table-striped mb-0" id="technician-table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -30,29 +30,6 @@
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($technicians as $data)
-                                    <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        <td>{{$data->name}}</td>
-                                        <td>{{$data->username}}</td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn br-7 btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#add_salary-edit" onclick="editModal('{{ $data['id'] }}')">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <form id="deleteForm{{ $data['id'] }}"
-                                                action="{{ url('/super-admin/master/technician/' . $data['id'] . '/delete') }}"
-                                                style="display: inline;" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger deleteBtn"
-                                                    data-id="{{ $data['id'] }}"><i class="fa fa-trash"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -83,14 +60,42 @@
 
 @section('script')
     <script>
-        $(document).ready(function () {
-            $('#username').on('input', function () {
+        $(document).ready(function() {
+            $('#technician-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ url('/super-admin/master/technician/datatable') }}",
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'username',
+                        name: 'username'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false,
+                        className: 'text-center'
+                    },
+                ]
+            });
+
+            $('#username').on('input', function() {
                 $('#submit-btn').prop('disabled', true);
                 $('#username').removeClass('is-invalid');
                 $('#username-feedback').addClass('d-none');
             });
 
-            $('#check-username').on('click', function () {
+            $('#check-username').on('click', function() {
                 var username = $('#username').val();
 
                 if (username.trim() === '') {
@@ -101,8 +106,10 @@
                 $.ajax({
                     url: "{{ url('/super-admin/master/technician/check-username') }}",
                     method: "GET",
-                    data: { username: username },
-                    success: function (response) {
+                    data: {
+                        username: username
+                    },
+                    success: function(response) {
                         if (response.exists) {
                             $('#username').addClass('is-invalid');
                             $('#username-feedback').removeClass('d-none');
@@ -117,13 +124,41 @@
                             toastr.success("Username tersedia");
                         }
                     },
-                    error: function () {
+                    error: function() {
                         toastr.error("Gagal memeriksa username");
                         $('#submit-btn').prop('disabled', true);
                     }
                 });
             });
         });
+
+        $('#technician-table').on('draw.dt', function() {
+            $('.editBtn').on('click', function() {
+                const id = $(this).data('id');
+                editModal(id);
+            });
+
+            $('.deleteBtn').on('click', function(e) {
+                e.preventDefault();
+                const id = $(this).data('id');
+                const deleteForm = $('#deleteForm' + id);
+                Swal.fire({
+                    title: 'Anda yakin?',
+                    text: "Data akan dihapus secara permanen!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        deleteForm.submit();
+                    }
+                });
+            });
+        });
+
 
         function editModal(id) {
             $.ajax({
@@ -132,16 +167,16 @@
                 data: {
                     id: id
                 },
-                success: function (response) {
+                success: function(response) {
                     $("#modal-content-edit").html(response)
                 },
-                error: function (error) {
+                error: function(error) {
                     console.log(error);
                 }
             })
         }
 
-        $('.deleteBtn').on('click', function (e) {
+        $('.deleteBtn').on('click', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
             var deleteForm = $('#deleteForm' + id);
@@ -157,6 +192,43 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     deleteForm.submit();
+                }
+            });
+        });
+
+        $(document).on('click', '.deleteBtn', function(e) {
+            e.preventDefault();
+            const id = $(this).data('id');
+
+            Swal.fire({
+                title: 'Anda yakin?',
+                text: "Data akan dihapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Kirimkan request delete ke server
+                    $.ajax({
+                        url: '/super-admin/master/technician/' + id + '/delete',
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}', // Kirimkan CSRF token untuk validasi
+                        },
+                        success: function(response) {
+                            // Swal.fire('Berhasil!', response.success, 'success');
+                            toastr.success('success', 'Berhasil menghapus data!');
+                            $('#technician-table').DataTable().ajax.reload(null,
+                                false); // Reload tabel tanpa refresh
+                        },
+                        error: function(xhr) {
+                            toastr.error('error', 'Gagal menghapus data!');
+                            // Swal.fire('Gagal!', xhr.responseJSON.error || 'Terjadi kesalahan', 'error');
+                        }
+                    });
                 }
             });
         });
