@@ -54,8 +54,8 @@ class TechnicianController extends Controller
         DB::beginTransaction();
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:technicians,username',
+            'name' => 'required|string|max:50',
+            'username' => 'required|string|max:50|unique:technicians,username',
         ]);
 
         if ($validator->fails()) {
@@ -107,8 +107,8 @@ class TechnicianController extends Controller
         DB::beginTransaction();
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:technicians,username,' . $id,
+            'name' => 'required|string|max:50',
+            'username' => 'required|string|max:50|unique:technicians,username,' . $id,
         ]);
 
         if ($validator->fails()) {

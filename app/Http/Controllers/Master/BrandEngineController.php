@@ -54,7 +54,7 @@ class BrandEngineController extends Controller
         DB::beginTransaction();
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
         ]);
 
         if ($validator->fails()) {
@@ -105,7 +105,7 @@ class BrandEngineController extends Controller
         DB::beginTransaction();
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
         ]);
 
         if ($validator->fails()) {
