@@ -10,15 +10,59 @@
         <div class="form-group">
             <label>Username</label>
             <div class="d-flex gap-2">
-                <input class="form-control" value="{{ $technician->username }}" name="username" id="username"
+                <input class="form-control" value="{{ $technician->username }}" name="username" id="username-edit"
                     type="text">
-                <button type="button" class="btn btn-outline-primary" id="check-username">Cek</button>
+                <button type="button" class="btn btn-outline-primary" id="check-username-edit">Cek</button>
             </div>
-            <small id="username-feedback" class="text-danger d-none">Username sudah digunakan</small>
+            <small id="username-feedback-edit" class="text-danger d-none">Username sudah digunakan</small>
         </div>
     </div>
     <div class="submit-section d-flex justify-content-end mt-4 gap-2">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="submit" class="btn btn-primary" id="submit-btn-edit">Simpan</button>
     </div>
 </form>
+
+<script>
+    $(document).ready(function () {
+        $('#username-edit').on('input', function () {
+            $('#submit-btn-edit').prop('disabled', true);
+            $('#username-edit').removeClass('is-invalid');
+            $('#username-feedback-edit').addClass('d-none');
+        });
+
+        $('#check-username-edit').on('click', function () {
+            var username = $('#username-edit').val();
+
+            if (username.trim() === '') {
+                toastr.warning("Username tidak boleh kosong");
+                return;
+            }
+
+            $.ajax({
+                url: "{{ url('/super-admin/master/technician/check-username') }}",
+                method: "GET",
+                data: { username: username, except_id: {{ $technician->id }} }, // jika kamu ingin mengabaikan username milik user itu sendiri
+                success: function (response) {
+                    if (response.exists) {
+                        $('#username-edit').addClass('is-invalid');
+                        $('#username-feedback-edit').removeClass('d-none');
+                        $('#submit-btn-edit').prop('disabled', true);
+
+                        toastr.error("Username sudah digunakan");
+                    } else {
+                        $('#username-edit').removeClass('is-invalid');
+                        $('#username-feedback-edit').addClass('d-none');
+                        $('#submit-btn-edit').prop('disabled', false);
+
+                        toastr.success("Username tersedia");
+                    }
+                },
+                error: function () {
+                    toastr.error("Gagal memeriksa username");
+                    $('#submit-btn-edit').prop('disabled', true);
+                }
+            });
+        });
+    });
+</script>
