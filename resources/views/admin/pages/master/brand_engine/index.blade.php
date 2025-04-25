@@ -21,7 +21,7 @@
             <div class="card mb-0">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="datatable table table-stripped mb-0">
+                        <table class="table table-striped mb-0" id="brand-engine-table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -29,28 +29,6 @@
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($brandEngine as $data)
-                                    <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        <td>{{$data->name}}</td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn br-7 btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#add_salary-edit" onclick="editModal('{{ $data['id'] }}')">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <form id="deleteForm{{ $data['id'] }}"
-                                                action="{{ url('/super-admin/master/brand-engine/' . $data['id'] . '/delete') }}"
-                                                style="display: inline;" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger deleteBtn"
-                                                    data-id="{{ $data['id'] }}"><i class="fa fa-trash"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -81,21 +59,37 @@
 
 @section('script')
     <script>
-        function editModal(id) {
+        $(document).ready(function () {
+            $('#brand-engine-table').DataTable({
+                searchable: true,
+                processing: true,
+                serverSide: true,
+                ajax: "{{ url('super-admin/master/brand-engine/datatable') }}",
+                columns: [
+                    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                    { data: 'name', name: 'name' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center' }
+                ]
+            });
+        });
+
+        // Tangani klik tombol edit dari DataTables
+        $(document).on('click', '.editBtn', function () {
+            const id = $(this).data('id');
+
             $.ajax({
                 url: '/super-admin/master/brand-engine/' + id + '/edit',
                 type: 'GET',
-                data: {
-                    id: id
-                },
                 success: function (response) {
-                    $("#modal-content-edit").html(response)
+                    $('#modal-content-edit').html(response); // Load form edit
+                    $('#add_salary-edit').modal('show'); // Pastikan modal terbuka
                 },
-                error: function (error) {
-                    console.log(error);
+                error: function () {
+                    Swal.fire('Gagal', 'Gagal memuat data.', 'error');
                 }
-            })
-        }
+            });
+        });
+
 
         $('.deleteBtn').on('click', function (e) {
             e.preventDefault();
@@ -116,5 +110,42 @@
                 }
             });
         });
+
+        $(document).on('click', '.deleteBtn', function (e) {
+            e.preventDefault();
+            const id = $(this).data('id');
+
+            Swal.fire({
+                title: 'Anda yakin?',
+                text: "Data akan dihapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Kirimkan request delete ke server
+                    $.ajax({
+                        url: '/super-admin/master/brand-engine/' + id + '/delete',
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}',  // Kirimkan CSRF token untuk validasi
+                        },
+                        success: function (response) {
+                            // Swal.fire('Berhasil!', response.success, 'success');
+                            toastr.success('success', 'Berhasil menghapus data!');
+                            $('#brand-engine-table').DataTable().ajax.reload(null, false); // Reload tabel tanpa refresh
+                        },
+                        error: function (xhr) {
+                            toastr.error('error', 'Gagal menghapus data!');
+                            // Swal.fire('Gagal!', xhr.responseJSON.error || 'Terjadi kesalahan', 'error');
+                        }
+                    });
+                }
+            });
+        });
+
     </script>
 @endsection

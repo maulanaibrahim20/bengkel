@@ -10,14 +10,18 @@ use App\Http\Controllers\Master\BrandEngineController;
 use App\Http\Controllers\Master\TechnicianController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [AppController::class, 'home']);
-Route::get('/about', [AppController::class, 'about']);
-Route::get('/service', [AppController::class, 'service']);
-Route::get('/booking', [AppController::class, 'booking']);
-Route::get('/contact', [AppController::class, 'contact']);
+
 
 
 Route::middleware(['guest'])->group(function () {
+
+    Route::get('/', [AppController::class, 'home']);
+    Route::get('/about', [AppController::class, 'about']);
+    Route::get('/service', [AppController::class, 'service']);
+    Route::get('/booking', [AppController::class, 'booking']);
+    Route::get('/contact', [AppController::class, 'contact']);
+
+
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
 
@@ -29,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix' => 'super-admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'admin']);
+
         Route::group(['prefix' => 'cms'], function () {
             Route::get('cms/pages/datatables', [PageController::class, 'getDatatable'])->name('pages.cms.datatable');
             Route::resource('pages', PageController::class);
@@ -36,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('master')->group(function () {
             Route::group(['prefix' => 'brand-engine', 'controller' => BrandEngineController::class], function () {
+                Route::get('/datatable', [BrandEngineController::class, 'getDataTable']);
                 Route::get('/', 'index');
                 Route::get('/create', 'create');
                 Route::post('/create', 'store');
