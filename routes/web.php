@@ -32,7 +32,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::group(['prefix' => 'super-admin'], function () {
+    Route::group(['prefix' => 'super-admin', 'middleware' => 'can:super-admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'admin']);
 
         Route::group(['prefix' => 'cms'], function () {
