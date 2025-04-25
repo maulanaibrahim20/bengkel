@@ -44,7 +44,6 @@ Route::middleware(['auth'])->group(function () {
             Route::group(['prefix' => 'brand-engine', 'controller' => BrandEngineController::class], function () {
                 Route::get('/datatable', [BrandEngineController::class, 'getDataTable']);
                 Route::get('/', 'index');
-                Route::get('/create', 'create');
                 Route::post('/create', 'store');
                 Route::get('/{id}/edit', 'edit');
                 Route::put('/{id}/update', 'update');
@@ -54,7 +53,6 @@ Route::middleware(['auth'])->group(function () {
             Route::group(['prefix' => 'technician', 'controller' => TechnicianController::class], function () {
                 Route::get('/datatable', [TechnicianController::class, 'getDataTable']);
                 Route::get('/', 'index');
-                Route::get('/create', 'create');
                 Route::post('/create', 'store');
                 Route::get('/{id}/edit', 'edit');
                 Route::put('/{id}/update', 'update');
@@ -65,7 +63,6 @@ Route::middleware(['auth'])->group(function () {
             Route::group(['prefix' => 'product-category', 'controller' => ProductCategoryController::class], function () {
                 Route::get('/datatable', [ProductCategoryController::class, 'getDataTable']);
                 Route::get('/', 'index');
-                Route::get('/create', 'create');
                 Route::post('/create', 'store');
                 Route::get('/{id}/edit', 'edit');
                 Route::put('/{id}/update', 'update');

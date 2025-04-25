@@ -30,6 +30,8 @@
                                 href="{{ url('/super-admin/master/brand-engine') }}">Brand Engine</a></li>
                         <li><a class="{{ Request::segment(3) == 'technician' ? 'active' : '' }}"
                                 href="{{ url('/super-admin/master/technician') }}">Technician</a></li>
+                        <li><a class="{{ Request::segment(3) == 'product-category' ? 'active' : '' }}"
+                                href="{{ url('/super-admin/master/product-category') }}">Product Category</a></li>
                     </ul>
                 </li>
             </ul>
