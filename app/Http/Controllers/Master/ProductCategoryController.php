@@ -40,7 +40,7 @@ class ProductCategoryController extends Controller
 
     public function index()
     {
-        return view('admin.pages.master.product_category.index');
+        return view('super-admin.pages.master.product_category.index');
     }
 
     public function store(Request $request)
@@ -92,7 +92,7 @@ class ProductCategoryController extends Controller
             return back()->with('error', 'Brand Engine not found.');
         }
 
-        return view('admin.pages.master.product_category.edit', $data);
+        return view('super-admin.pages.master.product_category.edit', $data);
     }
 
     public function update(Request $request, $id)

@@ -71,11 +71,11 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
-    Route::group(['prefix' => '/admin'], function () {
+    Route::group(['prefix' => '/admin', 'middleware' => 'can:admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'admin']);
     });
 
-    Route::group(['prefix' => '/user'], function () {
+    Route::group(['prefix' => '/user', 'middleware' => 'can:user'], function () {
         Route::get('/dashboard', [DashboardController::class, 'user']);
     });
 

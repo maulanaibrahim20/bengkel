@@ -41,12 +41,12 @@ class BrandEngineController extends Controller
     public function index()
     {
 
-        return view('admin.pages.master.brand_engine.index');
+        return view('super-admin.pages.master.brand_engine.index');
     }
 
     public function create(Request $request)
     {
-        return view('admin.pages.master.brand_engine.create');
+        return view('super-admin.pages.master.brand_engine.create');
     }
 
     public function store(Request $request)
@@ -98,7 +98,7 @@ class BrandEngineController extends Controller
             return back()->with('error', 'Brand Engine not found.');
         }
 
-        return view('admin.pages.master.brand_engine.edit', compact('brandEngine'));
+        return view('super-admin.pages.master.brand_engine.edit', compact('brandEngine'));
     }
     public function update(Request $request, $id)
     {

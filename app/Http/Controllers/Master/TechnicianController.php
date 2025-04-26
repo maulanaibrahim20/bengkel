@@ -41,12 +41,12 @@ class TechnicianController extends Controller
     public function index()
     {
         $data['technicians'] = $this->technician->latest()->get();
-        return view('admin.pages.master.technician.index', $data);
+        return view('super-admin.pages.master.technician.index', $data);
     }
 
     public function create()
     {
-        return view('admin.pages.master.technician.create');
+        return view('super-admin.pages.master.technician.create');
     }
 
     public function store(Request $request)
@@ -99,7 +99,7 @@ class TechnicianController extends Controller
             return back()->with('error', 'Technician not found.');
         }
 
-        return view('admin.pages.master.technician.edit', $data);
+        return view('super-admin.pages.master.technician.edit', $data);
     }
 
     public function update(Request $request, $id)

@@ -50,6 +50,7 @@ class LoginController extends Controller
             }
 
             if (Auth::attempt(["email" => $request->email, "password" => $request->password])) {
+
                 $request->session()->regenerate();
 
                 if ($user->role_id == $this->user::SUPER_ADMIN) {
@@ -60,7 +61,7 @@ class LoginController extends Controller
                     return redirect('/admin/dashboard')->with('success', 'Login successful.');
                 } elseif ($user->role_id == $this->user::USER) {
                     DB::commit();
-                    return redirect('/dashboard')->with('success', 'Login successful.');
+                    return redirect('user/dashboard')->with('success', 'Login successful.');
                 } else {
                     DB::rollBack();
                     return back()->with('error', 'Invalid role.');

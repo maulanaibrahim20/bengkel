@@ -5,17 +5,29 @@
                 <li class="menu-title">
                     <span>Main</span>
                 </li>
-                @auth
-                    <li class="submenu">
-
-                        <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span
-                                class="menu-arrow"></span></a>
-                        <ul style="display: none;">
-                            <li><a class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}"
-                                    href="{{ url('/super-admin/dashboard') }}">Admin Dashboard</a></li>
-                        </ul>
-                    </li>
-                @endauth
+                <li class="submenu">
+                    <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span
+                            class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li>
+                            @auth
+                                @if (Auth::user()->role_id == 1)
+                                    <a class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}"
+                                        href="{{ url('/super-admin/dashboard') }}">Dashboard
+                                    </a>
+                                @elseif (Auth::user()->role_id == 2)
+                                    <a class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}"
+                                        href="{{ url('/admin/dashboard') }}">Dashboard
+                                    </a>
+                                @elseif (Auth::user()->role_id == 3)
+                                    <a class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}"
+                                        href="{{ url('/user/dashboard') }}">Dashboard
+                                    </a>
+                                @endif
+                            @endauth
+                        </li>
+                    </ul>
+                </li>
                 <li class="menu-title">
                     <span>Employees</span>
                 </li>
@@ -38,6 +50,12 @@
                                     href="{{ url('/super-admin/master/product-category') }}">Product Category</a></li>
                         </ul>
                     </li>
+                @endcan
+                @can('admin')
+                    @dd(Auth::user()->role_id)
+                @endcan
+                @can('user')
+                    @dd(Auth::user()->role_id)
                 @endcan
             </ul>
         </div>

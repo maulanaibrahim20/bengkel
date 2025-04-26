@@ -3,16 +3,16 @@
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
-                <h3 class="page-title">Product Category</h3>
+                <h3 class="page-title">Brand Engine</h3>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ url('/super-admin/dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="admin-dashboard.html">Dashboard</a></li>
                     <li class="breadcrumb-item text-2xl">Master</li>
-                    <li class="breadcrumb-item active">Product Category</li>
+                    <li class="breadcrumb-item active">Brand Engine</li>
                 </ul>
             </div>
             <div class="col-auto float-end ms-auto">
                 <a href="#" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_salary"><i
-                        class="fa fa-plus"></i> Add Product Category</a>
+                        class="fa fa-plus"></i> Add Brand Engine</a>
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
             <div class="card mb-0">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped mb-0" id="product-category-table">
+                        <table class="table table-striped mb-0" id="brand-engine-table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    @include('admin.pages.master.product_category.create')
+    @include('super-admin.pages.master.brand_engine.create')
 
     <div id="add_salary-edit" class="modal custom-modal fade" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -60,11 +60,11 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#product-category-table').DataTable({
+            $('#brand-engine-table').DataTable({
                 searchable: true,
                 processing: true,
                 serverSide: true,
-                ajax: "{{ url('super-admin/master/product-category/datatable') }}",
+                ajax: "{{ url('super-admin/master/brand-engine/datatable') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -86,11 +86,12 @@
             });
         });
 
+        // Tangani klik tombol edit dari DataTables
         $(document).on('click', '.editBtn', function() {
             const id = $(this).data('id');
 
             $.ajax({
-                url: '/super-admin/master/product-category/' + id + '/edit',
+                url: '/super-admin/master/brand-engine/' + id + '/edit',
                 type: 'GET',
                 success: function(response) {
                     $('#modal-content-edit').html(response); // Load form edit
@@ -140,7 +141,7 @@
                 if (result.isConfirmed) {
                     // Kirimkan request delete ke server
                     $.ajax({
-                        url: '/super-admin/master/product-category/' + id + '/delete',
+                        url: '/super-admin/master/brand-engine/' + id + '/delete',
                         type: 'DELETE',
                         data: {
                             _token: '{{ csrf_token() }}', // Kirimkan CSRF token untuk validasi
@@ -148,8 +149,8 @@
                         success: function(response) {
                             // Swal.fire('Berhasil!', response.success, 'success');
                             toastr.success('success', 'Berhasil menghapus data!');
-                            $('#product-category-table').DataTable().ajax.reload(null,
-                                false); // Reload tabel tanpa refresh
+                            $('#brand-engine-table').DataTable().ajax.reload(null,
+                            false); // Reload tabel tanpa refresh
                         },
                         error: function(xhr) {
                             toastr.error('error', 'Gagal menghapus data!');

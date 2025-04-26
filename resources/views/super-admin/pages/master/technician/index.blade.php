@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    @include('admin.pages.master.technician.create')
+    @include('super-admin.pages.master.technician.create')
 
     <div id="add_salary-edit" class="modal custom-modal fade" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
