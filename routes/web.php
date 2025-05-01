@@ -8,6 +8,7 @@ use App\Http\Controllers\Cms\PageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BrandEngineController;
 use App\Http\Controllers\Master\ProductCategoryController;
+use App\Http\Controllers\Master\ProductUnitController;
 use App\Http\Controllers\Master\TechnicianController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +63,15 @@ Route::middleware(['auth'])->group(function () {
 
             Route::group(['prefix' => 'product-category', 'controller' => ProductCategoryController::class], function () {
                 Route::get('/datatable', [ProductCategoryController::class, 'getDataTable']);
+                Route::get('/', 'index');
+                Route::post('/create', 'store');
+                Route::get('/{id}/edit', 'edit');
+                Route::put('/{id}/update', 'update');
+                Route::delete('/{id}/delete', 'destroy');
+            });
+
+            Route::group(['prefix' => 'product-unit', 'controller' => ProductUnitController::class], function () {
+                Route::get('/datatable', [ProductUnitController::class, 'getDataTable']);
                 Route::get('/', 'index');
                 Route::post('/create', 'store');
                 Route::get('/{id}/edit', 'edit');

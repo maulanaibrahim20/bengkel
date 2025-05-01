@@ -43,11 +43,17 @@
                                 class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a class="{{ Request::segment(3) == 'brand-engine' ? 'active' : '' }}"
-                                    href="{{ url('/super-admin/master/brand-engine') }}">Brand Engine</a></li>
+                                    href="{{ url('/super-admin/master/brand-engine') }}">Brand Engine</a>
+                            </li>
                             <li><a class="{{ Request::segment(3) == 'technician' ? 'active' : '' }}"
-                                    href="{{ url('/super-admin/master/technician') }}">Technician</a></li>
+                                    href="{{ url('/super-admin/master/technician') }}">Technician</a>
+                            </li>
                             <li><a class="{{ Request::segment(3) == 'product-category' ? 'active' : '' }}"
-                                    href="{{ url('/super-admin/master/product-category') }}">Product Category</a></li>
+                                    href="{{ url('/super-admin/master/product-category') }}">Product Category</a>
+                            </li>
+                            <li><a class="{{ Request::segment(3) == 'product-unit' ? 'active' : '' }}"
+                                    href="{{ url('/super-admin/master/product-unit') }}">Product Unit</a>
+                            </li>
                         </ul>
                     </li>
                 @endcan

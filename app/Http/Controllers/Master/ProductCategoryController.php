@@ -20,7 +20,7 @@ class ProductCategoryController extends Controller
 
     public function getDataTable(Request $request)
     {
-        $data = $this->productCategory->select(['id', 'name']); // atau sesuaikan dengan modelnya
+        $data = $this->productCategory->select(['id', 'name']);
 
         return DataTables::of($data)
             ->addIndexColumn()
@@ -34,7 +34,7 @@ class ProductCategoryController extends Controller
 
                 return $editBtn . ' ' . $deleteForm;
             })
-            ->rawColumns(['action']) // penting agar HTML tidak di-escape
+            ->rawColumns(['action'])
             ->make(true);
     }
 
