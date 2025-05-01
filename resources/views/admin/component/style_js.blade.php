@@ -101,6 +101,8 @@
     $('#logoutBtn').on('click', function(e) {
         e.preventDefault();
 
+        let logoutUrl = $(this).attr('href');
+
         Swal.fire({
             title: 'Anda yakin ingin logout?',
             icon: 'warning',
@@ -111,26 +113,12 @@
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
-                showLoading();
-
-                $.ajax({
-                    url: "{{ route('logout') }}",
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        window.location.href = '/';
-                        toastr.success('success', 'Logout berhasil!');
-                    },
-                    error: function(xhr) {
-                        Swal.fire('Gagal', 'Logout gagal, coba lagi.', 'error');
-                    }
-                });
+                window.location.href = logoutUrl;
             }
         });
     });
 </script>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
