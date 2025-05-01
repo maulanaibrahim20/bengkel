@@ -3,10 +3,10 @@
     <!-- Logo -->
     <div class="header-left">
         <a href="admin-dashboard.html" class="logo">
-            <img src="{{url('/assets')}}/img/logo.png" width="40" height="40" alt="">
+            <img src="{{ url('/assets') }}/img/logo.png" width="40" height="40" alt="">
         </a>
         <a href="admin-dashboard.html" class="logo2">
-            <img src="{{url('/assets')}}/img/logo2.png" width="40" height="40" alt="">
+            <img src="{{ url('/assets') }}/img/logo2.png" width="40" height="40" alt="">
         </a>
     </div>
     <!-- /Logo -->
@@ -45,7 +45,7 @@
                             <a href="activities.html">
                                 <div class="media d-flex">
                                     <span class="avatar flex-shrink-0">
-                                        <img alt="" src="{{url('/assets')}}/img/profiles/avatar-02.jpg">
+                                        <img alt="" src="{{ url('/assets') }}/img/profiles/avatar-02.jpg">
                                     </span>
                                     <div class="media-body flex-grow-1">
                                         <p class="noti-details"><span class="noti-title">John Doe</span> added
@@ -61,7 +61,7 @@
                             <a href="activities.html">
                                 <div class="media d-flex">
                                     <span class="avatar flex-shrink-0">
-                                        <img alt="" src="{{url('/assets')}}/img/profiles/avatar-03.jpg">
+                                        <img alt="" src="{{ url('/assets') }}/img/profiles/avatar-03.jpg">
                                     </span>
                                     <div class="media-body flex-grow-1">
                                         <p class="noti-details"><span class="noti-title">Tarah Shropshire</span>
@@ -77,7 +77,7 @@
                             <a href="activities.html">
                                 <div class="media d-flex">
                                     <span class="avatar flex-shrink-0">
-                                        <img alt="" src="{{url('/assets')}}/img/profiles/avatar-06.jpg">
+                                        <img alt="" src="{{ url('/assets') }}/img/profiles/avatar-06.jpg">
                                     </span>
                                     <div class="media-body flex-grow-1">
                                         <p class="noti-details"><span class="noti-title">Misty Tison</span>
@@ -94,7 +94,7 @@
                             <a href="activities.html">
                                 <div class="media d-flex">
                                     <span class="avatar flex-shrink-0">
-                                        <img alt="" src="{{url('/assets')}}/img/profiles/avatar-17.jpg">
+                                        <img alt="" src="{{ url('/assets') }}/img/profiles/avatar-17.jpg">
                                     </span>
                                     <div class="media-body flex-grow-1">
                                         <p class="noti-details"><span class="noti-title">Rolland Webber</span>
@@ -110,7 +110,7 @@
                             <a href="activities.html">
                                 <div class="media d-flex">
                                     <span class="avatar flex-shrink-0">
-                                        <img alt="" src="{{url('/assets')}}/img/profiles/avatar-13.jpg">
+                                        <img alt="" src="{{ url('/assets') }}/img/profiles/avatar-13.jpg">
                                     </span>
                                     <div class="media-body flex-grow-1">
                                         <p class="noti-details"><span class="noti-title">Bernardo Galaviz</span>
@@ -134,14 +134,14 @@
         {{-- profile --}}
         <li class="nav-item dropdown has-arrow main-drop">
             <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                <span class="user-img"><img src="{{url('/assets')}}/img/profiles/avatar-21.jpg" alt="">
+                <span class="user-img"><img src="{{ url('/assets') }}/img/profiles/avatar-21.jpg" alt="">
                     <span class="status online"></span></span>
                 <span>Admin</span>
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="profile.html">My Profile</a>
                 <a class="dropdown-item" href="settings.html">Settings</a>
-                <a class="dropdown-item" href="{{ url('/logout') }}">Logout</a>
+                <button class="dropdown-item" id="logoutBtn">Logout</button>
             </div>
         </li>
         {{-- profile --}}

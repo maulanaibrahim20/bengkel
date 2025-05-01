@@ -34,44 +34,50 @@ class LoginController extends Controller
 
         if ($validate->fails()) {
             DB::rollBack();
-            return back()->with('error', $validate->errors()->first());
-        };
+            return response()->json([
+                'status' => false,
+                'errors' => $validate->errors(),
+            ], 422);
+        }
 
         try {
-
             $user = $this->user->where('email', $request->email)->first();
-            if (!$user) {
+            if (!$user || !Hash::check($request->password, $user->password)) {
                 DB::rollBack();
-                return back()->with('error', 'Invalid email or password. 1');
-            }
-            if (!Hash::check($request->password, $user->password)) {
-                DB::rollBack();
-                return back()->with('error', 'Invalid email or password. 2');
+                return response()->json(['status' => false, 'message' => 'Email atau password salah.'], 401);
             }
 
-            if (Auth::attempt(["email" => $request->email, "password" => $request->password])) {
-
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $request->session()->regenerate();
 
+                DB::commit();
+
                 if ($user->role_id == $this->user::SUPER_ADMIN) {
-                    DB::commit();
-                    return redirect('/super-admin/dashboard')->with('success', 'Login successful.');
+                    $redirectUrl = url('/super-admin/dashboard');
                 } elseif ($user->role_id == $this->user::ADMIN) {
-                    DB::commit();
-                    return redirect('/admin/dashboard')->with('success', 'Login successful.');
+                    $redirectUrl = url('/admin/dashboard');
                 } elseif ($user->role_id == $this->user::USER) {
-                    DB::commit();
-                    return redirect('user/dashboard')->with('success', 'Login successful.');
+                    $redirectUrl = url('/user/dashboard');
                 } else {
-                    DB::rollBack();
-                    return back()->with('error', 'Invalid role.');
+                    $redirectUrl = null;
                 }
+
+                if (!$redirectUrl) {
+                    return response()->json(['status' => false, 'message' => 'Role tidak valid.'], 403);
+                }
+
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Login berhasil.',
+                    'redirect' => $redirectUrl
+                ]);
             }
+
             DB::rollBack();
-            return back()->with('error', 'Invalid email or password.');
+            return response()->json(['status' => false, 'message' => 'Email atau password salah.'], 401);
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Something went wrong. Please try again.' . $e->getMessage());
+            return response()->json(['status' => false, 'message' => 'Terjadi kesalahan. ' . $e->getMessage()], 500);
         }
     }
 }

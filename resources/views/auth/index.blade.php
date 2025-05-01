@@ -22,7 +22,7 @@
         <div class="account-content">
             <div class="container">
                 <div class="account-logo">
-                    <a href="admin-dashboard.html"><img src="{{url('/assets')}}/img/logo2.png"
+                    <a href="admin-dashboard.html"><img src="{{ url('/assets') }}/img/logo2.png"
                             alt="Dreamguy's Technologies"></a>
                 </div>
                 <div class="account-box">
@@ -32,6 +32,7 @@
         </div>
     </div>
     @include('admin.component.style_js')
+    @yield('script')
 </body>
 
 </html>

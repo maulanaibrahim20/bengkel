@@ -92,5 +92,5 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'user']);
     });
 
-    Route::get('/logout', LogoutController::class);
+    Route::post('/logout', LogoutController::class)->name('logout');
 });

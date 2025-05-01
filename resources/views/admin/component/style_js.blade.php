@@ -70,8 +70,6 @@
         toastr.options.timeOut = 5000;
         toastr.options.progressBar = true;
         toastr.success("{{ session('success') }}");
-        var audio = new Audio('audio.mp3');
-        audio.play();
     </script>
 @endif
 
@@ -80,7 +78,6 @@
         toastr.options.timeOut = 5000;
         toastr.options.progressBar = true;
         toastr.warning("{{ session('warning') }}");
-        var audio = new Audio('audio.mp3');
     </script>
 @endif
 
@@ -89,7 +86,6 @@
         toastr.options.timeOut = 5000;
         toastr.options.progressBar = true;
         toastr.info("{{ session('info') }}");
-        var audio = new Audio('audio.mp3');
     </script>
 @endif
 
@@ -98,8 +94,43 @@
         toastr.options.timeOut = 5000;
         toastr.options.progressBar = true;
         toastr.error("{{ session('error') }}");
-        var audio = new Audio('audio.mp3');
     </script>
 @endif
+
+<script>
+    $('#logoutBtn').on('click', function(e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: 'Anda yakin ingin logout?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Logout!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                showLoading();
+
+                $.ajax({
+                    url: "{{ route('logout') }}",
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        window.location.href = '/';
+                        toastr.success('success', 'Logout berhasil!');
+                    },
+                    error: function(xhr) {
+                        Swal.fire('Gagal', 'Logout gagal, coba lagi.', 'error');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

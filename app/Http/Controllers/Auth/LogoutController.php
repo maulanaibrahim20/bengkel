@@ -14,6 +14,6 @@ class LogoutController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect(url('/'))->with('success', 'Anda Berhasil Logout');
+        return redirect('/')->with('success', 'Anda berhasil logout');
     }
 }
