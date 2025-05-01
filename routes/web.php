@@ -10,10 +10,8 @@ use App\Http\Controllers\Master\BrandEngineController;
 use App\Http\Controllers\Master\ProductCategoryController;
 use App\Http\Controllers\Master\ProductUnitController;
 use App\Http\Controllers\Master\TechnicianController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
-
-
-
 
 Route::middleware(['guest'])->group(function () {
 
@@ -36,9 +34,14 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'super-admin', 'middleware' => 'can:super-admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'admin']);
 
-        Route::group(['prefix' => 'cms'], function () {
-            Route::get('cms/pages/datatables', [PageController::class, 'getDatatable'])->name('pages.cms.datatable');
-            Route::resource('pages', PageController::class);
+        Route::group(['prefix' => 'product', 'controller' => ProductController::class], function () {
+            Route::get('/datatable', 'getDataTable');
+            Route::get('/', 'index');
+            Route::get('/create', 'create');
+            Route::post('/create', 'store');
+            Route::get('/{id}/edit', 'edit');
+            Route::put('/{id}/update', 'update');
+            Route::delete('/{id}/delete', 'destroy');
         });
 
         Route::prefix('master')->group(function () {

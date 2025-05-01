@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
+use App\Models\Technician;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,6 +19,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RoleSeeder::class,
             CmsSeeder::class,
+            BrandEngineSeeder::class,
+            ProductCategorySeeder::class,
+            ProductUnitSeeder::class,
+            TechnicianSeeder::class,
         ]);
     }
 }

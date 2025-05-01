@@ -28,13 +28,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="menu-title">
-                    <span>Employees</span>
-                </li>
-                <li>
-                    <a href="clients.html"><i class="la la-users"></i> <span>Clients</span></a>
-                </li>
                 @can('super-admin')
+                    <li class="menu-title">
+                        <span>Product</span>
+                    </li>
+                    <li class="{{ Request::segment(2) == 'product' ? 'active' : '' }}">
+                        <a href="{{ url('/super-admin/product') }}"><i class="la la-box"></i> <span>Produk</span></a>
+                    </li>
                     <li class="menu-title">
                         <span>Master</span>
                     </li>
@@ -58,10 +58,8 @@
                     </li>
                 @endcan
                 @can('admin')
-                    @dd(Auth::user()->role_id)
                 @endcan
                 @can('user')
-                    @dd(Auth::user()->role_id)
                 @endcan
             </ul>
         </div>
