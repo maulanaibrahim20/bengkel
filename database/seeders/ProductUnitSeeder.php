@@ -26,15 +26,15 @@ class ProductUnitSeeder extends Seeder
         ];
 
         $productUnitAcronym = [
-            'pcs',
+            'Pcs',
             'L',
-            'set',
-            'roll',
-            'tube',
-            'can',
-            'btl',
-            'box',
-            'pack',
+            'Set',
+            'Roll',
+            'Tube',
+            'Can',
+            'Btl',
+            'Box',
+            'Pack',
         ];
 
         foreach ($productUnitName as $index => $name) {

@@ -14,7 +14,6 @@ class CmsSeeder extends Seeder
      */
     public function run()
     {
-        // Buat satu halaman "home"
         $page = PagesCms::create([
             'title' => 'Home',
             'slug' => 'home',
@@ -25,7 +24,6 @@ class CmsSeeder extends Seeder
             'published_at' => now(),
         ]);
 
-        // Tambahkan beberapa komponen ke halaman tersebut
         ComponentCms::create([
             'page_id' => $page->id,
             'type' => 'hero',

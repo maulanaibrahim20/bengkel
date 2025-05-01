@@ -38,7 +38,7 @@ class ProductController extends Controller
 
         return DataTables::of($data)
             ->addIndexColumn()
-            ->addColumn('unit', fn($row) => $row->unit->name ?? '-')
+            ->addColumn('unit', fn($row) => $row->unit->acronym ?? '-')
             ->addColumn('category', fn($row) => $row->category->name ?? '-')
             ->addColumn('image', function ($row) {
                 if ($row->image) {
