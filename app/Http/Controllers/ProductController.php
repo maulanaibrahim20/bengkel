@@ -33,7 +33,8 @@ class ProductController extends Controller
             'description',
             'stock',
             'image',
-            'status'
+            'status',
+            'price'
         ]);
 
         return DataTables::of($data)
@@ -47,6 +48,7 @@ class ProductController extends Controller
                 }
                 return '-';
             })
+            ->addColumn('price', fn($row) => 'Rp ' . number_format($row->price, 0, ',', '.'))
             ->addColumn('status', function ($row) {
                 $badgeClass = $row->status === 'active' ? 'badge-success' : 'badge-danger';
                 return "<span class='badge {$badgeClass} text-capitalize'>{$row->status}</span>";

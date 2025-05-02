@@ -31,6 +31,7 @@
                                     <th>Description</th>
                                     <th>Image</th>
                                     <th>Stock</th>
+                                    <th>Price</th>
                                     <th>Status</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -89,6 +90,10 @@
                     {
                         data: 'status',
                         name: 'status'
+                    },
+                    {
+                        data: 'price',
+                        name: 'price'
                     },
                     {
                         data: 'action',

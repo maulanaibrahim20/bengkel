@@ -30,6 +30,12 @@
                 </li>
                 @can('super-admin')
                     <li class="menu-title">
+                        <span>Kasir</span>
+                    </li>
+                    <li class="{{ Request::segment(2) == 'product' ? 'active' : '' }}">
+                        <a href="{{ url('/app/kasir') }}"><i class="la la-box"></i> <span>Kasir</span></a>
+                    </li>
+                    <li class="menu-title">
                         <span>Product</span>
                     </li>
                     <li class="{{ Request::segment(2) == 'product' ? 'active' : '' }}">

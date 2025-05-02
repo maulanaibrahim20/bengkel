@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\AppKasirController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -83,6 +84,9 @@ Route::middleware(['auth'])->group(function () {
             });
         });
     });
+
+    Route::get('/app/kasir/getData', [AppKasirController::class, 'getData']);
+    Route::get('/app/kasir', [AppKasirController::class, 'index']);
 
     Route::group(['prefix' => '/admin', 'middleware' => 'can:admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'admin']);

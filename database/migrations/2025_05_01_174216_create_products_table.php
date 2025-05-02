@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->integer('stock');
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->decimal('price', 10, 2);
             $table->timestamps();
         });
     }

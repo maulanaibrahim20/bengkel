@@ -28,6 +28,7 @@ class ProductSeeder extends Seeder
                 'status' => 'active',
                 'category' => 'Oli Mesin',
                 'unit' => 'Liter',
+                'price' => 45000.00
             ],
             [
                 'name' => 'Aki GS Astra 12V 5Ah',
@@ -38,6 +39,7 @@ class ProductSeeder extends Seeder
                 'status' => 'active',
                 'category' => 'Aki / Battery',
                 'unit' => 'Pieces',
+                'price' => 250000.00
             ],
             [
                 'name' => 'Ban Swallow 90/90-14',
@@ -48,6 +50,7 @@ class ProductSeeder extends Seeder
                 'status' => 'active',
                 'category' => 'Ban',
                 'unit' => 'Pieces',
+                'price' => 175000.00
             ],
             [
                 'name' => 'Kampas Rem Belakang Yamaha',
@@ -58,6 +61,7 @@ class ProductSeeder extends Seeder
                 'status' => 'active',
                 'category' => 'Rem & Kampas',
                 'unit' => 'Set',
+                'price' => 65000.00
             ],
             [
                 'name' => 'Filter Udara Honda Beat',
@@ -68,6 +72,7 @@ class ProductSeeder extends Seeder
                 'status' => 'active',
                 'category' => 'Filter Udara',
                 'unit' => 'Pieces',
+                'price' => 55000.00
             ],
             [
                 'name' => 'Lampu LED 12V Universal',
@@ -78,6 +83,7 @@ class ProductSeeder extends Seeder
                 'status' => 'active',
                 'category' => 'Lampu & Kelistrikan',
                 'unit' => 'Pieces',
+                'price' => 35000.00
             ],
             [
                 'name' => 'Piston Kit Supra X 125',
@@ -88,6 +94,7 @@ class ProductSeeder extends Seeder
                 'status' => 'active',
                 'category' => 'Sparepart Mesin',
                 'unit' => 'Set',
+                'price' => 185000.00
             ],
             [
                 'name' => 'Spion Motor Bulat Klasik',
@@ -98,6 +105,7 @@ class ProductSeeder extends Seeder
                 'status' => 'active',
                 'category' => 'Aksesoris Motor',
                 'unit' => 'Set',
+                'price' => 60000.00
             ],
             [
                 'name' => 'Jasa Servis Lengkap Motor',
@@ -108,6 +116,7 @@ class ProductSeeder extends Seeder
                 'status' => 'active',
                 'category' => 'Jasa Servis',
                 'unit' => 'Pack',
+                'price' => 120000.00
             ],
             [
                 'name' => 'Selang Rem TDR Racing',
@@ -118,6 +127,7 @@ class ProductSeeder extends Seeder
                 'status' => 'active',
                 'category' => 'Rem & Kampas',
                 'unit' => 'Roll',
+                'price' => 95000.00
             ],
         ];
 
@@ -131,6 +141,7 @@ class ProductSeeder extends Seeder
                 'status' => $product['status'],
                 'category_id' => $categories[$product['category']],
                 'unit_id' => $units[$product['unit']],
+                'price' => $product['price']
             ]);
         }
     }
