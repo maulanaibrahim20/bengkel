@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -39,21 +40,10 @@ class RegisterController extends Controller
             abort(404);
         }
     }
-
-    protected function redirectByRole($user)
-    {
-        return match ($user->role_id) {
-            User::SUPER_ADMIN => '/super-admin/dashboard',
-            User::ADMIN => '/admin/dashboard',
-            User::USER => '/user/dashboard',
-            default => '/',
-        };
-    }
-
-    public function register(Request $request)
+    public function register(Request $request, $type)
     {
         try {
-            $googleUser = Socialite::driver('google')->user();
+            $googleUser = Socialite::driver($type)->user();
         } catch (\Exception $e) {
             return redirect('/login')->with('error', 'Failed to login with Google.');
         }
@@ -64,7 +54,7 @@ class RegisterController extends Controller
             $user = $this->user->create([
                 'name' => $googleUser->name,
                 'email' => $googleUser->email,
-                'password' => Hash::make('password'),
+                'password' => Hash::make(Str::random(12)),
                 'role_id' => $this->user::USER,
             ]);
         }
@@ -73,6 +63,14 @@ class RegisterController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect($this->redirectByRole($user))->with('success', 'Login berhasil.');
+        if ($user->role_id == $this->user::USER) {
+            return redirect('/user/dashboard')->with('success', 'Login berhasil.');
+        } elseif ($user->role_id == $this->user::ADMIN) {
+            return redirect('/admin/dashboard')->with('success', 'Login berhasil.');
+        } elseif ($user->role_id == $this->user::SUPER_ADMIN) {
+            return redirect('/super-admin/dashboard')->with('success', 'Login berhasil.');
+        } else {
+            return redirect('/')->with('success', 'Login berhasil.');
+        }
     }
 }

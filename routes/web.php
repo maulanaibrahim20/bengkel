@@ -29,13 +29,12 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/login', [LoginController::class, 'login']);
 
     Route::get('/register', [RegisterController::class, 'index']);
-    Route::get('/register/{type}', [RegisterController::class, 'showForm']);
+    Route::get('/register/{type}/redirect', [RegisterController::class, 'showForm']);
 });
 
-Route::get('/register/google/create', [RegisterController::class, 'register']);
+Route::get('/auth/{type}/register', [RegisterController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
-
     Route::group(['prefix' => 'super-admin', 'middleware' => 'can:super-admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'admin']);
 
