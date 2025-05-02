@@ -12,6 +12,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Login - HRMS admin template</title>
     @include('auth.component.style_css')
+    @stack('style')
 
 </head>
 

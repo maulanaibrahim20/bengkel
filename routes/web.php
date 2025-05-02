@@ -19,16 +19,20 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/', [AppController::class, 'home']);
     Route::get('/about', [AppController::class, 'about']);
     Route::get('/service', [AppController::class, 'service']);
-    Route::get('/booking', [AppController::class, 'booking']);
-    Route::get('/contact', [AppController::class, 'contact']);
 
+    Route::get('/booking', [AppController::class, 'booking']);
+    Route::get('/booking/register', [AppController::class, 'bookingRegister']);
+
+    Route::get('/contact', [AppController::class, 'contact']);
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
 
     Route::get('/register', [RegisterController::class, 'index']);
-    Route::post('/register', [RegisterController::class, 'register']);
+    Route::get('/register/{type}', [RegisterController::class, 'showForm']);
 });
+
+Route::get('/register/google/create', [RegisterController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
 

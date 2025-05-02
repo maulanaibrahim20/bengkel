@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Notifications\EmailOtpNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Socialite\Facades\Socialite;
 
 class RegisterController extends Controller
 {
@@ -18,39 +21,58 @@ class RegisterController extends Controller
         $this->user = new User();
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        return view('auth.register.index');
+        return view('auth.register.choose_register');
+    }
+
+    public function showForm($type)
+    {
+        if (!in_array($type, ['google', 'phone'])) {
+            abort(404);
+        }
+        if ($type == 'google') {
+            return Socialite::driver('google')->redirect();
+        } elseif ($type == 'phone') {
+            return view('');
+        } else {
+            abort(404);
+        }
+    }
+
+    protected function redirectByRole($user)
+    {
+        return match ($user->role_id) {
+            User::SUPER_ADMIN => '/super-admin/dashboard',
+            User::ADMIN => '/admin/dashboard',
+            User::USER => '/user/dashboard',
+            default => '/',
+        };
     }
 
     public function register(Request $request)
     {
-        DB::beginTransaction();
-
-        $validate = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        if ($validate->fails()) {
-            DB::rollBack();
-            return back()->with('error', $validate->errors()->first());
-        };
-
         try {
-            $this->user->create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'role_id' => 2,
-            ]);
-
-            DB::commit();
-            return redirect('/login')->with('success', 'Registration successful. You can now log in.');
+            $googleUser = Socialite::driver('google')->user();
         } catch (\Exception $e) {
-            DB::rollBack();
-            return back()->with('error', 'Something went wrong. Please try again.' . $e->getMessage());
+            return redirect('/login')->with('error', 'Failed to login with Google.');
         }
+
+        $user = $this->user->where('email', $googleUser->email)->first();
+
+        if (!$user) {
+            $user = $this->user->create([
+                'name' => $googleUser->name,
+                'email' => $googleUser->email,
+                'password' => Hash::make('password'),
+                'role_id' => $this->user::USER,
+            ]);
+        }
+
+        Auth::login($user);
+
+        $request->session()->regenerate();
+
+        return redirect($this->redirectByRole($user))->with('success', 'Login berhasil.');
     }
 }

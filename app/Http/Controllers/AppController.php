@@ -26,6 +26,11 @@ class AppController extends Controller
         return view('landing.pages.booking.index');
     }
 
+    public function bookingRegister()
+    {
+        return view('landing.pages.booking.book_register');
+    }
+
     public function contact(Request $request)
     {
         return view('landing.pages.contact.index');
