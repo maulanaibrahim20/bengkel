@@ -66,6 +66,12 @@
                 @can('admin')
                 @endcan
                 @can('user')
+                    <li class="menu-title">
+                        <span>Kasir</span>
+                    </li>
+                    <li class="{{ Request::segment(2) == 'booking' ? 'active' : '' }}">
+                        <a href="{{ url('/user/booking') }}"><i class="fa fa-book"></i> <span>Booking</span></a>
+                    </li>
                 @endcan
             </ul>
         </div>

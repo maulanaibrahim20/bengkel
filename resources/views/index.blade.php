@@ -13,6 +13,7 @@
     <title>Dashboard - HRMS admin template</title>
 
     @include('admin.component.style_css')
+    @stack('css')
 
 </head>
 

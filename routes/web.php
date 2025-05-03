@@ -12,6 +12,7 @@ use App\Http\Controllers\Master\ProductCategoryController;
 use App\Http\Controllers\Master\ProductUnitController;
 use App\Http\Controllers\Master\TechnicianController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserBookingController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -100,6 +101,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/welcome', function () {
             return view('user.pages.welcome');
         });
+
+        Route::group(['prefix' => 'booking', 'controller' => UserBookingController::class], function () {
+            Route::get('/', 'index');
+        });
+
         Route::get('/dashboard', [DashboardController::class, 'user']);
         Route::get('/update/profile', [UserProfileController::class, 'index']);
         Route::put('/update/profile', [UserProfileController::class, 'update']);
