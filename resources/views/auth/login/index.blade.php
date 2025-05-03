@@ -1,8 +1,10 @@
 @extends('auth.index')
+
 @section('content')
     <div class="account-wrapper">
         <h3 class="account-title">Login</h3>
         <p class="account-subtitle">Access to our dashboard</p>
+
         <form id="loginForm" action="{{ url('/login') }}" method="POST">
             @csrf
             <div class="form-group">
@@ -27,9 +29,22 @@
             <div class="form-group text-center">
                 <button class="btn btn-primary account-btn" type="submit">Login</button>
             </div>
+
             <div class="account-footer">
                 <p>Don't have an account yet? <a href="{{ url('/register') }}">Register</a></p>
             </div>
+
+            <div class="form-group text-center mt-3">
+                <span>Atau masuk menggunakan</span>
+            </div>
+
+            <div class="form-group text-center">
+                <a href="{{ url('/register/google/redirect') }}" class="btn d-block"
+                    style="background-color: #db4437; color: #fff; padding: 10px 20px; font-size: 14px; border-radius: 4px; width: 100%; max-width: 300px; margin: 0 auto;">
+                    <i class="fa fa-google mr-2" style="color: #fff;"></i> Masuk Dengan Google
+                </a>
+            </div>
+
         </form>
     </div>
 @endsection

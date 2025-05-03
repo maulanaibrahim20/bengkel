@@ -41,12 +41,6 @@ class RegisterController extends Controller
 
     public function register(Request $request, $type)
     {
-        $request->validate([
-            'name'  => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|string|min:8|unique:users',
-        ]);
-
         try {
             $googleUser = Socialite::driver($type)->user();
 
