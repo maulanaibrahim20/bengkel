@@ -8,8 +8,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-create-brand" action="{{ url('/super-admin/master/brand-engine/create') }}" method="POST"
-                    enctype="multipart/form-data">
+                <form id="form-create-brand" action="{{ url('/super-admin/master/brand-engine/create') }}"
+                    method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="form-group">
@@ -30,7 +30,7 @@
 </div>
 
 <script>
-    $('#form-create-brand').on('submit', function (e) {
+    $('#form-create-brand').on('submit', function(e) {
         e.preventDefault();
 
         let form = $(this);
@@ -43,14 +43,14 @@
             data: formData,
             processData: false,
             contentType: false,
-            success: function (response) {
+            success: function(response) {
                 $('#add_salary').modal('hide');
 
                 form[0].reset();
 
                 $('#brand-engine-table').DataTable().ajax.reload(null, false);
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 let errMsg = 'Terjadi kesalahan.';
                 if (xhr.responseJSON && xhr.responseJSON.message) {
                     errMsg = xhr.responseJSON.message;
@@ -59,6 +59,5 @@
         });
     });
 
-    $('#form-create-brand').on('submit', function (e) {
-    });
+    $('#form-create-brand').on('submit', function(e) {});
 </script>

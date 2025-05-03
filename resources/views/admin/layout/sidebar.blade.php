@@ -72,6 +72,12 @@
                     <li class="{{ Request::segment(2) == 'booking' ? 'active' : '' }}">
                         <a href="{{ url('/user/booking') }}"><i class="fa fa-book"></i> <span>Booking</span></a>
                     </li>
+                    <li class="menu-title">
+                        <span>List Motor</span>
+                    </li>
+                    <li class="{{ Request::segment(2) == 'motorcycle' ? 'active' : '' }}">
+                        <a href="{{ url('/user/motorcycle') }}"><i class="fa fa-motorcycle"></i> <span>Motor</span></a>
+                    </li>
                 @endcan
             </ul>
         </div>

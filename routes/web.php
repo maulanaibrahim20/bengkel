@@ -11,6 +11,7 @@ use App\Http\Controllers\Master\BrandEngineController;
 use App\Http\Controllers\Master\ProductCategoryController;
 use App\Http\Controllers\Master\ProductUnitController;
 use App\Http\Controllers\Master\TechnicianController;
+use App\Http\Controllers\MotorCycleUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserBookingController;
 use App\Http\Controllers\UserProfileController;
@@ -52,7 +53,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('master')->group(function () {
             Route::group(['prefix' => 'brand-engine', 'controller' => BrandEngineController::class], function () {
-                Route::get('/datatable', [BrandEngineController::class, 'getDataTable']);
+                Route::get('/datatable', 'getDataTable');
                 Route::get('/', 'index');
                 Route::post('/create', 'store');
                 Route::get('/{id}/edit', 'edit');
@@ -61,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
             });
 
             Route::group(['prefix' => 'technician', 'controller' => TechnicianController::class], function () {
-                Route::get('/datatable', [TechnicianController::class, 'getDataTable']);
+                Route::get('/datatable', 'getDataTable');
                 Route::get('/', 'index');
                 Route::post('/create', 'store');
                 Route::get('/{id}/edit', 'edit');
@@ -71,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
             });
 
             Route::group(['prefix' => 'product-category', 'controller' => ProductCategoryController::class], function () {
-                Route::get('/datatable', [ProductCategoryController::class, 'getDataTable']);
+                Route::get('/datatable', 'getDataTable');
                 Route::get('/', 'index');
                 Route::post('/create', 'store');
                 Route::get('/{id}/edit', 'edit');
@@ -104,6 +105,15 @@ Route::middleware(['auth'])->group(function () {
 
         Route::group(['prefix' => 'booking', 'controller' => UserBookingController::class], function () {
             Route::get('/', 'index');
+        });
+
+        Route::group(['prefix' => 'motorcycle', 'controller' => MotorCycleUserController::class], function () {
+            Route::get('/datatable', 'getDataTable');
+            Route::get('/', 'index');
+            Route::post('/create', 'store');
+            Route::get('/{id}/edit', 'edit');
+            Route::put('/{id}/update', 'update');
+            Route::delete('/{id}/delete', 'destroy');
         });
 
         Route::get('/dashboard', [DashboardController::class, 'user']);
