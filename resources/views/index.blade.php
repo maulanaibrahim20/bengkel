@@ -10,7 +10,7 @@
         content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
-    <title>Dashboard - HRMS admin template</title>
+    <title>{{ config('app.name') }} | {{ $pageTitle ?? 'Defaul Title' }}</title>
 
     @include('admin.component.style_css')
     @stack('css')
