@@ -18,6 +18,7 @@ class DashboardController extends Controller
     }
     public function user(Request $request)
     {
-        return view('user.pages.dashboard.index');
+        $newRegister = session('new_register', false);
+        return view('user.pages.dashboard.index', compact('newRegister'));
     }
 }

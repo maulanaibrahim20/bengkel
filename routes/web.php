@@ -12,6 +12,7 @@ use App\Http\Controllers\Master\ProductCategoryController;
 use App\Http\Controllers\Master\ProductUnitController;
 use App\Http\Controllers\Master\TechnicianController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
@@ -91,12 +92,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/app/kasir/getData', [AppKasirController::class, 'getData']);
     Route::get('/app/kasir', [AppKasirController::class, 'index']);
 
-    Route::group(['prefix' => '/admin', 'middleware' => 'can:admin'], function () {
+    Route::group(['prefix' => 'admin', 'middleware' => 'can:admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'admin']);
     });
 
-    Route::group(['prefix' => '/user', 'middleware' => 'can:user'], function () {
+    Route::group(['prefix' => 'user', 'middleware' => 'can:user'], function () {
+        Route::get('/welcome', function () {
+            return view('user.pages.welcome');
+        });
         Route::get('/dashboard', [DashboardController::class, 'user']);
+        Route::get('/update/profile', [UserProfileController::class, 'index']);
+        Route::put('/update/profile', [UserProfileController::class, 'update']);
     });
 
     Route::get('/logout', LogoutController::class)->name('logout');

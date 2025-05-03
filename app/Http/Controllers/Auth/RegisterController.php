@@ -29,48 +29,62 @@ class RegisterController extends Controller
 
     public function showForm($type)
     {
-        if (!in_array($type, ['google', 'phone'])) {
-            abort(404);
-        }
-        if ($type == 'google') {
-            return Socialite::driver('google')->redirect();
-        } elseif ($type == 'phone') {
-            return view('');
-        } else {
-            abort(404);
+        switch ($type) {
+            case 'google':
+                return Socialite::driver('google')->redirect();
+            case 'phone':
+                return view('');
+            default:
+                abort(404);
         }
     }
+
     public function register(Request $request, $type)
     {
+        $request->validate([
+            'name'  => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|string|min:8|unique:users',
+        ]);
+
         try {
             $googleUser = Socialite::driver($type)->user();
+
+            $user = $this->user->where('email', $googleUser->email)->first();
+
+            if (!$user) {
+                $user = $this->user->create([
+                    'name'              => $googleUser->name,
+                    'email'             => $googleUser->email,
+                    'password'          => Hash::make(Str::random(12)),
+                    'role_id'           => $this->user::USER,
+                    'email_verified_at' => now(),
+                    'remember_token'    => Str::random(10),
+                ]);
+
+                session(['new_register' => true]);
+            }
+
+            Auth::login($user);
+            $request->session()->regenerate();
+
+            switch ($user->role_id) {
+                case $this->user::USER:
+                    return session('new_register')
+                        ? redirect('/user/update/profile')->with('success', 'Login berhasil.')
+                        : redirect('/user/welcome')->with('success', 'Login berhasil.');
+
+                case $this->user::ADMIN:
+                    return redirect('/admin/dashboard')->with('success', 'Login berhasil.');
+
+                case $this->user::SUPER_ADMIN:
+                    return redirect('/super-admin/dashboard')->with('success', 'Login berhasil.');
+
+                default:
+                    return redirect('/')->with('success', 'Login berhasil.');
+            }
         } catch (\Exception $e) {
-            return redirect('/login')->with('error', 'Failed to login with Google.');
-        }
-
-        $user = $this->user->where('email', $googleUser->email)->first();
-
-        if (!$user) {
-            $user = $this->user->create([
-                'name' => $googleUser->name,
-                'email' => $googleUser->email,
-                'password' => Hash::make(Str::random(12)),
-                'role_id' => $this->user::USER,
-            ]);
-        }
-
-        Auth::login($user);
-
-        $request->session()->regenerate();
-
-        if ($user->role_id == $this->user::USER) {
-            return redirect('/user/dashboard')->with('success', 'Login berhasil.');
-        } elseif ($user->role_id == $this->user::ADMIN) {
-            return redirect('/admin/dashboard')->with('success', 'Login berhasil.');
-        } elseif ($user->role_id == $this->user::SUPER_ADMIN) {
-            return redirect('/super-admin/dashboard')->with('success', 'Login berhasil.');
-        } else {
-            return redirect('/')->with('success', 'Login berhasil.');
+            return redirect('/login')->with('error', 'Gagal login menggunakan ' . ucfirst($type) . '.');
         }
     }
 }

@@ -57,7 +57,7 @@ class LoginController extends Controller
                 } elseif ($user->role_id == $this->user::ADMIN) {
                     $redirectUrl = url('/admin/dashboard');
                 } elseif ($user->role_id == $this->user::USER) {
-                    $redirectUrl = url('/user/dashboard');
+                    $redirectUrl = url('/user/welcome');
                 } else {
                     $redirectUrl = null;
                 }
