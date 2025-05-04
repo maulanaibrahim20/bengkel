@@ -17,7 +17,8 @@ class UserProfileController extends Controller
     {
         $this->user = new User();
     }
-    public function index()
+
+    public function formRegister()
     {
         $user = $this->user->find(Auth::id());
 

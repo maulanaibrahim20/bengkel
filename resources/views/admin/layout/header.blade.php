@@ -134,14 +134,26 @@
         {{-- profile --}}
         <li class="nav-item dropdown has-arrow main-drop">
             <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                <span class="user-img"><img src="{{ url('/assets') }}/img/profiles/avatar-21.jpg" alt="">
-                    <span class="status online"></span></span>
+                <span class="user-img">
+                    @php
+                        use Illuminate\Support\Str;
+
+                        $image = Auth::user()->profile_image;
+                        $imageUrl = Str::startsWith($image, ['http://', 'https://'])
+                            ? $image
+                            : asset($image ?? 'assets/img/profiles/avatar-01.jpg');
+                    @endphp
+
+                    <img src="{{ $imageUrl }}" alt="">
+
+                    <span class="status {{ Auth::user()->status == 0 ? 'offline' : 'online' }}"></span>
+                </span>
                 <span>{{ Auth::user()->name }}</span>
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="profile.html">My Profile</a>
+                <a class="dropdown-item" href="{{ url('/user/profile') }}">My Profile</a>
                 <a class="dropdown-item" href="settings.html">Settings</a>
-                <a href="{{ route('logout') }}" id="logoutBtn" class="dropdown-item">Logout</a>
+                <a href="{{ route('logout') }}" class="dropdown-item logoutBtn">Logout</a>
             </div>
         </li>
         {{-- profile --}}
@@ -155,7 +167,7 @@
         <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="profile.html">My Profile</a>
             <a class="dropdown-item" href="settings.html">Settings</a>
-            <a class="dropdown-item" href="{{ url('/logout') }}">Logout</a>
+            <a class="dropdown-item logoutBtn" href="{{ url('/logout') }}">Logout</a>
         </div>
     </div>
     <!-- /Mobile Menu -->

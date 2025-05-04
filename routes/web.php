@@ -13,6 +13,7 @@ use App\Http\Controllers\Master\ProductUnitController;
 use App\Http\Controllers\Master\TechnicianController;
 use App\Http\Controllers\MotorCycleUserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserBookingController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
@@ -99,6 +100,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::group(['prefix' => 'user', 'middleware' => 'can:user'], function () {
+        Route::get('/dashboard', [DashboardController::class, 'user']);
+
         Route::get('/welcome', function () {
             return view('user.pages.welcome');
         });
@@ -116,10 +119,15 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/{id}/delete', 'destroy');
         });
 
-        Route::get('/dashboard', [DashboardController::class, 'user']);
-        Route::get('/update/profile', [UserProfileController::class, 'index']);
+
+        Route::get('/update/profile', [UserProfileController::class, 'formRegister']);
         Route::put('/update/profile', [UserProfileController::class, 'update']);
     });
+
+    Route::get('{role}/profile', [ProfileController::class, 'index']);
+    Route::get('{role}/profile/{id}/edit', [ProfileController::class, 'edit']);
+    Route::put('{role}/profile/update', [ProfileController::class, 'update']);
+
 
     Route::get('/logout', LogoutController::class)->name('logout');
 });

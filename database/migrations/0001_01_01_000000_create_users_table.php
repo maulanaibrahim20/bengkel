@@ -18,8 +18,12 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone')->nullable();
-            $table->smallInteger('status')->default(1)->comment('1=active, 0=inactive');
+            $table->smallInteger('status')->default(1)->comment('1 = active, 0 = inactive');
             $table->string('role_id');
+            $table->string('profile_image')->nullable();
+            $table->text('address')->nullable();
+            $table->date('birth_date')->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

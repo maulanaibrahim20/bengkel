@@ -67,7 +67,7 @@
                 @endcan
                 @can('user')
                     <li class="menu-title">
-                        <span>Kasir</span>
+                        <span>Booking</span>
                     </li>
                     <li class="{{ Request::segment(2) == 'booking' ? 'active' : '' }}">
                         <a href="{{ url('/user/booking') }}"><i class="fa fa-book"></i> <span>Booking</span></a>
@@ -79,6 +79,23 @@
                         <a href="{{ url('/user/motorcycle') }}"><i class="fa fa-motorcycle"></i> <span>Motor</span></a>
                     </li>
                 @endcan
+                <li class="menu-title">
+                    <span>Setting</span>
+                </li>
+                <li class="{{ Request::segment(2) == 'profile' ? 'active' : '' }}">
+                    @if (Auth::user()->role_id == 1)
+                        <a href="{{ url('/super-admin/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a>
+                    @elseif (Auth::user()->role_id == 2)
+                        <a href="{{ url('/admin/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a>
+                    @elseif (Auth::user()->role_id == 3)
+                        <a href="{{ url('/user/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a>
+                    @endif
+
+                </li>
+                <li>
+                    <a href="{{ route('logout') }}" class="logoutBtn"><i class="fa fa-sign-out"></i>
+                        <span>Logout</span></a>
+                </li>
             </ul>
         </div>
     </div>

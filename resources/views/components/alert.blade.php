@@ -65,23 +65,25 @@
 @endif
 
 <script>
-    $('#logoutBtn').on('click', function(e) {
-        e.preventDefault();
+    $(document).ready(function() {
+        $('.logoutBtn').on('click', function(e) {
+            e.preventDefault();
 
-        let logoutUrl = $(this).attr('href');
+            let logoutUrl = $(this).attr('href');
 
-        Swal.fire({
-            title: 'Anda yakin ingin logout?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Logout!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = logoutUrl;
-            }
+            Swal.fire({
+                title: 'Anda yakin ingin logout?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Logout!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = logoutUrl;
+                }
+            });
         });
     });
 </script>
