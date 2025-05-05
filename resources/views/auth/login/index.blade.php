@@ -17,7 +17,7 @@
                         <label>Password</label>
                     </div>
                     <div class="col-auto">
-                        <a class="text-muted" href="forgot-password.html">Forgot password?</a>
+                        <a class="text-muted" href="{{ url('/forgot-password') }}">Forgot password?</a>
                     </div>
                 </div>
                 <div class="position-relative">
@@ -51,14 +51,14 @@
 
 @section('script')
     <script>
-        $('#toggle-password').on('click', function() {
+        $('#toggle-password').on('click', function () {
             const passwordInput = $('#password');
             const type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
             passwordInput.attr('type', type);
             $(this).toggleClass('fa-eye fa-eye-slash');
         });
 
-        $('#loginForm').on('submit', function(e) {
+        $('#loginForm').on('submit', function (e) {
             e.preventDefault();
             showLoading();
 
@@ -70,14 +70,14 @@
                 url: url,
                 type: 'POST',
                 data: formData,
-                success: function(response) {
+                success: function (response) {
                     hideLoading();
                     toastr.success(response.message);
                     setTimeout(() => {
                         window.location.href = response.redirect;
                     }, 1000);
                 },
-                error: function(xhr) {
+                error: function (xhr) {
                     hideLoading();
                     if (xhr.status === 422) {
                         const errors = xhr.responseJSON.errors;

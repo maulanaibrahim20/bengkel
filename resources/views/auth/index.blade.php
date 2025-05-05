@@ -10,7 +10,7 @@
         content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
-    <title>Login - HRMS admin template</title>
+    <title>{{ config('app.name') }} | {{ $pageTitle ?? 'Defaul Title' }}</title>
     @include('auth.component.style_css')
     @stack('style')
 

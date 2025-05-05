@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\AppKasirController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Cms\PageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BrandEngineController;
@@ -31,6 +33,15 @@ Route::middleware(['guest'])->group(function () {
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
+
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'index']);
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmail']);
+
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])
+        ->name('password.reset');
+
+    Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
+        ->name('password.update');
 
     Route::get('/register', [RegisterController::class, 'index']);
     Route::get('/register/{type}/redirect', [RegisterController::class, 'showForm']);
