@@ -66,13 +66,43 @@
             </div>
         </div>
     </div>
+
+    @if (!$hasMotor)
+        <div class="modal fade" id="motorWarningModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
+            data-bs-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content rounded-4">
+                    <div class="modal-header bg-warning">
+                        <h5 class="modal-title">Peringatan</h5>
+                    </div>
+                    <div class="modal-body">
+                        Anda belum memiliki motor terdaftar. Silakan tambahkan motor terlebih dahulu sebelum melakukan
+                        booking.
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{{ url('/user/motorcycle') }}" class="btn btn-primary">Tambah Motor</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
 
 @section('script')
+    @if (!$hasMotor)
+        <script>
+            $(document).ready(function() {
+                $('#motorWarningModal').modal('show');
+
+                // Matikan semua tombol agar tidak bisa booking
+                $('button').not('.btn-primary').prop('disabled', true);
+            });
+        </script>
+    @endif
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Ketika tombol tanggal diklik
-            $('.date-tab-btn').on('click', function () {
+            $('.date-tab-btn').on('click', function() {
                 $('.schedule-tab').hide(); // Sembunyikan semua tab jadwal
 
                 $('.date-tab-btn').removeClass('btn-dark text-white').addClass(
@@ -90,13 +120,13 @@
                 $.ajax({
                     url: '/user/booking/slot/' + selectedDate,
                     type: 'GET',
-                    success: function (response) {
+                    success: function(response) {
 
                         // --- SLOT PAGI ---
                         let morningHtml = '';
                         if (response.morningSlots.length > 0) {
 
-                            response.morningSlots.forEach(function (slot) {
+                            response.morningSlots.forEach(function(slot) {
                                 const isFull = slot.current_bookings >= slot
                                     .max_bookings;
                                 morningHtml += `
@@ -118,7 +148,7 @@
                         const afternoonSlots = Object.values(response.afternoonSlots);
 
                         if (afternoonSlots.length > 0) {
-                            afternoonSlots.forEach(function (slot) {
+                            afternoonSlots.forEach(function(slot) {
                                 const isFull = slot.current_bookings >= slot
                                     .max_bookings;
 
