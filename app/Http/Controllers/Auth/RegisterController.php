@@ -54,7 +54,8 @@ class RegisterController extends Controller
                     'role_id'           => $this->user::USER,
                     'email_verified_at' => now(),
                     'remember_token'    => Str::random(10),
-                    'profile_image'     => $googleUser->avatar
+                    'profile_image'     => $googleUser->avatar,
+                    'gender'            => $request
                 ]);
 
                 session(['new_register' => true]);

@@ -107,6 +107,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::group(['prefix' => 'booking', 'controller' => UserBookingController::class], function () {
+            Route::get('/slot/{date}', 'getSlots');
             Route::get('/', 'index');
         });
 

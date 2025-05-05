@@ -36,6 +36,7 @@ class UserProfileController extends Controller
 
     public function update(Request $request)
     {
+        dd($request->all());
         DB::beginTransaction();
 
         try {
@@ -44,7 +45,8 @@ class UserProfileController extends Controller
             $user->update([
                 'name' => Str::slug($request->first_name) . ' ' . Str::slug($request->last_name),
                 'phone' => $request->phone,
-                'status' => 1
+                'status' => 1,
+                'gender' => $request->gender,
             ]);
 
             DB::commit();

@@ -24,72 +24,41 @@
     <div class="container my-5">
         <div class="card p-4 shadow-sm rounded-4">
             <!-- Header tanggal -->
-            <div class="d-flex mb-3 overflow-auto">
-                @php
-                    $startDate = \Carbon\Carbon::now();
-                @endphp
-                @for ($i = 0; $i < 7; $i++)
+            <div class="d-flex mb-4 overflow-auto">
+                @foreach ($dates as $i => $day)
                     @php
-                        $date = $startDate->copy()->addDays($i);
-                        $isToday = $date->isToday();
+                        $isToday = $day['date']->isToday();
                     @endphp
                     <div class="me-2">
                         <button
-                            class="btn {{ $isToday ? 'btn-dark text-white' : 'btn-outline-secondary' }} rounded-4 px-4 py-2 w-100">
-                            <div class="fw-bold">{{ $date->format('d M') }}</div>
+                            class="btn date-tab-btn {{ $isToday ? 'btn-dark text-white' : 'btn-outline-secondary' }} rounded-4 px-4 py-2 w-100"
+                            data-tab="tab-{{ $i }}">
+                            <div class="fw-bold">{{ $day['date']->format('d M') }}</div>
                             @if ($isToday)
                                 <div class="badge bg-warning text-dark mt-1">Hari Ini</div>
                             @endif
                         </button>
                     </div>
-                @endfor
+                @endforeach
             </div>
 
-            <!-- Jadwal -->
-            <div class="px-2">
-                <h5 class="fw-bold mb-2">Pagi</h5>
-                <div class="d-flex flex-wrap mb-3">
-                    @foreach (['09:00', '09:30', '10:00', '10:30', '11:00', '11:30'] as $time)
-                        <div class="m-1">
-                            <button class="btn btn-secondary rounded-pill px-3" disabled>{{ $time }}</button>
-                        </div>
-                    @endforeach
-                </div>
+            <!-- Slot jadwal per tanggal -->
+            @foreach ($dates as $i => $day)
+                <div id="tab-{{ $i }}" class="schedule-tab mb-4" style="display: none;">
+                    <h5 class="fw-bold mb-3">{{ $day['date']->translatedFormat('l, d F Y') }}</h5>
 
-                <h5 class="fw-bold mb-2">Sore</h5>
-                <div class="d-flex flex-wrap">
-                    @php
-                        $afternoonTimes = [
-                            '12:00',
-                            '12:30',
-                            '13:00',
-                            '13:30',
-                            '14:00',
-                            '14:30',
-                            '15:00',
-                            '15:30',
-                            '16:00',
-                            '16:30',
-                            '17:00',
-                            '17:30',
-                            '18:00',
-                            '18:30',
-                            '19:00',
-                            '19:30',
-                        ];
-                        $disabledTimes = ['13:00', '17:00']; // contoh yang tidak bisa diklik
-                    @endphp
-                    @foreach ($afternoonTimes as $time)
-                        <div class="m-1">
-                            <button
-                                class="btn rounded-pill px-3 {{ in_array($time, $disabledTimes) ? 'btn-secondary' : 'btn-outline-primary' }}"
-                                {{ in_array($time, $disabledTimes) ? 'disabled' : '' }}>
-                                {{ $time }}
-                            </button>
-                        </div>
-                    @endforeach
+                    <h6 class="fw-bold">Pagi</h6>
+                    <div class="d-flex flex-wrap mb-3 morning-slots">
+                        <!-- Slot pagi akan dimuat di sini melalui AJAX -->
+                    </div>
+
+                    <h6 class="fw-bold">Sore</h6>
+                    <div class="d-flex flex-wrap afternoon-slots">
+                        <!-- Slot sore akan dimuat di sini melalui AJAX -->
+                    </div>
                 </div>
-            </div>
+            @endforeach
+
 
             <!-- Note -->
             <div class="mt-4 text-muted small">
@@ -97,4 +66,83 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            // Ketika tombol tanggal diklik
+            $('.date-tab-btn').on('click', function() {
+                $('.schedule-tab').hide(); // Sembunyikan semua tab jadwal
+
+                $('.date-tab-btn').removeClass('btn-dark text-white').addClass(
+                    'btn-outline-secondary'); // Reset tombol
+
+                $(this).removeClass('btn-outline-secondary').addClass(
+                    'btn-dark text-white'); // Aktifkan tombol yg dipilih
+
+                const tabId = $(this).data('tab'); // ID tab yg dipilih
+                $('#' + tabId).show(); // Tampilkan tab yang sesuai
+
+                const selectedDate = $(this).find('.fw-bold').text(); // Ambil tanggal
+
+                // AJAX untuk ambil data slot berdasarkan tanggal
+                $.ajax({
+                    url: '/user/booking/slot/' + selectedDate,
+                    type: 'GET',
+                    success: function(response) {
+
+                        // --- SLOT PAGI ---
+                        let morningHtml = '';
+                        if (response.morningSlots.length > 0) {
+
+                            response.morningSlots.forEach(function(slot) {
+                                const isFull = slot.current_bookings >= slot
+                                    .max_bookings;
+                                morningHtml += `
+                                    <div class="m-1">
+                                        <button class="btn rounded-pill px-3 ${isFull ? 'btn-secondary' : 'btn-outline-primary'}" ${isFull ? 'disabled' : ''}>
+                                            ${slot.time}
+                                        </button>
+                                    </div>
+                                `;
+                            });
+                        } else {
+                            morningHtml = '<div class="text-muted">Tidak ada slot pagi.</div>';
+                        }
+                        $('#' + tabId + ' .morning-slots').html(morningHtml);
+
+                        // --- SLOT SORE ---
+                        let afternoonHtml = '';
+
+                        const afternoonSlots = Object.values(response.afternoonSlots);
+
+                        if (afternoonSlots.length > 0) {
+                            afternoonSlots.forEach(function(slot) {
+                                const isFull = slot.current_bookings >= slot
+                                    .max_bookings;
+
+                                afternoonHtml += `
+            <div class="m-1">
+                <button class="btn rounded-pill px-3 ${isFull ? 'btn-secondary' : 'btn-outline-primary'}" ${isFull ? 'disabled' : ''}>
+                    ${slot.time}
+                </button>
+            </div>
+        `;
+                            });
+                        } else {
+                            afternoonHtml =
+                                '<div class="text-muted">Tidak ada slot sore.</div>';
+                        }
+
+
+                        $('#' + tabId + ' .afternoon-slots').html(afternoonHtml);
+                    }
+                });
+            });
+
+            // Klik tanggal pertama saat halaman dibuka
+            $('.date-tab-btn').first().click();
+        });
+    </script>
 @endsection
