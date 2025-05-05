@@ -34,7 +34,26 @@ class UserSuperAdminController extends Controller
             </form>";
                 return $editBtn . ' ' . $deleteForm;
             })
-            ->rawColumns(['action'])
+            ->addColumn('status', function ($row) {
+                $statusText = $row->status ? 'Active' : 'Inactive';
+                $statusClass = $row->status ? 'text-success' : 'text-danger';
+
+                return '
+                    <div class="dropdown action-label">
+                        <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-dot-circle-o ' . $statusClass . '"></i> ' . $statusText . '
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item change-status" href="#" data-id="' . $row->id . '" data-status="1">
+                                <i class="fa fa-dot-circle-o text-success"></i> Active
+                            </a>
+                            <a class="dropdown-item change-status" href="#" data-id="' . $row->id . '" data-status="0">
+                                <i class="fa fa-dot-circle-o text-danger"></i> Inactive
+                            </a>
+                        </div>
+                    </div>';
+            })
+            ->rawColumns(['action', 'status'])
             ->make(true);
     }
 
@@ -177,6 +196,19 @@ class UserSuperAdminController extends Controller
         } catch (\Exception) {
             DB::rollBack();
             return response()->json(['error', 'Something went wrong while deleting.']);
+        }
+    }
+
+    public function changeStatus($id, Request $request)
+    {
+        try {
+            $user = User::findOrFail($id);
+            $user->status = $request->status;
+            $user->save();
+
+            return response()->json(['success' => true, 'message' => 'Status berhasil diperbarui.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Gagal memperbarui status.' . $e->getMessage()], 500);
         }
     }
 }

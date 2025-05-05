@@ -148,5 +148,32 @@
                 }
             });
         });
+
+        $(document).on('click', '.change-status', function (e) {
+            e.preventDefault();
+            const id = $(this).data('id');
+            const status = $(this).data('status');
+
+            $.ajax({
+                url: '/super-admin/user/' + id + '/change-status',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    status: status
+                },
+                success: function (res) {
+                    if (res.success) {
+                        toastr.success('Berhasil mengubah status');
+                        $('#user-table').DataTable().ajax.reload(null, false);
+                    } else {
+                        toastr.error('Gagal mengubah status');
+                    }
+                },
+                error: function () {
+                    toastr.error('Terjadi kesalahan saat mengubah status');
+                }
+            });
+        });
+
     </script>
 @endsection

@@ -116,7 +116,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}/edit', 'edit');
             Route::put('/{id}/update', 'update');
             Route::delete('/{id}/delete', 'destroy');
-            Route::delete('/{id}/status', 'changeStatus')->name('user.changeStatus');
+            Route::post('/{id}/change-status', 'changeStatus');
         });
     });
 
