@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
@@ -27,6 +28,8 @@ class ResetPasswordController extends Controller
             'password_confirmation' => 'required|min:8|same:password',
         ]);
 
+        DB::beginTransaction();
+
         try {
             $status = Password::reset(
                 $request->only('email', 'password', 'password_confirmation', 'token'),
@@ -39,11 +42,14 @@ class ResetPasswordController extends Controller
             );
 
             if ($status === Password::PASSWORD_RESET) {
+                DB::commit();
                 return redirect('/login')->with('success', __($status));
             }
 
+            DB::rollBack();
             return back()->withErrors(['email' => [__($status)]]);
         } catch (\Exception $e) {
+            DB::rollBack();
             return back()->with('error', 'Terjadi kesalahan saat reset password. Silakan coba lagi.');
         }
     }

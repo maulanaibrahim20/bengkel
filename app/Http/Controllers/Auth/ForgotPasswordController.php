@@ -37,7 +37,19 @@ class ForgotPasswordController extends Controller
             DB::commit();
 
             if ($status === Password::RESET_LINK_SENT) {
+                DB::commit();
+
+                if ($request->ajax()) {
+                    return response()->json(['message' => __($status)]);
+                }
+
                 return back()->with('success', __($status));
+            }
+
+            DB::rollBack();
+
+            if ($request->ajax()) {
+                return response()->json(['message' => __($status)], 400);
             }
 
             return back()->with('error', __($status));
