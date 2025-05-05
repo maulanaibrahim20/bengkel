@@ -29,10 +29,22 @@
                         <div class="profile-image-wrap text-center position-relative" style="margin-top: -60px;">
                             <div class="profile-image mb-3">
                                 @php
+                                    use Illuminate\Support\Str;
+
+                                    $user = Auth::user();
                                     $image = $user->profile_image;
+
+                                    $defaultImages = [
+                                        1 => 'img/adminsuper123.png',
+                                        2 => 'img/adminsuper123.png',
+                                        3 => 'assets/img/profiles/avatar-01.jpg',
+                                    ];
+
+                                    $defaultImage = $defaultImages[$user->role_id] ?? 'assets/img/profiles/avatar-01.jpg';
+
                                     $imageUrl = Str::startsWith($image, ['http://', 'https://'])
                                         ? $image
-                                        : asset($image ?? 'assets/img/profiles/avatar-01.jpg');
+                                        : asset($image ?: $defaultImage);
                                 @endphp
 
                                 <img src="{{ $imageUrl }}"
@@ -186,9 +198,9 @@
 
 @section('script')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             });
 
@@ -198,7 +210,7 @@
             });
         });
 
-        $(document).on('click', '.editBtn', function() {
+        $(document).on('click', '.editBtn', function () {
 
             const id = $(this).data('id');
             console.log(id);
@@ -208,11 +220,11 @@
             $.ajax({
                 url: '/' + baseUserPrefix + '/profile/' + id + '/edit',
                 type: 'GET',
-                success: function(response) {
+                success: function (response) {
                     $('#modal-content').html(response);
                     $('#profile_info').modal('show');
                 },
-                error: function() {
+                error: function () {
                     Swal.fire('Gagal', 'Gagal memuat data.', 'error');
                 }
             });

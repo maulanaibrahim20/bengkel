@@ -2,12 +2,19 @@
 
     <!-- Logo -->
     <div class="header-left">
-        <a href="admin-dashboard.html" class="logo">
-            <img src="{{ url('/assets') }}/img/logo.png" width="40" height="40" alt="">
-        </a>
-        <a href="admin-dashboard.html" class="logo2">
-            <img src="{{ url('/assets') }}/img/logo2.png" width="40" height="40" alt="">
-        </a>
+        @if (Auth::user()->role_id == 1)
+            <a href="{{ url('/super-admin/dashboard') }}" class="logo">
+                <img src="{{ url('/assets') }}/img/logo.png" width="40" height="40" alt="">
+            </a>
+        @elseif (Auth::user()->role_id == 2)
+            <a href="{{ url('/admin/dashboard') }}" class="logo">
+                <img src="{{ url('/assets') }}/img/logo.png" width="40" height="40" alt="">
+            </a>
+        @elseif (Auth::user()->role_id == 3)
+            <a href="{{ url('/user/dashboard') }}" class="logo">
+                <img src="{{ url('/assets') }}/img/logo.png" width="40" height="40" alt="">
+            </a>
+        @endif
     </div>
     <!-- /Logo -->
 
@@ -138,10 +145,20 @@
                     @php
                         use Illuminate\Support\Str;
 
-                        $image = Auth::user()->profile_image;
+                        $user = Auth::user();
+                        $image = $user->profile_image;
+
+                        $defaultImages = [
+                            1 => 'img/adminsuper123.png',
+                            2 => 'img/adminsuper123.png',
+                            3 => 'assets/img/profiles/avatar-01.jpg',
+                        ];
+
+                        $defaultImage = $defaultImages[$user->role_id] ?? 'assets/img/profiles/avatar-01.jpg';
+
                         $imageUrl = Str::startsWith($image, ['http://', 'https://'])
                             ? $image
-                            : asset($image ?? 'assets/img/profiles/avatar-01.jpg');
+                            : asset($image ?: $defaultImage);
                     @endphp
 
                     <img src="{{ $imageUrl }}" alt="">
@@ -151,7 +168,13 @@
                 <span>{{ Auth::user()->name }}</span>
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ url('/user/profile') }}">My Profile</a>
+                @if (Auth::user()->role_id == 1)
+                    <a class="dropdown-item" href="{{ url('/super-admin/profile') }}">My Profile</a>
+                @elseif (Auth::user()->role_id == 2)
+                    <a class="dropdown-item" href="{{ url('/admin/profile') }}">My Profile</a>
+                @elseif (Auth::user()->role_id == 3)
+                    <a class="dropdown-item" href="{{ url('/user/profile') }}">My Profile</a>
+                @endif
                 <a class="dropdown-item" href="settings.html">Settings</a>
                 <a href="{{ route('logout') }}" class="dropdown-item logoutBtn">Logout</a>
             </div>
@@ -165,7 +188,13 @@
         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
                 class="fa fa-ellipsis-v"></i></a>
         <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="profile.html">My Profile</a>
+            @if (Auth::user()->role_id == 1)
+                <a class="dropdown-item" href="{{ url('/super-admin/profile') }}">My Profile</a>
+            @elseif (Auth::user()->role_id == 2)
+                <a class="dropdown-item" href="{{ url('/admin/profile') }}">My Profile</a>
+            @elseif (Auth::user()->role_id == 3)
+                <a class="dropdown-item" href="{{ url('/user/profile') }}">My Profile</a>
+            @endif
             <a class="dropdown-item" href="settings.html">Settings</a>
             <a class="dropdown-item logoutBtn" href="{{ url('/logout') }}">Logout</a>
         </div>

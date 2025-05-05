@@ -42,6 +42,12 @@ class LoginController extends Controller
 
         try {
             $user = $this->user->where('email', $request->email)->first();
+
+            if ($user->status == 0) {
+                DB::rollBack();
+                return response()->json(['status' => false, 'message' => 'Akun anda telah dinonaktifkan. Silahkan hubungi admin.'], 401);
+            }
+
             if (!$user || !Hash::check($request->password, $user->password)) {
                 DB::rollBack();
                 return response()->json(['status' => false, 'message' => 'Email atau password salah.'], 401);

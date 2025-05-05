@@ -13,11 +13,13 @@ use App\Http\Controllers\Master\BrandEngineController;
 use App\Http\Controllers\Master\ProductCategoryController;
 use App\Http\Controllers\Master\ProductUnitController;
 use App\Http\Controllers\Master\TechnicianController;
+use App\Http\Controllers\MotorCycleAdminController;
 use App\Http\Controllers\MotorCycleUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserBookingController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\UserSuperAdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
@@ -51,7 +53,7 @@ Route::get('/auth/{type}/register', [RegisterController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'super-admin', 'middleware' => 'can:super-admin'], function () {
-        Route::get('/dashboard', [DashboardController::class, 'admin']);
+        Route::get('/dashboard', [DashboardController::class, 'superAdmin']);
 
         Route::group(['prefix' => 'product', 'controller' => ProductController::class], function () {
             Route::get('/datatable', 'getDataTable');
@@ -93,13 +95,28 @@ Route::middleware(['auth'])->group(function () {
             });
 
             Route::group(['prefix' => 'product-unit', 'controller' => ProductUnitController::class], function () {
-                Route::get('/datatable', [ProductUnitController::class, 'getDataTable']);
+                Route::get('/datatable', 'getDataTable');
                 Route::get('/', 'index');
                 Route::post('/create', 'store');
                 Route::get('/{id}/edit', 'edit');
                 Route::put('/{id}/update', 'update');
                 Route::delete('/{id}/delete', 'destroy');
             });
+        });
+
+        Route::group(['prefix' => 'motorcycle', 'controller' => MotorCycleAdminController::class], function () {
+            Route::get('/datatable', 'getDataTable');
+            Route::get('/', 'index');
+        });
+
+        Route::group(['prefix' => 'user', 'controller' => UserSuperAdminController::class], function () {
+            Route::get('/datatable', 'getDataTable');
+            Route::get('/', 'index');
+            Route::post('/create', 'store');
+            Route::get('/{id}/edit', 'edit');
+            Route::put('/{id}/update', 'update');
+            Route::delete('/{id}/delete', 'destroy');
+            Route::delete('/{id}/status', 'changeStatus')->name('user.changeStatus');
         });
     });
 
@@ -108,6 +125,15 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix' => 'admin', 'middleware' => 'can:admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'admin']);
+
+        // Route::group(['prefix' => 'motorcycle', 'controller' => MotorCycleAdminController::class], function () {
+        //     Route::get('/datatable', 'getDataTable');
+        //     Route::get('/', 'index');
+        //     Route::post('/create', 'store');
+        //     Route::get('/{id}/edit', 'edit');
+        //     Route::put('/{id}/update', 'update');
+        //     Route::delete('/{id}/delete', 'destroy');
+        // });
     });
 
     Route::group(['prefix' => 'user', 'middleware' => 'can:user'], function () {

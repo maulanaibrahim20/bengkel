@@ -70,9 +70,9 @@
 
 @section('script')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Ketika tombol tanggal diklik
-            $('.date-tab-btn').on('click', function() {
+            $('.date-tab-btn').on('click', function () {
                 $('.schedule-tab').hide(); // Sembunyikan semua tab jadwal
 
                 $('.date-tab-btn').removeClass('btn-dark text-white').addClass(
@@ -90,22 +90,22 @@
                 $.ajax({
                     url: '/user/booking/slot/' + selectedDate,
                     type: 'GET',
-                    success: function(response) {
+                    success: function (response) {
 
                         // --- SLOT PAGI ---
                         let morningHtml = '';
                         if (response.morningSlots.length > 0) {
 
-                            response.morningSlots.forEach(function(slot) {
+                            response.morningSlots.forEach(function (slot) {
                                 const isFull = slot.current_bookings >= slot
                                     .max_bookings;
                                 morningHtml += `
-                                    <div class="m-1">
-                                        <button class="btn rounded-pill px-3 ${isFull ? 'btn-secondary' : 'btn-outline-primary'}" ${isFull ? 'disabled' : ''}>
-                                            ${slot.time}
-                                        </button>
-                                    </div>
-                                `;
+                                        <div class="m-1">
+                                            <button class="btn rounded-pill px-3 ${isFull ? 'btn-secondary' : 'btn-outline-primary'}" ${isFull ? 'disabled' : ''}>
+                                                ${slot.time}
+                                            </button>
+                                        </div>
+                                    `;
                             });
                         } else {
                             morningHtml = '<div class="text-muted">Tidak ada slot pagi.</div>';
@@ -118,17 +118,17 @@
                         const afternoonSlots = Object.values(response.afternoonSlots);
 
                         if (afternoonSlots.length > 0) {
-                            afternoonSlots.forEach(function(slot) {
+                            afternoonSlots.forEach(function (slot) {
                                 const isFull = slot.current_bookings >= slot
                                     .max_bookings;
 
                                 afternoonHtml += `
-            <div class="m-1">
-                <button class="btn rounded-pill px-3 ${isFull ? 'btn-secondary' : 'btn-outline-primary'}" ${isFull ? 'disabled' : ''}>
-                    ${slot.time}
-                </button>
-            </div>
-        `;
+                <div class="m-1">
+                    <button class="btn rounded-pill px-3 ${isFull ? 'btn-secondary' : 'btn-outline-primary'}" ${isFull ? 'disabled' : ''}>
+                        ${slot.time}
+                    </button>
+                </div>
+            `;
                             });
                         } else {
                             afternoonHtml =

@@ -5,7 +5,7 @@
                 <li class="menu-title">
                     <span>Main</span>
                 </li>
-                <li class="submenu">
+                <li class="submenu {{ Request::segment(2) == 'dashboard' ? 'active menu-open' : '' }}">
                     <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span
                             class="menu-arrow"></span></a>
                     <ul style="display: none;">
@@ -29,68 +29,82 @@
                     </ul>
                 </li>
                 @can('super-admin')
-                    <li class="menu-title">
-                        <span>Kasir</span>
-                    </li>
+
+                    {{-- TRANSAKSI --}}
+                    <li class="menu-title"><span>Transaksi</span></li>
                     <li class="{{ Request::segment(2) == 'kasir' ? 'active' : '' }}">
-                        <a href="{{ url('/app/kasir') }}"><i class="la la-box"></i> <span>Kasir</span></a>
+                        <a href="{{ url('/app/kasir') }}"><i class="la la-cash-register"></i> <span>Kasir</span></a>
                     </li>
-                    <li class="menu-title">
-                        <span>Product</span>
-                    </li>
+
+                    {{-- PRODUK & INVENTORI --}}
+                    <li class="menu-title"><span>Produk & Inventori</span></li>
                     <li class="{{ Request::segment(2) == 'product' ? 'active' : '' }}">
-                        <a href="{{ url('/super-admin/product') }}"><i class="la la-box"></i> <span>Produk</span></a>
+                        <a href="{{ url('/super-admin/product') }}"><i class="la la-box"></i> <span>Daftar Produk</span></a>
                     </li>
-                    <li class="menu-title">
-                        <span>Master</span>
+                    <li class="{{ Request::segment(2) == 'motorcycle' ? 'active' : '' }}">
+                        <a href="{{ url('/super-admin/motorcycle') }}"><i class="la la-motorcycle"></i> <span>List
+                                Motor</span></a>
                     </li>
-                    <li class="submenu">
-                        <a href="#"><i class="la la-dashboard"></i> <span> Master</span> <span
+
+                    {{-- MASTER DATA --}}
+                    <li class="menu-title"><span>Master Data</span></li>
+
+                    @php
+                        $activeMasterProduk = in_array(Request::segment(3), ['product-category', 'product-unit']);
+                        $activeMasterUmum = in_array(Request::segment(3), ['brand-engine', 'technician']);
+                    @endphp
+
+                    {{-- Master Produk --}}
+                    <li class="submenu {{ $activeMasterProduk ? 'active menu-open' : '' }}">
+                        <a href="#"><i class="la la-archive"></i> <span>Master Produk</span> <span
                                 class="menu-arrow"></span></a>
-                        <ul style="display: none;">
-                            <li><a class="{{ Request::segment(3) == 'brand-engine' ? 'active' : '' }}"
-                                    href="{{ url('/super-admin/master/brand-engine') }}">Brand Engine</a>
-                            </li>
-                            <li><a class="{{ Request::segment(3) == 'technician' ? 'active' : '' }}"
-                                    href="{{ url('/super-admin/master/technician') }}">Technician</a>
-                            </li>
+                        <ul style="{{ $activeMasterProduk ? 'display: block;' : 'display: none;' }}">
                             <li><a class="{{ Request::segment(3) == 'product-category' ? 'active' : '' }}"
-                                    href="{{ url('/super-admin/master/product-category') }}">Product Category</a>
-                            </li>
+                                    href="{{ url('/super-admin/master/product-category') }}">Kategori Produk</a></li>
                             <li><a class="{{ Request::segment(3) == 'product-unit' ? 'active' : '' }}"
-                                    href="{{ url('/super-admin/master/product-unit') }}">Product Unit</a>
-                            </li>
+                                    href="{{ url('/super-admin/master/product-unit') }}">Satuan Produk</a></li>
                         </ul>
+                    </li>
+
+                    {{-- Master Umum --}}
+                    <li class="submenu {{ $activeMasterUmum ? 'active menu-open' : '' }}">
+                        <a href="#"><i class="la la-cogs"></i> <span>Master Umum</span> <span class="menu-arrow"></span></a>
+                        <ul style="{{ $activeMasterUmum ? 'display: block;' : 'display: none;' }}">
+                            <li><a class="{{ Request::segment(3) == 'brand-engine' ? 'active' : '' }}"
+                                    href="{{ url('/super-admin/master/brand-engine') }}">Brand Mesin</a></li>
+                            <li><a class="{{ Request::segment(3) == 'technician' ? 'active' : '' }}"
+                                    href="{{ url('/super-admin/master/technician') }}">Teknisi</a></li>
+                        </ul>
+                    </li>
+
+                    {{-- MANAJEMEN SISTEM --}}
+                    <li class="menu-title"><span>Manajemen Sistem</span></li>
+                    <li class="{{ Request::segment(2) == 'user' ? 'active' : '' }}">
+                        <a href="{{ url('/super-admin/user') }}"><i class="la la-user"></i> <span>Pengguna</span></a>
                     </li>
                 @endcan
                 @can('admin')
                 @endcan
                 @can('user')
-                    <li class="menu-title">
-                        <span>Booking</span>
-                    </li>
+                    <li class="menu-title"><span>Booking</span></li>
                     <li class="{{ Request::segment(2) == 'booking' ? 'active' : '' }}">
                         <a href="{{ url('/user/booking') }}"><i class="fa fa-book"></i> <span>Booking</span></a>
                     </li>
-                    <li class="menu-title">
-                        <span>List Motor</span>
-                    </li>
+                    <li class="menu-title"><span>Motor Saya</span></li>
                     <li class="{{ Request::segment(2) == 'motorcycle' ? 'active' : '' }}">
                         <a href="{{ url('/user/motorcycle') }}"><i class="fa fa-motorcycle"></i> <span>Motor</span></a>
                     </li>
                 @endcan
-                <li class="menu-title">
-                    <span>Setting</span>
-                </li>
+                {{-- PENGATURAN --}}
+                <li class="menu-title"><span>Pengaturan</span></li>
                 <li class="{{ Request::segment(2) == 'profile' ? 'active' : '' }}">
                     @if (Auth::user()->role_id == 1)
-                        <a href="{{ url('/super-admin/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a>
+                        <a href="{{ url('/super-admin/profile') }}"><i class="fa fa-user"></i> <span>Profil</span></a>
                     @elseif (Auth::user()->role_id == 2)
-                        <a href="{{ url('/admin/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a>
+                        <a href="{{ url('/admin/profile') }}"><i class="fa fa-user"></i> <span>Profil</span></a>
                     @elseif (Auth::user()->role_id == 3)
-                        <a href="{{ url('/user/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a>
+                        <a href="{{ url('/user/profile') }}"><i class="fa fa-user"></i> <span>Profil</span></a>
                     @endif
-
                 </li>
                 <li>
                     <a href="{{ route('logout') }}" class="logoutBtn"><i class="fa fa-sign-out"></i>

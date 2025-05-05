@@ -22,7 +22,7 @@ class MotorCycleUserController extends Controller
 
     public function getDataTable(Request $request)
     {
-        $data = Motorcycle::with(['user', 'brandEngine'])->select('motorcycles.*')->where('user_id', Auth::user()->id);
+        $data = $this->motor->with(['user', 'brandEngine'])->select('motorcycles.*')->where('user_id', Auth::user()->id);
 
         return DataTables::of($data)
             ->addIndexColumn()
@@ -124,10 +124,9 @@ class MotorCycleUserController extends Controller
 
     public function edit($id)
     {
-        $motorcycle = Motorcycle::with('brandEngine')->findOrFail($id);
-        $brands = BrandEngine::all(); // untuk select option brand
+        $motorcycle = $this->motor->with('brandEngine')->findOrFail($id);
+        $brands = $this->brandEngine->all();
 
-        // Pisahkan plat menjadi 3 bagian
         $plateParts = explode(' ', $motorcycle->plate);
         $plate_prefix = $plateParts[0] ?? '';
         $plate_number = $plateParts[1] ?? '';

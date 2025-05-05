@@ -4,7 +4,7 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="page-title">Welcome Admin!</h3>
+                <h3 class="page-title">Welcome {{ strtoupper(Auth::user()->name) }}</h3>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ul>
@@ -155,8 +155,8 @@
                         </div>
                         <h3 class="mb-3">$1,12,000</h3>
                         <div class="progress mb-2" style="height: 5px;">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;"
-                                aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;" aria-valuenow="40"
+                                aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="mb-0">Previous Month <span class="text-muted">$1,42,000</span></p>
                     </div>
@@ -196,15 +196,15 @@
                         <div class="stats-info">
                             <p>Open Tickets <strong>190 <small>/ 212</small></strong></p>
                             <div class="progress">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 62%"
-                                    aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 62%" aria-valuenow="62"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                         <div class="stats-info">
                             <p>Closed Tickets <strong>22 <small>/ 212</small></strong></p>
                             <div class="progress">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 22%"
-                                    aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 22%" aria-valuenow="22"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -267,8 +267,7 @@
                     </h4>
                     <div class="leave-info-box">
                         <div class="media d-flex align-items-center">
-                            <a href="profile.html" class="avatar"><img alt=""
-                                    src="{{ url('/assets') }}/img/user.jpg"></a>
+                            <a href="profile.html" class="avatar"><img alt="" src="{{ url('/assets') }}/img/user.jpg"></a>
                             <div class="media-body flex-grow-1">
                                 <div class="text-sm my-0">Martin Lewis</div>
                             </div>
@@ -285,8 +284,7 @@
                     </div>
                     <div class="leave-info-box">
                         <div class="media d-flex align-items-center">
-                            <a href="profile.html" class="avatar"><img alt=""
-                                    src="{{ url('/assets') }}/img/user.jpg"></a>
+                            <a href="profile.html" class="avatar"><img alt="" src="{{ url('/assets') }}/img/user.jpg"></a>
                             <div class="media-body flex-grow-1">
                                 <div class="text-sm my-0">Martin Lewis</div>
                             </div>
@@ -472,9 +470,8 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                    class="material-icons">more_vert</i></a>
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" href="javascript:void(0)"><i
                                                         class="fa fa-pencil m-r-5"></i> Edit</a>
@@ -512,9 +509,8 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                    class="material-icons">more_vert</i></a>
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" href="javascript:void(0)"><i
                                                         class="fa fa-pencil m-r-5"></i> Edit</a>
@@ -551,9 +547,8 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                    class="material-icons">more_vert</i></a>
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" href="javascript:void(0)"><i
                                                         class="fa fa-pencil m-r-5"></i> Edit</a>
@@ -590,9 +585,8 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                    class="material-icons">more_vert</i></a>
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" href="javascript:void(0)"><i
                                                         class="fa fa-pencil m-r-5"></i> Edit</a>
@@ -630,9 +624,8 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                    class="material-icons">more_vert</i></a>
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" href="javascript:void(0)"><i
                                                         class="fa fa-pencil m-r-5"></i> Edit</a>
@@ -684,9 +677,8 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                    class="material-icons">more_vert</i></a>
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" href="javascript:void(0)"><i
                                                         class="fa fa-pencil m-r-5"></i> Edit</a>
@@ -713,9 +705,8 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                    class="material-icons">more_vert</i></a>
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" href="javascript:void(0)"><i
                                                         class="fa fa-pencil m-r-5"></i> Edit</a>
@@ -742,9 +733,8 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                    class="material-icons">more_vert</i></a>
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" href="javascript:void(0)"><i
                                                         class="fa fa-pencil m-r-5"></i> Edit</a>
@@ -771,9 +761,8 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                    class="material-icons">more_vert</i></a>
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" href="javascript:void(0)"><i
                                                         class="fa fa-pencil m-r-5"></i> Edit</a>
@@ -800,9 +789,8 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                    class="material-icons">more_vert</i></a>
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" href="javascript:void(0)"><i
                                                         class="fa fa-pencil m-r-5"></i> Edit</a>
