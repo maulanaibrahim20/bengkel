@@ -39,7 +39,7 @@
             </div>
 
             <div class="form-group text-center">
-                <a href="{{ url('/register/google/redirect') }}" class="btn d-block"
+                <a href="{{ url('/auth/google/redirect') }}" class="btn d-block"
                     style="background-color: #db4437; color: #fff; padding: 10px 20px; font-size: 14px; border-radius: 4px; width: 100%; max-width: 300px; margin: 0 auto;">
                     <i class="fa fa-google mr-2" style="color: #fff;"></i> Masuk Dengan Google
                 </a>

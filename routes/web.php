@@ -17,10 +17,14 @@ use App\Http\Controllers\MotorCycleAdminController;
 use App\Http\Controllers\MotorCycleUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserBookingController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\UserSuperAdminController;
 use Illuminate\Support\Facades\Route;
+
+
+
 
 Route::middleware(['guest'])->group(function () {
 
@@ -36,20 +40,22 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
 
+    Route::get('/register', [RegisterController::class, 'index']);
+    Route::post('/register', [RegisterController::class, 'store']);
+
+    Route::get('/auth/{provider}/redirect', [RegisterController::class, 'redirectToProvider']);
+
+    Route::get('/verify-email/{token}', [RegisterController::class, 'verifyEmail']);
+
     Route::get('/forgot-password', [ForgotPasswordController::class, 'index']);
     Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmail']);
 
-    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])
-        ->name('password.reset');
-
-    Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
-        ->name('password.update');
-
-    Route::get('/register', [RegisterController::class, 'index']);
-    Route::get('/register/{type}/redirect', [RegisterController::class, 'showForm']);
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 });
 
-Route::get('/auth/{type}/register', [RegisterController::class, 'register']);
+Route::get('/auth/{provider}/callback', [RegisterController::class, 'register']);
+
 
 Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'super-admin', 'middleware' => 'can:super-admin'], function () {
@@ -60,6 +66,17 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', 'index');
             Route::get('/create', 'create');
             Route::post('/create', 'store');
+            Route::get('/{id}/edit', 'edit');
+            Route::put('/{id}/update', 'update');
+            Route::delete('/{id}/delete', 'destroy');
+        });
+
+        Route::group(['prefix' => 'service', 'controller' => ServiceController::class], function () {
+            Route::get('/datatable', 'getDataTable');
+            Route::get('/', 'index');
+            Route::get('/create', 'create');
+            Route::post('/create', 'store');
+            Route::get('/{id}/details', 'getDetails');
             Route::get('/{id}/edit', 'edit');
             Route::put('/{id}/update', 'update');
             Route::delete('/{id}/delete', 'destroy');

@@ -48,6 +48,11 @@ class LoginController extends Controller
                 return response()->json(['status' => false, 'message' => 'Akun anda telah dinonaktifkan. Silahkan hubungi admin.'], 401);
             }
 
+            if ($user->email_verified_at == null) {
+                DB::rollBack();
+                return response()->json(['status' => false, 'message' => 'Akun anda belum diverifikasi. Silahkan hubungi admin.'], 401);
+            }
+
             if (!$user || !Hash::check($request->password, $user->password)) {
                 DB::rollBack();
                 return response()->json(['status' => false, 'message' => 'Email atau password salah.'], 401);

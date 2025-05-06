@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\BookingSlot;
+use App\Models\Motorcycle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserBookingController extends Controller
 {
@@ -26,6 +28,8 @@ class UserBookingController extends Controller
 
     public function index()
     {
+        $hasMotor = Motorcycle::where('user_id', Auth::user()->id)->exists();
+
         $startDate = Carbon::today();
         $endDate = $startDate->copy()->addDays(6);
 
@@ -43,6 +47,7 @@ class UserBookingController extends Controller
         return view('user.pages.booking.index', [
             'dates' => $dates,
             'startDate' => $startDate,
+            'hasMotor' => $hasMotor
         ]);
     }
 }

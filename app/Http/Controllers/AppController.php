@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
     public function home(Request $request)
     {
-        return view('landing.pages.home.index');
+        $data['services'] = Service::with('detail')->get();
+        return view('landing.pages.home.index', $data);
     }
 
     public function about(Request $request)
