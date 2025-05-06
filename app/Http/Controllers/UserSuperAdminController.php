@@ -26,11 +26,11 @@ class UserSuperAdminController extends Controller
             ->addColumn('status', fn($row) => $row->status ? 'Active' : 'Inactive')
             ->addColumn('role', fn($row) => $row->role ? $row->role->name : '-')
             ->addColumn('action', function ($row) {
-                $editBtn = "<button type='button' class='btn btn-warning btn-sm editBtn' data-id='{$row->id}'><i class='fa fa-edit'></i></button>";
+                $editBtn = "<button type='button' class='btn btn-warning editBtn' data-id='{$row->id}'><i class='fas fa-edit'></i></button>";
 
                 $deleteForm = "<form id='deleteForm{$row->id}' action='" . url("/super-admin/user/{$row->id}/delete") . "' method='POST' style='display: inline;'>
                 " . csrf_field() . method_field('DELETE') . "
-                <button type='submit' class='btn btn-danger deleteBtn' data-id='{$row->id}'><i class='fa fa-trash'></i></button>
+                <button type='submit' class='btn btn-danger deleteBtn' data-id='{$row->id}'><i class='fas fa-trash'></i></button>
             </form>";
                 return $editBtn . ' ' . $deleteForm;
             })

@@ -27,16 +27,15 @@ class ServiceController extends Controller
                 return 'Rp ' . number_format($row->price, 0, ',', '.');
             })
             ->addColumn('action', function ($row) {
-                $detailBtn = "<button type='button' class='btn btn-info btn detailBtn' data-id='{$row->id}'><i class='fa fa-eye'></i></button>";
-
-                $editBtn = "<a href='" . url('super-admin/service/' . $row->id . '/edit') . "' class='btn btn-warning'><i class='fa fa-edit'></i></a>";
+                $editBtn = "<a href='" . url('super-admin/service/' . $row->id . '/edit') . "' class='btn btn-warning text-white'><i class='fas fa-edit'></i></a>";
+                $detailBtn = "<button type='button' class='btn btn-info text-white btn detailBtn' data-id='{$row->id}'><i class='fas fa-eye'></i></button>";
 
                 $deleteForm = "<form id='deleteForm{$row->id}' action='" . url("/super-admin/services/{$row->id}/delete") . "' method='POST' style='display:inline-block;'>
                     " . csrf_field() . method_field('DELETE') . "
-                    <button type='submit' class='btn btn-danger btn deleteBtn' data-id='{$row->id}'><i class='fa fa-trash'></i></button>
+                    <button type='submit' class='btn btn-danger btn deleteBtn' data-id='{$row->id}'><i class='fas fa-trash'></i></button>
                 </form>";
 
-                return $detailBtn . ' ' . $editBtn . ' ' . $deleteForm;
+                return  $editBtn . ' ' .  $detailBtn . ' ' . $deleteForm;
             })
             ->rawColumns(['action'])
             ->make(true);
