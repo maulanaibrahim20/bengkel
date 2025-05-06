@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     const SUPER_ADMIN = 1;
     const ADMIN = 2;
@@ -30,7 +30,9 @@ class User extends Authenticatable
         'profile_image',
         'address',
         'birth_date',
-        'gender'
+        'gender',
+        'remember_token',
+        'email_verified_at',
     ];
 
     /**
