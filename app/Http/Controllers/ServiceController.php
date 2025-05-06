@@ -11,9 +11,15 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ServiceController extends Controller
 {
+    protected $service;
+
+    public function __construct()
+    {
+        $this->service = new Service();
+    }
     public function getDataTable(Request $request)
     {
-        $data = Service::select(['id', 'name', 'price', 'duration']);
+        $data = $this->service->select(['id', 'name', 'price', 'duration']);
 
         return DataTables::of($data)
             ->addIndexColumn()
@@ -43,7 +49,7 @@ class ServiceController extends Controller
 
     public function getDetails($id)
     {
-        $service = Service::with('detail')->findOrFail($id);
+        $service = $this->service->with('detail')->findOrFail($id);
 
         return view('super-admin.pages.service.detail', compact('service'));
     }
@@ -70,7 +76,7 @@ class ServiceController extends Controller
         DB::beginTransaction();
 
         try {
-            $service = Service::create([
+            $service = $this->service->create([
                 'name' => $request->name,
                 'price' => $request->price,
                 'duration' => $request->duration,
@@ -101,7 +107,7 @@ class ServiceController extends Controller
 
     public function edit($id)
     {
-        $service = Service::with('detail')->findOrFail($id);
+        $service = $this->service->with('detail')->findOrFail($id);
         return view('super-admin.pages.service.edit', compact('service'));
     }
 
@@ -122,7 +128,7 @@ class ServiceController extends Controller
         DB::beginTransaction();
 
         try {
-            $service = Service::findOrFail($id);
+            $service = $this->service->findOrFail($id);
 
             $service->update([
                 'name' => $request->name,

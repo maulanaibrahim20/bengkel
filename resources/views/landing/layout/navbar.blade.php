@@ -23,7 +23,16 @@
                 <i class="fa fa-envelope me-2"></i>Contact
             </a>
         </div>
-        <a href="{{ url('/login') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
+
+        <!-- Tombol Login -->
+        <a href="{{ url('/login') }}" class="btn btn-primary py-3 px-5 d-none d-lg-block"
+            style="transition: background-color 0.3s ease;">
+            Login <i class="fa fa-sign-in-alt ms-2"></i>
+        </a>
+
+        <!-- Tombol Login untuk Tampilan Mobile -->
+        <a href="{{ url('/login') }}" class="btn btn-primary py-3 w-100 w-lg-auto d-block d-lg-none"
+            style="transition: background-color 0.3s ease;">
             Login <i class="fa fa-sign-in-alt ms-2"></i>
         </a>
     </div>
