@@ -130,6 +130,10 @@ class RegisterController extends Controller
             Auth::login($user);
             $request->session()->regenerate();
 
+            if (!Auth::check()) {
+                return back()->with('error', 'Autentikasi gagal. Silakan coba lagi.');
+            }
+
             switch ($user->role_id) {
                 case $this->user::USER:
                     return session('new_register')

@@ -45,6 +45,10 @@
                         <a href="{{ url('/super-admin/motorcycle') }}"><i class="la la-motorcycle"></i> <span>List
                                 Motor</span></a>
                     </li>
+                    <li class="{{ Request::segment(2) == 'service' ? 'active' : '' }}">
+                        <a href="{{ url('/super-admin/service') }}"><i class="la la-tools"></i>
+                            <span>Service</span></a>
+                    </li>
 
                     {{-- MASTER DATA --}}
                     <li class="menu-title"><span>Master Data</span></li>

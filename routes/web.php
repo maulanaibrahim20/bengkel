@@ -17,6 +17,7 @@ use App\Http\Controllers\MotorCycleAdminController;
 use App\Http\Controllers\MotorCycleUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserBookingController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\UserSuperAdminController;
@@ -65,6 +66,17 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', 'index');
             Route::get('/create', 'create');
             Route::post('/create', 'store');
+            Route::get('/{id}/edit', 'edit');
+            Route::put('/{id}/update', 'update');
+            Route::delete('/{id}/delete', 'destroy');
+        });
+
+        Route::group(['prefix' => 'service', 'controller' => ServiceController::class], function () {
+            Route::get('/datatable', 'getDataTable');
+            Route::get('/', 'index');
+            Route::get('/create', 'create');
+            Route::post('/create', 'store');
+            Route::get('/{id}/details', 'getDetails');
             Route::get('/{id}/edit', 'edit');
             Route::put('/{id}/update', 'update');
             Route::delete('/{id}/delete', 'destroy');
