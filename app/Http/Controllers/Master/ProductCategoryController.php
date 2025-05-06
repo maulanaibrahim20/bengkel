@@ -25,11 +25,11 @@ class ProductCategoryController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
-                $editBtn = "<button type='button' class='btn br-7 btn-warning editBtn' data-id='{$row->id}' data-bs-toggle='modal' data-bs-target='#add_salary-edit'><i class='fa fa-edit'></i></button>";
+                $editBtn = "<button type='button' class='btn br-7 btn-warning editBtn' data-id='{$row->id}' data-bs-toggle='modal' data-bs-target='#add_salary-edit'><i class='fas fa-edit'></i></button>";
 
                 $deleteForm = "<form id='deleteForm{$row->id}' action='" . url("/super-admin/master/product-category/{$row->id}/delete") . "' method='POST' style='display: inline;'>
                     " . csrf_field() . method_field('DELETE') . "
-                    <button type='submit' class='btn btn-danger deleteBtn' data-id='{$row->id}'><i class='fa fa-trash'></i></button>
+                    <button type='submit' class='btn btn-danger deleteBtn' data-id='{$row->id}'><i class='fas fa-trash'></i></button>
                 </form>";
 
                 return $editBtn . ' ' . $deleteForm;

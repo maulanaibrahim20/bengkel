@@ -54,9 +54,9 @@ class ProductController extends Controller
                 return "<span class='badge {$badgeClass} text-capitalize'>{$row->status}</span>";
             })
             ->addColumn('action', function ($row) {
-                $editBtn = "<a href='" . url("/super-admin/product/{$row->id}/edit") . "' class='btn btn-warning btn-sm'><i class='fa fa-edit'></i></a>";
+                $editBtn = "<a href='" . url("/super-admin/product/{$row->id}/edit") . "' class='btn btn-warning btn-sm'><i class='fas fa-edit'></i></a>";
 
-                $deleteBtn = "<button type='button' class='btn btn-danger btn-sm deleteBtn' data-id='{$row->id}'><i class='fa fa-trash'></i></button>";
+                $deleteBtn = "<button type='button' class='btn btn-danger btn-sm deleteBtn' data-id='{$row->id}'><i class='fas fa-trash'></i></button>";
 
                 return $editBtn . ' ' . $deleteBtn;
             })

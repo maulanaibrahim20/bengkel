@@ -31,10 +31,10 @@ class MotorCycleAdminController extends Controller
                 $deleteUrl = url('admin.motorcycle.destroy', $row->id);
 
                 return "
-                <a href='{$editUrl}' class='btn btn-sm btn-warning'><i class='fa fa-edit'></i></a>
+                <a href='{$editUrl}' class='btn btn-sm btn-warning'><i class='fas fa-edit'></i></a>
                 <form action='{$deleteUrl}' method='POST' style='display:inline'>
                     " . csrf_field() . method_field('DELETE') . "
-                    <button class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></button>
+                    <button class='btn btn-sm btn-danger'><i class='fas fa-trash'></i></button>
                 </form>
             ";
             })
