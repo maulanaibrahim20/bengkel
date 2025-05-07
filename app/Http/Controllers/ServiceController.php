@@ -27,7 +27,7 @@ class ServiceController extends Controller
                 return 'Rp ' . number_format($row->price, 0, ',', '.');
             })
             ->addColumn('action', function ($row) {
-                $editBtn = "<a href='" . url('super-admin/service/' . $row->id . '/edit') . "' class='btn btn-warning text-white'><i class='fas fa-edit'></i></a>";
+                $editBtn = "<a href='" . url('super-admin/service/' . $row->id . '/edit') . "' class='btn btn-warning'><i class='fas fa-edit'></i></a>";
                 $detailBtn = "<button type='button' class='btn btn-info text-white btn detailBtn' data-id='{$row->id}'><i class='fas fa-eye'></i></button>";
 
                 $deleteForm = "<form id='deleteForm{$row->id}' action='" . url("/super-admin/services/{$row->id}/delete") . "' method='POST' style='display:inline-block;'>
@@ -102,7 +102,6 @@ class ServiceController extends Controller
             ], 500);
         }
     }
-
 
     public function edit($id)
     {

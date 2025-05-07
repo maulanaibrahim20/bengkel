@@ -32,7 +32,9 @@
                     {{-- TRANSAKSI --}}
                     <li class="menu-title"><span>Transaksi</span></li>
                     <li class="{{ Request::segment(2) == 'kasir' ? 'active' : '' }}">
-                        <a href="{{ url('/app/kasir') }}"><i class="la la-cash-register"></i> <span>Kasir</span></a>
+                        <a href="{{ url('/app/kasir') }}"><i class="la la-cash-register"></i>
+                            <span>Kasir
+                                (Prototype)</span></a>
                     </li>
 
                     {{-- PRODUK & INVENTORI --}}
@@ -76,8 +78,7 @@
 
                     {{-- Master Umum --}}
                     <li class="submenu {{ $activeMasterUmum ? 'active menu-open' : '' }}">
-                        <a href="#"><i class="la la-cogs"></i> <span>Master Umum</span> <span
-                                class="menu-arrow"></span></a>
+                        <a href="#"><i class="la la-cogs"></i> <span>Master Umum</span> <span class="menu-arrow"></span></a>
                         <ul style="{{ $activeMasterUmum ? 'display: block;' : 'display: none;' }}">
                             <li><a class="{{ Request::segment(3) == 'brand-engine' ? 'active' : '' }}"
                                     href="{{ url('/super-admin/master/brand-engine') }}">Brand Mesin</a></li>

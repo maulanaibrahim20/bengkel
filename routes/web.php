@@ -140,7 +140,12 @@ Route::middleware(['auth'])->group(function () {
         Route::group(['prefix' => 'booking-slot', 'controller' => BookingSlotSuperAdminController::class], function () {
             Route::get('/datatable', 'getDataTable');
             Route::get('/', 'index');
-            Route::get('/details/{date}', 'getSlotDetailsByDate')->name('booking-slot.details');
+            Route::get('/create', 'create');
+            Route::post('/create', 'store');
+            Route::put('/{id}/update', 'update');
+            Route::delete('/{id}/delete', 'destroy');
+            Route::get('/details-booking/{date}', 'showSlotDetailPage');
+            Route::post('/generate', 'generate');
         });
     });
 
