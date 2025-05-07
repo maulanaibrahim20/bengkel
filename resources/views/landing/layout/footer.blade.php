@@ -43,10 +43,9 @@
         <div class="copyright">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="border-bottom" href="https://freewebsitecode.com">Your Site Name</a>, All Right
+                    &copy; <a class="border-bottom" href="https://freewebsitecode.com">{{ config('app.name') }}</a>, All
+                    Right
                     Reserved.
-
-
                     Designed By <a class="border-bottom" href="https://freewebsitecode.com">Free Website Code</a>
                 </div>
                 <div class="col-md-6 text-center text-md-end">

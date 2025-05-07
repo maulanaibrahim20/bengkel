@@ -16,8 +16,7 @@
                                     <h1
                                         class="display-5 display-md-3 text-white mb-3 mb-md-4 pb-2 pb-md-3 animated slideInDown">
                                         Qualified Car Repair Service Center</h1>
-                                    <a href=""
-                                        class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
+                                    <a href="" class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
                                         More<i class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
@@ -39,8 +38,7 @@
                                     <h1
                                         class="display-5 display-md-3 text-white mb-3 mb-md-4 pb-2 pb-md-3 animated slideInDown">
                                         Qualified Car Wash Service Center</h1>
-                                    <a href=""
-                                        class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
+                                    <a href="" class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
                                         More<i class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
@@ -65,34 +63,49 @@
     <!-- Mobile-Optimized Feature Boxes -->
     <div class="container-xxl py-4 py-md-5">
         <div class="container">
+            <!-- Header Produk -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Produk Kami</h2>
+                <a href="/produk" class="btn btn-primary">Lihat Semua Produk</a>
+            </div>
+
+            <!-- Daftar Produk -->
             <div class="row g-3 g-md-4">
-                <div class="col-12 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="d-flex py-4 px-3 px-md-4 h-100">
-                        <i class="fa fa-certificate fa-2x fa-md-3x text-primary flex-shrink-0 mt-1"></i>
-                        <div class="ps-3 ps-md-4">
-                            <h5 class="mb-2 mb-md-3">Quality Servicing</h5>
-                            <p class="mb-2">Diam dolor diam ipsum sit amet diam et eos erat ipsum</p>
-                            <a class="text-secondary border-bottom" href="">Read More</a>
+                <!-- Produk 1 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="/path/to/image1.jpg" class="card-img-top" alt="Produk 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Nama Produk 1</h5>
+                            <p class="card-text">Deskripsi singkat produk 1 yang menarik dan informatif.</p>
+                            <p class="fw-bold text-primary">Rp 100.000</p>
+                            <a href="/produk/1" class="btn btn-outline-primary">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="d-flex bg-light py-4 px-3 px-md-4 h-100">
-                        <i class="fa fa-users-cog fa-2x fa-md-3x text-primary flex-shrink-0 mt-1"></i>
-                        <div class="ps-3 ps-md-4">
-                            <h5 class="mb-2 mb-md-3">Expert Workers</h5>
-                            <p class="mb-2">Diam dolor diam ipsum sit amet diam et eos erat ipsum</p>
-                            <a class="text-secondary border-bottom" href="">Read More</a>
+
+                <!-- Produk 2 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="/path/to/image2.jpg" class="card-img-top" alt="Produk 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Nama Produk 2</h5>
+                            <p class="card-text">Deskripsi singkat produk 2 yang menarik dan informatif.</p>
+                            <p class="fw-bold text-primary">Rp 150.000</p>
+                            <a href="/produk/2" class="btn btn-outline-primary">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="d-flex py-4 px-3 px-md-4 h-100">
-                        <i class="fa fa-tools fa-2x fa-md-3x text-primary flex-shrink-0 mt-1"></i>
-                        <div class="ps-3 ps-md-4">
-                            <h5 class="mb-2 mb-md-3">Modern Equipment</h5>
-                            <p class="mb-2">Diam dolor diam ipsum sit amet diam et eos erat ipsum</p>
-                            <a class="text-secondary border-bottom" href="">Read More</a>
+
+                <!-- Produk 3 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="/path/to/image3.jpg" class="card-img-top" alt="Produk 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Nama Produk 3</h5>
+                            <p class="card-text">Deskripsi singkat produk 3 yang menarik dan informatif.</p>
+                            <p class="fw-bold text-primary">Rp 200.000</p>
+                            <a href="/produk/3" class="btn btn-outline-primary">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
@@ -183,12 +196,10 @@
                                 <h2 class="accordion-header" id="heading-{{ $service->id }}">
                                     <button
                                         class="accordion-button d-flex align-items-center p-3 {{ $loop->first ? '' : 'collapsed' }}"
-                                        type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse-{{ $service->id }}"
+                                        type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $service->id }}"
                                         aria-expanded="{{ $loop->first ? 'true' : 'false' }}"
                                         aria-controls="collapse-{{ $service->id }}">
-                                        <i
-                                            class="fa {{ $service->icon ?? 'fa-cogs' }} fa-lg fa-md-2x me-3 text-primary"></i>
+                                        <i class="fa {{ $service->icon ?? 'fa-cogs' }} fa-lg fa-md-2x me-3 text-primary"></i>
                                         <h5 class="m-0">{{ $service->name }}</h5>
                                     </button>
                                 </h2>
@@ -232,8 +243,7 @@
                             Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua.</p>
 
                         @guest
-                            <a href="{{ url('/booking/register') }}"
-                                class="btn btn-primary px-4 px-md-5 py-2 py-md-3">Booking
+                            <a href="{{ url('/booking/register') }}" class="btn btn-primary px-4 px-md-5 py-2 py-md-3">Booking
                                 Now</a>
                         @else
                             <a href="{{ url('booking.create') }}" class="btn btn-light px-4 px-md-5 py-2 py-md-3">Booking
@@ -257,11 +267,6 @@
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="{{ url('/landing') }}/img/team-1.jpg" alt="Technician 1">
-                            <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
                         </div>
                         <div class="bg-light text-center p-3 p-md-4">
                             <h5 class="fw-bold mb-0">Full Name</h5>
@@ -273,11 +278,6 @@
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="{{ url('/landing') }}/img/team-2.jpg" alt="Technician 2">
-                            <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
                         </div>
                         <div class="bg-light text-center p-3 p-md-4">
                             <h5 class="fw-bold mb-0">Full Name</h5>
@@ -289,11 +289,6 @@
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="{{ url('/landing') }}/img/team-3.jpg" alt="Technician 3">
-                            <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
                         </div>
                         <div class="bg-light text-center p-3 p-md-4">
                             <h5 class="fw-bold mb-0">Full Name</h5>
@@ -305,11 +300,6 @@
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="{{ url('/landing') }}/img/team-4.jpg" alt="Technician 4">
-                            <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
                         </div>
                         <div class="bg-light text-center p-3 p-md-4">
                             <h5 class="fw-bold mb-0">Full Name</h5>
@@ -357,8 +347,7 @@
             <!-- Modified for touch-friendly swiping -->
             <div class="owl-carousel testimonial-carousel position-relative">
                 <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3"
-                        src="{{ url('/landing') }}/img/testimonial-1.jpg"
+                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-1.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
@@ -368,8 +357,7 @@
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3"
-                        src="{{ url('/landing') }}/img/testimonial-2.jpg"
+                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-2.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
@@ -379,8 +367,7 @@
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3"
-                        src="{{ url('/landing') }}/img/testimonial-3.jpg"
+                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-3.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
@@ -390,8 +377,7 @@
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3"
-                        src="{{ url('/landing') }}/img/testimonial-4.jpg"
+                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-4.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>

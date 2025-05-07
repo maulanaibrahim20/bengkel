@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->onDelete('cascade');
             $table->foreignId('booking_slot_id')->constrained('booking_slots')->onDelete('cascade');
+            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
+            $table->text('complaint')->nullable();
             $table->timestamps();
         });
     }

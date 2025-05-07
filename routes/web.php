@@ -172,9 +172,12 @@ Route::middleware(['auth'])->group(function () {
             return view('user.pages.welcome');
         });
 
+
         Route::group(['prefix' => 'booking', 'controller' => UserBookingController::class], function () {
             Route::get('/slot/{date}', 'getSlots');
             Route::get('/', 'index');
+            Route::get('/create', 'create');
+            Route::post('/create', 'store');
         });
 
         Route::group(['prefix' => 'motorcycle', 'controller' => MotorCycleUserController::class], function () {
