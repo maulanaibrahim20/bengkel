@@ -24,17 +24,23 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>User & Brand</th>
-                                    <th>Type</th>
-                                    <th>Plate</th>
-                                    <th class="text-center">Action</th>
+                                    <th>Tanggal dan Jam Booking</th>
+                                    <th>Jam Booking</th>
+                                    <th>Layanan Service</th>
+                                    <th>Total Harga Service</th>
+                                    <th>Status</th>
+                                    <th>Komplain/Catatan</th>
+                                    <th>Jam Dan Tanggal Booking</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($bookings as $index => $booking)
+                                @forelse ($bookings as $index => $booking)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($booking->slot->date)->translatedFormat('d F Y') }}</td>
+                                        <td>{{ $booking->created_at->translatedFormat('d M Y H:i') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($booking->slot->date)->translatedFormat('d F Y') }}
+                                        </td>
                                         <td>{{ \Carbon\Carbon::parse($booking->slot->time)->format('H:i') }} WIB</td>
                                         <td>
                                             <ul class="mb-0">
@@ -54,9 +60,18 @@
                                             </span>
                                         </td>
                                         <td>{{ $booking->complaint ?? '-' }}</td>
-                                        <td>{{ $booking->created_at->translatedFormat('d M Y H:i') }}</td>
+                                        <td>
+                                            <button type='button' class='btn btn-warning btn-sm editBtn'
+                                                data-id='{$row->id}'>
+                                                <i class='fa fa-eye'></i>
+                                            </button>
+                                        </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="8" class="text-center">No data found</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

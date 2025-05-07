@@ -78,7 +78,8 @@
 
                     {{-- Master Umum --}}
                     <li class="submenu {{ $activeMasterUmum ? 'active menu-open' : '' }}">
-                        <a href="#"><i class="la la-cogs"></i> <span>Master Umum</span> <span class="menu-arrow"></span></a>
+                        <a href="#"><i class="la la-cogs"></i> <span>Master Umum</span> <span
+                                class="menu-arrow"></span></a>
                         <ul style="{{ $activeMasterUmum ? 'display: block;' : 'display: none;' }}">
                             <li><a class="{{ Request::segment(3) == 'brand-engine' ? 'active' : '' }}"
                                     href="{{ url('/super-admin/master/brand-engine') }}">Brand Mesin</a></li>
@@ -105,15 +106,16 @@
                     </li>
 
                     {{-- Riwayat Booking --}}
-                    <li class="{{ Request::segment(3) == 'history' ? 'active' : '' }}">
-                        <a href="{{ url('/user/booking/history') }}"><i class="la la-history"></i> <span>Riwayat
+                    <li class="{{ Request::segment(2) == 'booking-history' ? 'active' : '' }}">
+                        <a href="{{ url('/user/booking-history') }}"><i class="la la-history"></i> <span>Riwayat
                                 Booking</span></a>
                     </li>
 
                     {{-- Motor --}}
                     <li class="menu-title"><span>Kendaraan</span></li>
                     <li class="{{ Request::segment(2) == 'motorcycle' ? 'active' : '' }}">
-                        <a href="{{ url('/user/motorcycle') }}"><i class="la la-motorcycle"></i> <span>Motor Saya</span></a>
+                        <a href="{{ url('/user/motorcycle') }}"><i class="la la-motorcycle"></i> <span>Motor
+                                Saya</span></a>
                     </li>
                 @endcan
                 {{-- PENGATURAN --}}

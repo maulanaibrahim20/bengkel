@@ -33,7 +33,7 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <input type="text" name="plate_prefix" class="form-control text-uppercase"
-                                        maxlength="2" placeholder="D" required maxlength="3">
+                                        maxlength="2" placeholder="E" required maxlength="3">
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" name="plate_number" class="form-control" maxlength="6"
