@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\BookingSlotSuperAdminController;
 use App\Http\Controllers\Cms\PageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BrandEngineController;
@@ -134,6 +135,12 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/{id}/update', 'update');
             Route::delete('/{id}/delete', 'destroy');
             Route::post('/{id}/change-status', 'changeStatus');
+        });
+
+        Route::group(['prefix' => 'booking-slot', 'controller' => BookingSlotSuperAdminController::class], function () {
+            Route::get('/datatable', 'getDataTable');
+            Route::get('/', 'index');
+            Route::get('/details/{date}', 'getSlotDetailsByDate')->name('booking-slot.details');
         });
     });
 

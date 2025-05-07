@@ -16,7 +16,8 @@
                                     <h1
                                         class="display-5 display-md-3 text-white mb-3 mb-md-4 pb-2 pb-md-3 animated slideInDown">
                                         Qualified Car Repair Service Center</h1>
-                                    <a href="" class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
+                                    <a href=""
+                                        class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
                                         More<i class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
@@ -38,7 +39,8 @@
                                     <h1
                                         class="display-5 display-md-3 text-white mb-3 mb-md-4 pb-2 pb-md-3 animated slideInDown">
                                         Qualified Car Wash Service Center</h1>
-                                    <a href="" class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
+                                    <a href=""
+                                        class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
                                         More<i class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
@@ -115,7 +117,8 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <h6 class="text-primary text-uppercase">// About Us //</h6>
-                    <h1 class="mb-3 mb-md-4"><span class="text-primary">CarServ</span> Is The Best Place For Your Auto Care
+                    <h1 class="mb-3 mb-md-4"><span class="text-primary">CarServ</span> Is The Best Place For Your Auto
+                        Care
                     </h1>
                     <p class="mb-3 mb-md-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet
                         diam et
@@ -166,34 +169,6 @@
         </div>
     </div>
 
-    <!-- Mobile-Optimized Facts Section -->
-    <div class="container-fluid fact bg-dark my-4 my-md-5 py-4 py-md-5">
-        <div class="container">
-            <div class="row g-3 g-md-4">
-                <div class="col-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
-                    <i class="fa fa-check fa-2x text-white mb-2 mb-md-3"></i>
-                    <h2 class="text-white mb-1 mb-md-2" data-toggle="counter-up">1234</h2>
-                    <p class="text-white mb-0">Years Experience</p>
-                </div>
-                <div class="col-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
-                    <i class="fa fa-users-cog fa-2x text-white mb-2 mb-md-3"></i>
-                    <h2 class="text-white mb-1 mb-md-2" data-toggle="counter-up">1234</h2>
-                    <p class="text-white mb-0">Expert Technicians</p>
-                </div>
-                <div class="col-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
-                    <i class="fa fa-users fa-2x text-white mb-2 mb-md-3"></i>
-                    <h2 class="text-white mb-1 mb-md-2" data-toggle="counter-up">1234</h2>
-                    <p class="text-white mb-0">Satisfied Clients</p>
-                </div>
-                <div class="col-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
-                    <i class="fa fa-car fa-2x text-white mb-2 mb-md-3"></i>
-                    <h2 class="text-white mb-1 mb-md-2" data-toggle="counter-up">1234</h2>
-                    <p class="text-white mb-0">Complete Projects</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="container-xxl service py-4 py-md-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -203,15 +178,17 @@
             <div class="row g-3 g-md-4 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12">
                     <div class="accordion" id="accordionServices">
-                        @foreach($services as $service)
+                        @foreach ($services as $service)
                             <div class="accordion-item mb-2 mb-md-3">
                                 <h2 class="accordion-header" id="heading-{{ $service->id }}">
                                     <button
                                         class="accordion-button d-flex align-items-center p-3 {{ $loop->first ? '' : 'collapsed' }}"
-                                        type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $service->id }}"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse-{{ $service->id }}"
                                         aria-expanded="{{ $loop->first ? 'true' : 'false' }}"
                                         aria-controls="collapse-{{ $service->id }}">
-                                        <i class="fa {{ $service->icon ?? 'fa-cogs' }} fa-lg fa-md-2x me-3 text-primary"></i>
+                                        <i
+                                            class="fa {{ $service->icon ?? 'fa-cogs' }} fa-lg fa-md-2x me-3 text-primary"></i>
                                         <h5 class="m-0">{{ $service->name }}</h5>
                                     </button>
                                 </h2>
@@ -222,11 +199,12 @@
                                         <p><strong>Harga:</strong> Rp{{ number_format($service->price, 0, ',', '.') }}</p>
                                         <p><strong>Durasi:</strong> {{ $service->duration }}</p>
 
-                                        @if($service->detail->count())
+                                        @if ($service->detail->count())
                                             <ul class="list-group list-group-flush mt-3">
-                                                @foreach($service->detail as $detail)
+                                                @foreach ($service->detail as $detail)
                                                     <li class="list-group-item px-0"><i
-                                                            class="fa fa-check text-success me-2"></i>{{ $detail->description }}</li>
+                                                            class="fa fa-check text-success me-2"></i>{{ $detail->description }}
+                                                    </li>
                                                 @endforeach
                                             </ul>
                                         @else
@@ -254,10 +232,12 @@
                             Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua.</p>
 
                         @guest
-                            <a href="{{ url('/booking/register') }}" class="btn btn-primary px-4 px-md-5 py-2 py-md-3">Booking
+                            <a href="{{ url('/booking/register') }}"
+                                class="btn btn-primary px-4 px-md-5 py-2 py-md-3">Booking
                                 Now</a>
                         @else
-                            <a href="{{ url('booking.create') }}" class="btn btn-light px-4 px-md-5 py-2 py-md-3">Booking Now</a>
+                            <a href="{{ url('booking.create') }}" class="btn btn-light px-4 px-md-5 py-2 py-md-3">Booking
+                                Now</a>
                         @endguest
                     </div>
                 </div>
@@ -341,6 +321,32 @@
         </div>
     </div>
 
+    <div class="container-fluid news-section bg-dark my-4 my-md-5 py-4 py-md-5">
+        <div class="container">
+            <div class="text-center mb-4 mb-md-5">
+                <h6 class="text-primary text-uppercase">// Berita dan Info //</h6>
+                <h1 class="text-white">Informasi Terbaru</h1>
+            </div>
+            <div class="owl-carousel news-carousel position-relative">
+                <div class="bg-light p-3 p-md-4 mx-2">
+                    <img src="https://via.placeholder.com/400x200?text=News+1" class="img-fluid mb-3" alt="Berita 1">
+                    <h5 class="mb-2">Judul Berita Pertama</h5>
+                    <p class="mb-0">Ringkasan berita atau informasi singkat yang menarik perhatian pembaca.</p>
+                </div>
+                <div class="bg-light p-3 p-md-4 mx-2">
+                    <img src="https://via.placeholder.com/400x200?text=News+2" class="img-fluid mb-3" alt="Berita 2">
+                    <h5 class="mb-2">Judul Berita Kedua</h5>
+                    <p class="mb-0">Penjelasan singkat tentang kegiatan atau promo terbaru dari bengkel Anda.</p>
+                </div>
+                <div class="bg-light p-3 p-md-4 mx-2">
+                    <img src="https://via.placeholder.com/400x200?text=News+3" class="img-fluid mb-3" alt="Berita 3">
+                    <h5 class="mb-2">Judul Berita Ketiga</h5>
+                    <p class="mb-0">Informasi penting terkait layanan, tips perawatan motor, atau update lainnya.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Mobile-Optimized Testimonial Section -->
     <div class="container-xxl py-4 py-md-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
@@ -351,7 +357,8 @@
             <!-- Modified for touch-friendly swiping -->
             <div class="owl-carousel testimonial-carousel position-relative">
                 <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-1.jpg"
+                    <img class="bg-light rounded-circle p-2 mx-auto mb-3"
+                        src="{{ url('/landing') }}/img/testimonial-1.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
@@ -361,7 +368,8 @@
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-2.jpg"
+                    <img class="bg-light rounded-circle p-2 mx-auto mb-3"
+                        src="{{ url('/landing') }}/img/testimonial-2.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
@@ -371,7 +379,8 @@
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-3.jpg"
+                    <img class="bg-light rounded-circle p-2 mx-auto mb-3"
+                        src="{{ url('/landing') }}/img/testimonial-3.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
@@ -381,7 +390,8 @@
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-4.jpg"
+                    <img class="bg-light rounded-circle p-2 mx-auto mb-3"
+                        src="{{ url('/landing') }}/img/testimonial-4.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>

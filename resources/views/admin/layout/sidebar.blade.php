@@ -29,7 +29,6 @@
                     </ul>
                 </li>
                 @can('super-admin')
-
                     {{-- TRANSAKSI --}}
                     <li class="menu-title"><span>Transaksi</span></li>
                     <li class="{{ Request::segment(2) == 'kasir' ? 'active' : '' }}">
@@ -39,7 +38,8 @@
                     {{-- PRODUK & INVENTORI --}}
                     <li class="menu-title"><span>Produk & Inventori</span></li>
                     <li class="{{ Request::segment(2) == 'product' ? 'active' : '' }}">
-                        <a href="{{ url('/super-admin/product') }}"><i class="la la-box"></i> <span>Daftar Produk</span></a>
+                        <a href="{{ url('/super-admin/product') }}"><i class="la la-box"></i> <span>Daftar
+                                Produk</span></a>
                     </li>
                     <li class="{{ Request::segment(2) == 'motorcycle' ? 'active' : '' }}">
                         <a href="{{ url('/super-admin/motorcycle') }}"><i class="la la-motorcycle"></i> <span>List
@@ -48,6 +48,10 @@
                     <li class="{{ Request::segment(2) == 'service' ? 'active' : '' }}">
                         <a href="{{ url('/super-admin/service') }}"><i class="la la-tools"></i>
                             <span>Service</span></a>
+                    </li>
+                    <li class="{{ Request::segment(2) == 'booking-slot' ? 'active' : '' }}">
+                        <a href="{{ url('/super-admin/booking-slot') }}"><i class="la la-book"></i>
+                            <span>Booking Slot</span></a>
                     </li>
 
                     {{-- MASTER DATA --}}
@@ -72,7 +76,8 @@
 
                     {{-- Master Umum --}}
                     <li class="submenu {{ $activeMasterUmum ? 'active menu-open' : '' }}">
-                        <a href="#"><i class="la la-cogs"></i> <span>Master Umum</span> <span class="menu-arrow"></span></a>
+                        <a href="#"><i class="la la-cogs"></i> <span>Master Umum</span> <span
+                                class="menu-arrow"></span></a>
                         <ul style="{{ $activeMasterUmum ? 'display: block;' : 'display: none;' }}">
                             <li><a class="{{ Request::segment(3) == 'brand-engine' ? 'active' : '' }}"
                                     href="{{ url('/super-admin/master/brand-engine') }}">Brand Mesin</a></li>

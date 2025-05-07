@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Roles;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Carbon::setLocale('id');
+
         Gate::define('super-admin', function ($user) {
             return !empty($user->role) && $user->role->id == Roles::SUPER_ADMIN;
         });
