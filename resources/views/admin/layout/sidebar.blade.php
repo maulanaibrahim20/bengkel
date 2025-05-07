@@ -96,24 +96,35 @@
                 @can('admin')
                 @endcan
                 @can('user')
-                    <li class="menu-title"><span>Booking</span></li>
+                    <li class="menu-title"><span>Layanan</span></li>
+
+                    {{-- Booking --}}
                     <li class="{{ Request::segment(2) == 'booking' ? 'active' : '' }}">
-                        <a href="{{ url('/user/booking') }}"><i class="fa fa-book"></i> <span>Booking</span></a>
+                        <a href="{{ url('/user/booking') }}"><i class="la la-calendar-plus-o"></i> <span>Buat
+                                Booking</span></a>
                     </li>
-                    <li class="menu-title"><span>Motor Saya</span></li>
+
+                    {{-- Riwayat Booking --}}
+                    <li class="{{ Request::segment(3) == 'history' ? 'active' : '' }}">
+                        <a href="{{ url('/user/booking/history') }}"><i class="la la-history"></i> <span>Riwayat
+                                Booking</span></a>
+                    </li>
+
+                    {{-- Motor --}}
+                    <li class="menu-title"><span>Kendaraan</span></li>
                     <li class="{{ Request::segment(2) == 'motorcycle' ? 'active' : '' }}">
-                        <a href="{{ url('/user/motorcycle') }}"><i class="fa fa-motorcycle"></i> <span>Motor</span></a>
+                        <a href="{{ url('/user/motorcycle') }}"><i class="la la-motorcycle"></i> <span>Motor Saya</span></a>
                     </li>
                 @endcan
                 {{-- PENGATURAN --}}
                 <li class="menu-title"><span>Pengaturan</span></li>
                 <li class="{{ Request::segment(2) == 'profile' ? 'active' : '' }}">
                     @if (Auth::user()->role_id == 1)
-                        <a href="{{ url('/super-admin/profile') }}"><i class="fa fa-user"></i> <span>Profil</span></a>
+                        <a href="{{ url('/super-admin/profile') }}"><i class="la la-user"></i> <span>Profil</span></a>
                     @elseif (Auth::user()->role_id == 2)
-                        <a href="{{ url('/admin/profile') }}"><i class="fa fa-user"></i> <span>Profil</span></a>
+                        <a href="{{ url('/admin/profile') }}"><i class="la la-user"></i> <span>Profil</span></a>
                     @elseif (Auth::user()->role_id == 3)
-                        <a href="{{ url('/user/profile') }}"><i class="fa fa-user"></i> <span>Profil</span></a>
+                        <a href="{{ url('/user/profile') }}"><i class="la la-user"></i> <span>Profil</span></a>
                     @endif
                 </li>
                 <li>

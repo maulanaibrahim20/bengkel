@@ -20,6 +20,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserBookingController;
+use App\Http\Controllers\UserBookingHistoryController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\UserSuperAdminController;
 use Illuminate\Support\Facades\Route;
@@ -172,12 +173,15 @@ Route::middleware(['auth'])->group(function () {
             return view('user.pages.welcome');
         });
 
-
         Route::group(['prefix' => 'booking', 'controller' => UserBookingController::class], function () {
             Route::get('/slot/{date}', 'getSlots');
             Route::get('/', 'index');
             Route::get('/create', 'create');
             Route::post('/create', 'store');
+
+            Route::group(['prefix' => 'history', 'controller' => UserBookingHistoryController::class], function () {
+                Route::get('/', 'index');
+            });
         });
 
         Route::group(['prefix' => 'motorcycle', 'controller' => MotorCycleUserController::class], function () {
@@ -188,6 +192,7 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/{id}/update', 'update');
             Route::delete('/{id}/delete', 'destroy');
         });
+
 
 
         Route::get('/update/profile', [UserProfileController::class, 'formRegister']);
