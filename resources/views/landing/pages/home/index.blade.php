@@ -63,34 +63,49 @@
     <!-- Mobile-Optimized Feature Boxes -->
     <div class="container-xxl py-4 py-md-5">
         <div class="container">
+            <!-- Header Produk -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Produk Kami</h2>
+                <a href="/produk" class="btn btn-primary">Lihat Semua Produk</a>
+            </div>
+
+            <!-- Daftar Produk -->
             <div class="row g-3 g-md-4">
-                <div class="col-12 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="d-flex py-4 px-3 px-md-4 h-100">
-                        <i class="fa fa-certificate fa-2x fa-md-3x text-primary flex-shrink-0 mt-1"></i>
-                        <div class="ps-3 ps-md-4">
-                            <h5 class="mb-2 mb-md-3">Quality Servicing</h5>
-                            <p class="mb-2">Diam dolor diam ipsum sit amet diam et eos erat ipsum</p>
-                            <a class="text-secondary border-bottom" href="">Read More</a>
+                <!-- Produk 1 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="/path/to/image1.jpg" class="card-img-top" alt="Produk 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Nama Produk 1</h5>
+                            <p class="card-text">Deskripsi singkat produk 1 yang menarik dan informatif.</p>
+                            <p class="fw-bold text-primary">Rp 100.000</p>
+                            <a href="/produk/1" class="btn btn-outline-primary">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="d-flex bg-light py-4 px-3 px-md-4 h-100">
-                        <i class="fa fa-users-cog fa-2x fa-md-3x text-primary flex-shrink-0 mt-1"></i>
-                        <div class="ps-3 ps-md-4">
-                            <h5 class="mb-2 mb-md-3">Expert Workers</h5>
-                            <p class="mb-2">Diam dolor diam ipsum sit amet diam et eos erat ipsum</p>
-                            <a class="text-secondary border-bottom" href="">Read More</a>
+
+                <!-- Produk 2 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="/path/to/image2.jpg" class="card-img-top" alt="Produk 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Nama Produk 2</h5>
+                            <p class="card-text">Deskripsi singkat produk 2 yang menarik dan informatif.</p>
+                            <p class="fw-bold text-primary">Rp 150.000</p>
+                            <a href="/produk/2" class="btn btn-outline-primary">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="d-flex py-4 px-3 px-md-4 h-100">
-                        <i class="fa fa-tools fa-2x fa-md-3x text-primary flex-shrink-0 mt-1"></i>
-                        <div class="ps-3 ps-md-4">
-                            <h5 class="mb-2 mb-md-3">Modern Equipment</h5>
-                            <p class="mb-2">Diam dolor diam ipsum sit amet diam et eos erat ipsum</p>
-                            <a class="text-secondary border-bottom" href="">Read More</a>
+
+                <!-- Produk 3 -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="/path/to/image3.jpg" class="card-img-top" alt="Produk 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Nama Produk 3</h5>
+                            <p class="card-text">Deskripsi singkat produk 3 yang menarik dan informatif.</p>
+                            <p class="fw-bold text-primary">Rp 200.000</p>
+                            <a href="/produk/3" class="btn btn-outline-primary">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
@@ -115,7 +130,8 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <h6 class="text-primary text-uppercase">// About Us //</h6>
-                    <h1 class="mb-3 mb-md-4"><span class="text-primary">CarServ</span> Is The Best Place For Your Auto Care
+                    <h1 class="mb-3 mb-md-4"><span class="text-primary">CarServ</span> Is The Best Place For Your Auto
+                        Care
                     </h1>
                     <p class="mb-3 mb-md-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet
                         diam et
@@ -166,34 +182,6 @@
         </div>
     </div>
 
-    <!-- Mobile-Optimized Facts Section -->
-    <div class="container-fluid fact bg-dark my-4 my-md-5 py-4 py-md-5">
-        <div class="container">
-            <div class="row g-3 g-md-4">
-                <div class="col-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
-                    <i class="fa fa-check fa-2x text-white mb-2 mb-md-3"></i>
-                    <h2 class="text-white mb-1 mb-md-2" data-toggle="counter-up">1234</h2>
-                    <p class="text-white mb-0">Years Experience</p>
-                </div>
-                <div class="col-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
-                    <i class="fa fa-users-cog fa-2x text-white mb-2 mb-md-3"></i>
-                    <h2 class="text-white mb-1 mb-md-2" data-toggle="counter-up">1234</h2>
-                    <p class="text-white mb-0">Expert Technicians</p>
-                </div>
-                <div class="col-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
-                    <i class="fa fa-users fa-2x text-white mb-2 mb-md-3"></i>
-                    <h2 class="text-white mb-1 mb-md-2" data-toggle="counter-up">1234</h2>
-                    <p class="text-white mb-0">Satisfied Clients</p>
-                </div>
-                <div class="col-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
-                    <i class="fa fa-car fa-2x text-white mb-2 mb-md-3"></i>
-                    <h2 class="text-white mb-1 mb-md-2" data-toggle="counter-up">1234</h2>
-                    <p class="text-white mb-0">Complete Projects</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="container-xxl service py-4 py-md-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -203,7 +191,7 @@
             <div class="row g-3 g-md-4 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12">
                     <div class="accordion" id="accordionServices">
-                        @foreach($services as $service)
+                        @foreach ($services as $service)
                             <div class="accordion-item mb-2 mb-md-3">
                                 <h2 class="accordion-header" id="heading-{{ $service->id }}">
                                     <button
@@ -222,11 +210,12 @@
                                         <p><strong>Harga:</strong> Rp{{ number_format($service->price, 0, ',', '.') }}</p>
                                         <p><strong>Durasi:</strong> {{ $service->duration }}</p>
 
-                                        @if($service->detail->count())
+                                        @if ($service->detail->count())
                                             <ul class="list-group list-group-flush mt-3">
-                                                @foreach($service->detail as $detail)
+                                                @foreach ($service->detail as $detail)
                                                     <li class="list-group-item px-0"><i
-                                                            class="fa fa-check text-success me-2"></i>{{ $detail->description }}</li>
+                                                            class="fa fa-check text-success me-2"></i>{{ $detail->description }}
+                                                    </li>
                                                 @endforeach
                                             </ul>
                                         @else
@@ -257,7 +246,8 @@
                             <a href="{{ url('/booking/register') }}" class="btn btn-primary px-4 px-md-5 py-2 py-md-3">Booking
                                 Now</a>
                         @else
-                            <a href="{{ url('booking.create') }}" class="btn btn-light px-4 px-md-5 py-2 py-md-3">Booking Now</a>
+                            <a href="{{ url('booking.create') }}" class="btn btn-light px-4 px-md-5 py-2 py-md-3">Booking
+                                Now</a>
                         @endguest
                     </div>
                 </div>
@@ -277,11 +267,6 @@
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="{{ url('/landing') }}/img/team-1.jpg" alt="Technician 1">
-                            <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
                         </div>
                         <div class="bg-light text-center p-3 p-md-4">
                             <h5 class="fw-bold mb-0">Full Name</h5>
@@ -293,11 +278,6 @@
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="{{ url('/landing') }}/img/team-2.jpg" alt="Technician 2">
-                            <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
                         </div>
                         <div class="bg-light text-center p-3 p-md-4">
                             <h5 class="fw-bold mb-0">Full Name</h5>
@@ -309,11 +289,6 @@
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="{{ url('/landing') }}/img/team-3.jpg" alt="Technician 3">
-                            <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
                         </div>
                         <div class="bg-light text-center p-3 p-md-4">
                             <h5 class="fw-bold mb-0">Full Name</h5>
@@ -325,17 +300,38 @@
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="{{ url('/landing') }}/img/team-4.jpg" alt="Technician 4">
-                            <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
                         </div>
                         <div class="bg-light text-center p-3 p-md-4">
                             <h5 class="fw-bold mb-0">Full Name</h5>
                             <small>Designation</small>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid news-section bg-dark my-4 my-md-5 py-4 py-md-5">
+        <div class="container">
+            <div class="text-center mb-4 mb-md-5">
+                <h6 class="text-primary text-uppercase">// Berita dan Info //</h6>
+                <h1 class="text-white">Informasi Terbaru</h1>
+            </div>
+            <div class="owl-carousel news-carousel position-relative">
+                <div class="bg-light p-3 p-md-4 mx-2">
+                    <img src="https://via.placeholder.com/400x200?text=News+1" class="img-fluid mb-3" alt="Berita 1">
+                    <h5 class="mb-2">Judul Berita Pertama</h5>
+                    <p class="mb-0">Ringkasan berita atau informasi singkat yang menarik perhatian pembaca.</p>
+                </div>
+                <div class="bg-light p-3 p-md-4 mx-2">
+                    <img src="https://via.placeholder.com/400x200?text=News+2" class="img-fluid mb-3" alt="Berita 2">
+                    <h5 class="mb-2">Judul Berita Kedua</h5>
+                    <p class="mb-0">Penjelasan singkat tentang kegiatan atau promo terbaru dari bengkel Anda.</p>
+                </div>
+                <div class="bg-light p-3 p-md-4 mx-2">
+                    <img src="https://via.placeholder.com/400x200?text=News+3" class="img-fluid mb-3" alt="Berita 3">
+                    <h5 class="mb-2">Judul Berita Ketiga</h5>
+                    <p class="mb-0">Informasi penting terkait layanan, tips perawatan motor, atau update lainnya.</p>
                 </div>
             </div>
         </div>

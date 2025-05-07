@@ -29,17 +29,19 @@
                     </ul>
                 </li>
                 @can('super-admin')
-
                     {{-- TRANSAKSI --}}
                     <li class="menu-title"><span>Transaksi</span></li>
                     <li class="{{ Request::segment(2) == 'kasir' ? 'active' : '' }}">
-                        <a href="{{ url('/app/kasir') }}"><i class="la la-cash-register"></i> <span>Kasir</span></a>
+                        <a href="{{ url('/app/kasir') }}"><i class="la la-cash-register"></i>
+                            <span>Kasir
+                                (Prototype)</span></a>
                     </li>
 
                     {{-- PRODUK & INVENTORI --}}
                     <li class="menu-title"><span>Produk & Inventori</span></li>
                     <li class="{{ Request::segment(2) == 'product' ? 'active' : '' }}">
-                        <a href="{{ url('/super-admin/product') }}"><i class="la la-box"></i> <span>Daftar Produk</span></a>
+                        <a href="{{ url('/super-admin/product') }}"><i class="la la-box"></i> <span>Daftar
+                                Produk</span></a>
                     </li>
                     <li class="{{ Request::segment(2) == 'motorcycle' ? 'active' : '' }}">
                         <a href="{{ url('/super-admin/motorcycle') }}"><i class="la la-motorcycle"></i> <span>List
@@ -48,6 +50,10 @@
                     <li class="{{ Request::segment(2) == 'service' ? 'active' : '' }}">
                         <a href="{{ url('/super-admin/service') }}"><i class="la la-tools"></i>
                             <span>Service</span></a>
+                    </li>
+                    <li class="{{ Request::segment(2) == 'booking-slot' ? 'active' : '' }}">
+                        <a href="{{ url('/super-admin/booking-slot') }}"><i class="la la-book"></i>
+                            <span>Booking Slot</span></a>
                     </li>
 
                     {{-- MASTER DATA --}}

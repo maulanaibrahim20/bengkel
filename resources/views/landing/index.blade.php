@@ -9,6 +9,10 @@
     <meta content="" name="description">
 
     @include('landing.component.style_css')
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+        integrity="sha512-utbXcCp0Qv1P2pTVp+5cf9QHGB6c9ewAUpS7yV7RfpBJBFWEZbyHP2WD6f9D7rf1s1XpJdeV8A4SczDRvU6v8g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>

@@ -51,7 +51,7 @@
 
                 <div>
                     <button type="submit" class="btn btn-primary">Simpan</button>
-                    <a href="{{ url('service.index') }}" class="btn btn-light">Kembali</a>
+                    <a href="{{ url('super-admin/service') }}" class="btn btn-light">Kembali</a>
                 </div>
             </div>
         </div>
@@ -63,11 +63,11 @@
         $(document).ready(function () {
             $('#add-detail').click(function () {
                 $('#detail-container').append(`
-                                                                    <div class="input-group mb-2">
-                                                                        <input type="text" name="details[]" class="form-control" placeholder="Deskripsi layanan" required>
-                                                                        <button type="button" class="btn btn-danger remove-detail"><i class="fa fa-trash"></i></button>
-                                                                    </div>
-                                                                `);
+                                                                        <div class="input-group mb-2">
+                                                                            <input type="text" name="details[]" class="form-control" placeholder="Deskripsi layanan" required>
+                                                                            <button type="button" class="btn btn-danger remove-detail"><i class="fa fa-trash"></i></button>
+                                                                        </div>
+                                                                    `);
             });
 
             $(document).on('click', '.remove-detail', function () {

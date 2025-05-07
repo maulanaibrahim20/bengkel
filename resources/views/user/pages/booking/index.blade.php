@@ -1,178 +1,422 @@
 @extends('index')
 @push('css')
     <style>
-        .btn-outline-primary:hover:not(:disabled) {
-            background-color: #e9f4ff;
+        :root {
+            --primary-color: #ff9b44;
+            --primary-light: #e9f4ff;
+            --dark-color: #212529;
+            --success-color: #198754;
+            --warning-color: #ffc107;
         }
 
-        .btn[disabled] {
+        .booking-card {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .date-selector {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) #f1f1f1;
+            padding-bottom: 8px;
+        }
+
+        .date-selector::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .date-selector::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .date-selector::-webkit-scrollbar-thumb {
+            background: #d1d1d1;
+            border-radius: 10px;
+        }
+
+        .date-selector::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+
+        .date-card {
+            min-width: 100px;
+            border-radius: 15px;
+            text-align: center;
+            padding: 12px 10px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid #dee2e6;
+        }
+
+        .date-card.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
+        }
+
+        .date-card:not(.active):hover {
+            background-color: var(--primary-light);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .date-weekday {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .date-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 4px 0;
+        }
+
+        .date-month {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .time-badge {
+            position: relative;
+            display: inline-flex;
+            margin: 8px;
+        }
+
+        .time-btn {
+            border-radius: 50px;
+            padding: 8px 18px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background-color: white;
+        }
+
+        .time-btn:not(:disabled):hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
+        }
+
+        .time-btn:disabled {
             opacity: 0.6;
+            cursor: not-allowed;
+            background-color: #f8f9fa;
+            border-color: #dee2e6;
+            color: #6c757d;
+        }
+
+        .time-slots-container {
+            border-radius: 10px;
+            padding: 15px;
+            background-color: #f9fbfd;
+            margin-bottom: 20px;
+        }
+
+        .time-section-heading {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .time-section-heading i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        .today-badge {
+            background-color: var(--warning-color);
+            color: var(--dark-color);
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .info-note {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 767.98px) {
+            .booking-card {
+                padding: 15px !important;
+            }
+
+            .date-card {
+                min-width: 85px;
+                padding: 10px 5px;
+            }
+
+            .date-number {
+                font-size: 1.1rem;
+            }
+
+            .time-btn {
+                padding: 6px 14px;
+                font-size: 0.9rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animation */
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        #bookingAdOverlay {
+            animation: fadeIn 0.5s ease-in-out;
         }
     </style>
 @endpush
 @section('content')
-    <div class="page-header">
-        <div class="row">
-            <div class="col-sm-12">
-                <h3 class="page-title">Pilih Tanggal Dan Jam Booking</h3>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item active">Dashboard</li>
-                </ul>
+    <div class="container py-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h3 class="page-title fw-bold">Pilih Tanggal & Jam Booking</h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/user/dashboard" class="text-decoration-none">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Booking Servis</li>
+                    </ol>
+                </nav>
             </div>
         </div>
-    </div>
-    <div class="container my-5">
-        <div class="card p-4 shadow-sm rounded-4">
-            <!-- Header tanggal -->
-            <div class="d-flex mb-4 overflow-auto">
+
+        <div class="booking-card card p-4">
+            <div class="mb-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center">
+                    <h5 class="fw-bold mb-3 mb-md-0">
+                        <i class="bi bi-calendar-check me-2 text-primary"></i>Jadwal Tersedia
+                    </h5>
+                    <div class="d-flex align-items-center small">
+                        <span class="d-flex align-items-center me-3">
+                            <span class="badge bg-success me-2">&nbsp;</span>Tersedia
+                        </span>
+                        <span class="d-flex align-items-center">
+                            <span class="badge bg-secondary me-2">&nbsp;</span>Penuh
+                        </span>
+                    </div>
+                </div>
+                <p class="text-muted mb-0 small">Silahkan pilih tanggal dan jam yang sesuai untuk booking servis Anda.</p>
+            </div>
+
+            <div class="date-selector d-flex mb-4">
                 @foreach ($dates as $i => $day)
                     @php
                         $isToday = $day['date']->isToday();
+                        $dayName = $day['date']->translatedFormat('D');
+                        $dayNumber = $day['date']->format('d');
+                        $monthName = $day['date']->format('M');
                     @endphp
-                    <div class="me-2">
-                        <button
-                            class="btn date-tab-btn {{ $isToday ? 'btn-dark text-white' : 'btn-outline-secondary' }} rounded-4 px-4 py-2 w-100"
-                            data-tab="tab-{{ $i }}">
-                            <div class="fw-bold">{{ $day['date']->format('d M') }}</div>
-                            @if ($isToday)
-                                <div class="badge bg-warning text-dark mt-1">Hari Ini</div>
-                            @endif
-                        </button>
+                    <div class="date-card {{ $i == 0 ? 'active' : '' }}" data-tab="tab-{{ $i }}">
+                        <div class="date-weekday">{{ $dayName }}</div>
+                        <div class="date-number">{{ $dayNumber }}</div>
+                        <div class="date-month">{{ $monthName }}</div>
+                        @if ($isToday)
+                            <div class="today-badge">Hari Ini</div>
+                        @endif
                     </div>
                 @endforeach
             </div>
 
-            <!-- Slot jadwal per tanggal -->
             @foreach ($dates as $i => $day)
-                <div id="tab-{{ $i }}" class="schedule-tab mb-4" style="display: none;">
-                    <h5 class="fw-bold mb-3">{{ $day['date']->translatedFormat('l, d F Y') }}</h5>
+                <div id="tab-{{ $i }}" class="schedule-tab fade-in" style="display: {{ $i == 0 ? 'block' : 'none' }};">
+                    <h5 class="fw-bold mb-3">
+                        <i class="bi bi-calendar-event me-2 text-primary"></i>
+                        {{ $day['date']->translatedFormat('l, d F Y') }}
+                    </h5>
 
-                    <h6 class="fw-bold">Pagi</h6>
-                    <div class="d-flex flex-wrap mb-3 morning-slots">
-                        <!-- Slot pagi akan dimuat di sini melalui AJAX -->
+                    <div class="time-slots-container">
+                        <div class="time-section-heading">
+                            <i class="bi bi-sunrise"></i>Sesi Pagi
+                        </div>
+                        <div class="d-flex flex-wrap morning-slots">
+                            <!-- Morning slots will be loaded here via AJAX -->
+                            <div class="d-flex justify-content-center align-items-center w-100 py-3">
+                                <div class="spinner-border spinner-border-sm text-primary me-2" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <span class="text-muted small">Memuat slot tersedia...</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <h6 class="fw-bold">Sore</h6>
-                    <div class="d-flex flex-wrap afternoon-slots">
-                        <!-- Slot sore akan dimuat di sini melalui AJAX -->
+                    <div class="time-slots-container">
+                        <div class="time-section-heading">
+                            <i class="bi bi-sunset"></i>Sesi Sore
+                        </div>
+                        <div class="d-flex flex-wrap afternoon-slots">
+                            <!-- Afternoon slots will be loaded here via AJAX -->
+                            <div class="d-flex justify-content-center align-items-center w-100 py-3">
+                                <div class="spinner-border spinner-border-sm text-primary me-2" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <span class="text-muted small">Memuat slot tersedia...</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @endforeach
 
-
-            <!-- Note -->
-            <div class="mt-4 text-muted small">
-                * Jika jam tidak bisa di klik, artinya slot pada jam tersebut sudah penuh.
+            <!-- Instructions note -->
+            <div class="info-note mt-3">
+                <div class="d-flex align-items-start">
+                    <i class="bi bi-info-circle-fill text-primary me-2 mt-1"></i>
+                    <div>
+                        <span class="fw-medium">Informasi:</span> Jika tombol jam berwarna abu-abu dan tidak dapat diklik,
+                        artinya slot pada jam tersebut sudah penuh atau tidak tersedia.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    @if (!$hasMotor)
-        <div class="modal fade" id="motorWarningModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
-            data-bs-keyboard="false">
-            <div class="modal-dialog">
-                <div class="modal-content rounded-4">
-                    <div class="modal-header bg-warning">
-                        <h5 class="modal-title">Peringatan</h5>
-                    </div>
-                    <div class="modal-body">
-                        Anda belum memiliki motor terdaftar. Silakan tambahkan motor terlebih dahulu sebelum melakukan
-                        booking.
-                    </div>
-                    <div class="modal-footer">
-                        <a href="{{ url('/user/motorcycle') }}" class="btn btn-primary">Tambah Motor</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
-@endsection
+    @include('user.pages.booking.modal-has-motor')
 
+    <!-- Fullscreen Loading Advertisement -->
+    <div id="bookingAdOverlay"
+        style="display: none; position: fixed; inset: 0; background: white; z-index: 9999; justify-content: center; align-items: center; flex-direction: column;">
+        <img src="/images/iklan-placeholder.jpg" alt="Iklan Booking"
+            style="max-width: 80%; max-height: 60%; margin-bottom: 30px;">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-3 text-muted">Mohon tunggu sebentar...</p>
+    </div>
+
+@endsection
 @section('script')
     @if (!$hasMotor)
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $('#motorWarningModal').modal('show');
-
-                // Matikan semua tombol agar tidak bisa booking
-                $('button').not('.btn-primary').prop('disabled', true);
+                $('.date-card').addClass('disabled').css('pointer-events', 'none').css('opacity', '0.6');
             });
         </script>
     @endif
     <script>
-        $(document).ready(function() {
-            // Ketika tombol tanggal diklik
-            $('.date-tab-btn').on('click', function() {
-                $('.schedule-tab').hide(); // Sembunyikan semua tab jadwal
+        $(document).ready(function () {
+            function renderSlotButtons(slots, containerSelector) {
+                let html = '';
 
-                $('.date-tab-btn').removeClass('btn-dark text-white').addClass(
-                    'btn-outline-secondary'); // Reset tombol
+                if (slots.length > 0) {
+                    slots.forEach(function (slot) {
+                        const isFull = slot.current_bookings >= slot.max_bookings;
+                        const statusClass = isFull ? 'btn-secondary' : 'time-btn';
+                        const statusIcon = isFull ? '<i class="bi bi-x-circle me-1"></i>' : '<i class="bi bi-check-circle me-1"></i>';
 
-                $(this).removeClass('btn-outline-secondary').addClass(
-                    'btn-dark text-white'); // Aktifkan tombol yg dipilih
+                        html += `
+                    <div class="time-badge">
+                        <button onclick="window.location.href='/user/booking/create?slot_id=${slot.id}'"
+                        class="btn ${statusClass}"
+                        ${isFull ? 'disabled' : ''}>
+                        ${statusIcon}${slot.time.slice(0, 5)}
+                        </button>
+                    </div>
+                `;
+                    });
+                } else {
+                    html = `
+                    <div class="text-center w-100 py-3">
+                        <i class="bi bi-calendar-x text-muted mb-2" style="font-size: 1.5rem;"></i>
+                        <p class="text-muted mb-0">Tidak ada slot tersedia untuk sesi ini.</p>
+                    </div>
+                `;
+                }
 
-                const tabId = $(this).data('tab'); // ID tab yg dipilih
-                $('#' + tabId).show(); // Tampilkan tab yang sesuai
+                $(containerSelector).html(html);
+            }
 
-                const selectedDate = $(this).find('.fw-bold').text(); // Ambil tanggal
+            $('.date-card').on('click', function () {
+                if ($(this).hasClass('disabled')) return;
 
-                // AJAX untuk ambil data slot berdasarkan tanggal
+                $('.schedule-tab').hide();
+                $('.date-card').removeClass('active');
+                $(this).addClass('active');
+
+                const tabId = $(this).data('tab');
+                $('#' + tabId).fadeIn(300);
+
+                // Extract the date from the clicked element
+                const dayNumber = $(this).find('.date-number').text();
+                const monthName = $(this).find('.date-month').text();
+                const selectedDate = dayNumber + ' ' + monthName;
+
+                // Show loading indicators
+                const loadingHTML = `
+                                                                                    <div class="d-flex justify-content-center align-items-center w-100 py-3">
+                                                                                        <div class="spinner-border spinner-border-sm text-primary me-2" role="status">
+                                                                                            <span class="visually-hidden">Loading...</span>
+                                                                                        </div>
+                                                                                        <span class="text-muted small">Memuat slot tersedia...</span>
+                                                                                    </div>
+                                                                                `;
+
+                $('#' + tabId + ' .morning-slots').html(loadingHTML);
+                $('#' + tabId + ' .afternoon-slots').html(loadingHTML);
+
+                // Fetch slots from server
                 $.ajax({
                     url: '/user/booking/slot/' + selectedDate,
                     type: 'GET',
-                    success: function(response) {
+                    success: function (response) {
+                        setTimeout(function () {
+                            renderSlotButtons(response.morningSlots, '#' + tabId + ' .morning-slots');
+                            renderSlotButtons(response.afternoonSlots, '#' + tabId + ' .afternoon-slots');
+                        }, 300); // Small delay for better UX
+                    },
+                    error: function () {
+                        const errorHTML = `
+                                                                                            <div class="text-center w-100 py-3">
+                                                                                                <i class="bi bi-exclamation-triangle text-danger mb-2" style="font-size: 1.5rem;"></i>
+                                                                                                <p class="text-danger mb-0">Gagal memuat data. Silakan coba lagi.</p>
+                                                                                            </div>
+                                                                                        `;
+                        $('#' + tabId + ' .morning-slots').html(errorHTML);
+                        $('#' + tabId + ' .afternoon-slots').html(errorHTML);
 
-                        // --- SLOT PAGI ---
-                        let morningHtml = '';
-                        if (response.morningSlots.length > 0) {
-
-                            response.morningSlots.forEach(function(slot) {
-                                const isFull = slot.current_bookings >= slot
-                                    .max_bookings;
-                                morningHtml += `
-                                        <div class="m-1">
-                                            <button class="btn rounded-pill px-3 ${isFull ? 'btn-secondary' : 'btn-outline-primary'}" ${isFull ? 'disabled' : ''}>
-                                                ${slot.time}
-                                            </button>
-                                        </div>
-                                    `;
-                            });
-                        } else {
-                            morningHtml = '<div class="text-muted">Tidak ada slot pagi.</div>';
-                        }
-                        $('#' + tabId + ' .morning-slots').html(morningHtml);
-
-                        // --- SLOT SORE ---
-                        let afternoonHtml = '';
-
-                        const afternoonSlots = Object.values(response.afternoonSlots);
-
-                        if (afternoonSlots.length > 0) {
-                            afternoonSlots.forEach(function(slot) {
-                                const isFull = slot.current_bookings >= slot
-                                    .max_bookings;
-
-                                afternoonHtml += `
-                <div class="m-1">
-                    <button class="btn rounded-pill px-3 ${isFull ? 'btn-secondary' : 'btn-outline-primary'}" ${isFull ? 'disabled' : ''}>
-                        ${slot.time}
-                    </button>
-                </div>
-            `;
-                            });
-                        } else {
-                            afternoonHtml =
-                                '<div class="text-muted">Tidak ada slot sore.</div>';
-                        }
-
-
-                        $('#' + tabId + ' .afternoon-slots').html(afternoonHtml);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal!',
+                            text: 'Terjadi kesalahan saat memuat jadwal',
+                            confirmButtonColor: '#0d6efd'
+                        });
                     }
                 });
             });
 
-            // Klik tanggal pertama saat halaman dibuka
-            $('.date-tab-btn').first().click();
+            // Auto click first date
+            $('.date-card').first().trigger('click');
         });
     </script>
 @endsection
