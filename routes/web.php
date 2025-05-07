@@ -181,7 +181,11 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::group(['prefix' => 'booking-history', 'controller' => UserBookingHistoryController::class], function () {
+            Route::get('/datatable', 'getDataTable');
             Route::get('/', 'index');
+            Route::get('/{id}/details', 'show');
+            Route::post('/{id}/status', 'updateStatus');
+            Route::put('/{id}/cancel', 'cancel');
         });
 
         Route::group(['prefix' => 'motorcycle', 'controller' => MotorCycleUserController::class], function () {

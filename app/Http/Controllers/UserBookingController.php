@@ -96,7 +96,7 @@ class UserBookingController extends Controller
 
             $totalBooking = Booking::count() + 100 + 1;
 
-            $code = sprintf('DNL-%s-%03d', $serviceInitial, $totalBooking);
+            $code = sprintf('DANIEL-FR-%s-%03d', $serviceInitial, $totalBooking);
 
             $booking = Booking::create([
                 'booking_code' => $code,
