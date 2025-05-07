@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class UserBookingController extends Controller
 {
@@ -90,7 +91,15 @@ class UserBookingController extends Controller
                 return redirect('/user/booking')->with('warning', 'Kamu sudah memiliki booking pada tanggal ini.');
             }
 
+            $service = Service::find($request->service_ids[0]);
+            $serviceInitial = strtoupper(substr($service->name, 0, 2));
+
+            $totalBooking = Booking::count() + 100 + 1;
+
+            $code = sprintf('DNL-%s-%03d', $serviceInitial, $totalBooking);
+
             $booking = Booking::create([
+                'booking_code' => $code,
                 'user_id' => Auth::id(),
                 'booking_slot_id' => $slot->id,
                 'status' => 'pending',

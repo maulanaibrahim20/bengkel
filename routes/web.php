@@ -178,10 +178,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', 'index');
             Route::get('/create', 'create');
             Route::post('/create', 'store');
+        });
 
-            Route::group(['prefix' => 'history', 'controller' => UserBookingHistoryController::class], function () {
-                Route::get('/', 'index');
-            });
+        Route::group(['prefix' => 'booking-history', 'controller' => UserBookingHistoryController::class], function () {
+            Route::get('/', 'index');
         });
 
         Route::group(['prefix' => 'motorcycle', 'controller' => MotorCycleUserController::class], function () {
