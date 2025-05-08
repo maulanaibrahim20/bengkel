@@ -63,6 +63,7 @@ Route::get('/auth/{provider}/callback', [RegisterController::class, 'register'])
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/check-booking/{booking_code}', [CheckBookingController::class, 'handle']);
+    Route::put('/check-booking/{booking_code}', [CheckBookingController::class, 'updateMotorDetails']);
 
     Route::group(['prefix' => 'super-admin', 'middleware' => 'can:super-admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'superAdmin']);

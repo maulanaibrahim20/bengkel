@@ -6,13 +6,13 @@ use App\Facades\GenerateQrCode;
 use App\Models\Booking;
 use App\Models\BookingSlot;
 use App\Models\Motorcycle;
+use App\Models\MotorCycleDetails;
 use App\Models\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class UserBookingController extends Controller
 {
@@ -139,6 +139,20 @@ class UserBookingController extends Controller
             ]);
 
             $booking->services()->attach($request->service_ids);
+
+            $motorcycle = Motorcycle::where('user_id', Auth::user()->id)->first();
+
+            if ($motorcycle) {
+                MotorCycleDetails::create([
+                    'booking_id' => $booking->id,
+                    'motorcycle_id' => $motorcycle->id,
+                    'year_of_manufacture' => 0,
+                    'kilometer_before' => 0,
+                    'oil_before' => '',
+                    'kilometer_after' => 0,
+                    'oil_after' => '',
+                ]);
+            }
 
             $slot->increment('current_bookings');
 
