@@ -35,8 +35,8 @@
                                     $image = $user->profile_image;
 
                                     $defaultImages = [
-                                        1 => 'img/adminsuper123.png',
-                                        2 => 'img/adminsuper123.png',
+                                        1 => 'img/logo.png',
+                                        2 => 'img/logo.png',
                                         3 => 'assets/img/profiles/avatar-01.jpg',
                                     ];
 
@@ -199,9 +199,9 @@
 
 @section('script')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             });
 
@@ -211,7 +211,7 @@
             });
         });
 
-        $(document).on('click', '.editBtn', function() {
+        $(document).on('click', '.editBtn', function () {
 
             const id = $(this).data('id');
             console.log(id);
@@ -221,11 +221,11 @@
             $.ajax({
                 url: '/' + baseUserPrefix + '/profile/' + id + '/edit',
                 type: 'GET',
-                success: function(response) {
+                success: function (response) {
                     $('#modal-content').html(response);
                     $('#profile_info').modal('show');
                 },
-                error: function() {
+                error: function () {
                     Swal.fire('Gagal', 'Gagal memuat data.', 'error');
                 }
             });

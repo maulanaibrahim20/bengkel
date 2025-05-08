@@ -1,7 +1,10 @@
 @extends('components.index-with-bg')
 @section('content')
-    <div class="container h-100 d-flex justify-content-center align-items-end content pb-5">
+    <div class="container h-100 d-flex justify-content-center align-items-center content pb-5">
         <div class="text-center text-white">
+            <!-- Logo -->
+            <img src="{{ url('/img/logo.png') }}" alt="Logo" class="img-fluid mb-4 logo-large">
+
             <h5 class="mb-2">Hallo <span class="text-warning fw-bold">{{ strtoupper(Auth::user()->name) }}</span>!</h5>
             <h4 class="fw-semibold mb-3">
                 Selamat Hari Raya <span class="text-warning">Idul Fitri 1446H</span><br>
@@ -17,7 +20,7 @@
                     keluarga.</p>
             </div>
 
-            <p class="fst-italic">Performa Tanpa Katanya</p>
+            <p class="fst-italic">#Berani Beda</p>
 
             <a href="{{ url('/user/dashboard') }}" class="btn btn-warning px-4 py-2 rounded-pill fw-semibold">
                 🛠 Lanjut Booking

@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\GenerateQrCode;
 use App\Models\Booking;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserBookingHistoryController extends Controller
 {
-
     public function getDataTable(Request $request)
     {
         $query = Booking::with(['slot', 'services'])
@@ -20,6 +22,11 @@ class UserBookingHistoryController extends Controller
             ->addIndexColumn()
             ->editColumn('created_at', function ($row) {
                 return $row->created_at->translatedFormat('d M Y H:i');
+            })
+            ->editColumn('booking_code', function ($row) {
+                return '<strong class="qrBtn badge bg-light text-primary" role="button" data-code="' . $row->booking_code . '">
+                            ' . e($row->booking_code) . '
+                        </strong>';
             })
             ->editColumn('status', function ($row) {
                 $status = $row->status;
@@ -36,7 +43,7 @@ class UserBookingHistoryController extends Controller
                         <i class="fa fa-eye"></i> Detail
                     </button>';
             })
-            ->rawColumns(['status', 'action'])
+            ->rawColumns(['booking_code', 'status', 'action'])
             ->make(true);
     }
     public function index()
@@ -56,12 +63,24 @@ class UserBookingHistoryController extends Controller
             ->where('user_id', Auth::id())
             ->firstOrFail();
 
+        $slotDate = Carbon::parse($booking->slot->date);
+        $formattedDate = $slotDate->locale('id')->isoFormat('dddd, DD-MM-YYYY');
+        $formattedTime = Carbon::parse($booking->slot->time)->format('H:i') . ' WIB';
+
+        $qrCodeUrl = url('/user/booking-history/' . $booking->booking_code . '/qrcode-view');
+        $qrCode = GenerateQrCode::generate($qrCodeUrl);
+
         return response()->json([
             'booking' => $booking,
-            'slot' => $booking->slot,
-            'services' => $booking->services
+            'slot' => [
+                'date' => $formattedDate,
+                'time' => $formattedTime,
+            ],
+            'services' => $booking->services,
+            'qrCodeUrl' => $qrCode,
         ]);
     }
+
 
     public function updateStatus(Request $request, $id)
     {
@@ -77,7 +96,6 @@ class UserBookingHistoryController extends Controller
 
         $booking->status = $request->status;
 
-        // Simpan alasan pembatalan jika ada
         if ($request->status === 'cancelled') {
             $booking->cancellation_reason = $request->reason;
         }
@@ -85,5 +103,18 @@ class UserBookingHistoryController extends Controller
         $booking->save();
 
         return response()->json(['message' => 'Status updated successfully.']);
+    }
+
+    public function qrView($bookingCode)
+    {
+        $booking = Booking::where('user_id', Auth::id())
+            ->where('booking_code', $bookingCode)
+            ->firstOrFail();
+
+        $qrString = url("/user/booking-history/{$booking->booking_code}/qr-code");
+
+        $qrUrl = GenerateQrCode::generate($qrString);
+
+        return view('user.pages.booking_history.qr-view-modal', compact('booking', 'qrUrl'));
     }
 }

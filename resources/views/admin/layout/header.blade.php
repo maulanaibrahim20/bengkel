@@ -4,15 +4,15 @@
     <div class="header-left">
         @if (Auth::user()->role_id == 1)
             <a href="{{ url('/super-admin/dashboard') }}" class="logo">
-                <img src="{{ url('/assets') }}/img/logo.png" width="40" height="40" alt="">
+                <img src="{{ url('/img') }}/logo.png" width="70" height="70" alt="">
             </a>
         @elseif (Auth::user()->role_id == 2)
             <a href="{{ url('/admin/dashboard') }}" class="logo">
-                <img src="{{ url('/assets') }}/img/logo.png" width="40" height="40" alt="">
+                <img src="{{ url('/img') }}/logo.png" width="70" height="70" alt="">
             </a>
         @elseif (Auth::user()->role_id == 3)
             <a href="{{ url('/user/dashboard') }}" class="logo">
-                <img src="{{ url('/assets') }}/img/logo.png" width="40" height="40" alt="">
+                <img src="{{ url('/img') }}/logo.png" width="70" height="70" alt="">
             </a>
         @endif
     </div>
@@ -149,8 +149,8 @@
                         $image = $user->profile_image;
 
                         $defaultImages = [
-                            1 => 'img/adminsuper123.png',
-                            2 => 'img/adminsuper123.png',
+                            1 => 'img/logo.png',
+                            2 => 'img/logo.png',
                             3 => 'assets/img/profiles/avatar-01.jpg',
                         ];
 

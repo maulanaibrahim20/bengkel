@@ -23,8 +23,8 @@
         <div class="account-content">
             <div class="container">
                 <div class="account-logo">
-                    <a href="admin-dashboard.html"><img src="{{ url('/assets') }}/img/logo2.png"
-                            alt="Dreamguy's Technologies"></a>
+                    <a href="{{ url('/login') }}"><img src="{{ url('/img') }}/logo.png" alt="Dreamguy's Technologies">
+                    </a>
                 </div>
                 <div class="account-box">
                     @yield('content')

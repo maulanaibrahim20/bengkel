@@ -1,4 +1,5 @@
-<div class="modal fade" id="bookingDetailModal" tabindex="-1" aria-labelledby="bookingDetailModalLabel" aria-hidden="true">
+<div class="modal fade" id="bookingDetailModal" tabindex="-1" aria-labelledby="bookingDetailModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content border-0 shadow-lg rounded-4">
             <div class="modal-header bg-primary text-white rounded-top-4">
@@ -9,6 +10,17 @@
                     aria-label="Close"></button>
             </div>
             <div class="modal-body p-4">
+
+                <!-- QR Code Section with Caption and Download Button -->
+                <div class="text-center mb-4">
+                    <img src="" id="booking-qrcode" alt="QR Code" class="img-fluid"
+                        style="max-width: 150px; height: auto;">
+                    <p class="mt-2 text-muted" id="qr-caption">Scan QR code hanya dilakukan oleh admin</p>
+                    <a href="" id="download-qrcode" class="btn btn-outline-primary btn-sm mt-3" download>
+                        <i class="fa fa-download me-1"></i> Download QR Code
+                    </a>
+                </div>
+
                 <div class="mb-3">
                     <label class="fw-bold text-muted">Kode Booking</label>
                     <div class="badge bg-primary text-white fs-6" id="modal-booking-code">-</div>
@@ -24,11 +36,11 @@
                         <div id="modal-complaint" class="border rounded p-2 bg-light">-</div>
                     </div>
                     <div class="col-md-6">
-                        <label class="fw-bold text-muted">Tanggal Slot</label>
+                        <label class="fw-bold text-muted">Tanggal Booking</label>
                         <div id="modal-slot-date" class="form-control-plaintext">-</div>
                     </div>
                     <div class="col-md-6">
-                        <label class="fw-bold text-muted">Jam Slot</label>
+                        <label class="fw-bold text-muted">Waktu Booking</label>
                         <div id="modal-slot-time" class="form-control-plaintext">-</div>
                     </div>
                 </div>
@@ -43,7 +55,8 @@
             <div class="modal-footer justify-content-between">
                 <div class="w-100 d-none" id="cancel-reason-container">
                     <label class="form-label fw-semibold">Alasan Pembatalan</label>
-                    <textarea class="form-control" id="cancel-reason" rows="2" placeholder="Masukkan alasan..."></textarea>
+                    <textarea class="form-control" id="cancel-reason" rows="2"
+                        placeholder="Masukkan alasan..."></textarea>
                 </div>
                 <div class="d-flex justify-content-end w-100 gap-2">
                     <button type="button" class="btn btn-danger" id="cancel-booking-btn">
