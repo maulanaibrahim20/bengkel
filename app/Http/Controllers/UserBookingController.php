@@ -128,7 +128,7 @@ class UserBookingController extends Controller
 
             $totalBooking = Booking::count() + 100 + 1;
 
-            $code = sprintf('DL-FR-%s-%03d', $serviceInitial, $totalBooking);
+            $code = sprintf('DL-%s%03d', $serviceInitial, $totalBooking);
 
             $booking = Booking::create([
                 'booking_code' => $code,
@@ -155,9 +155,7 @@ class UserBookingController extends Controller
     {
         $booking = Booking::with('user')->findOrFail($id);
 
-        $qrContent = url('/user/booking-history/' . $booking->booking_code . '/qrcode-view');
-
-        $qrBase64 = GenerateQrCode::generate($qrContent);
+        $qrBase64 = GenerateQrCode::generateBookingQrCode($booking->booking_code);
 
         return view('user.pages.booking.qrcode', compact('booking', 'qrBase64'));
     }

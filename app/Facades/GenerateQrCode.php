@@ -14,8 +14,10 @@ class GenerateQrCode
         //
     }
 
-    public static function generate($qrContent)
+    public static function generateBookingQrCode($booking_code)
     {
+        $qrContent = url('check-booking/' . $booking_code);
+
         $qrCode = QrCode::format('png')
             ->merge(public_path('img/logo.png'), 0.3, true)
             ->size(300)

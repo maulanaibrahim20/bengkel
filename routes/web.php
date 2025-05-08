@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BookingSlotSuperAdminController;
+use App\Http\Controllers\CheckBookingController;
 use App\Http\Controllers\Cms\PageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BrandEngineController;
@@ -60,6 +61,9 @@ Route::get('/auth/{provider}/callback', [RegisterController::class, 'register'])
 
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/check-booking/{booking_code}', [CheckBookingController::class, 'handle']);
+
     Route::group(['prefix' => 'super-admin', 'middleware' => 'can:super-admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'superAdmin']);
 

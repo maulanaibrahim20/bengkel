@@ -67,8 +67,7 @@ class UserBookingHistoryController extends Controller
         $formattedDate = $slotDate->locale('id')->isoFormat('dddd, DD-MM-YYYY');
         $formattedTime = Carbon::parse($booking->slot->time)->format('H:i') . ' WIB';
 
-        $qrCodeUrl = url('/user/booking-history/' . $booking->booking_code . '/qrcode-view');
-        $qrCode = GenerateQrCode::generate($qrCodeUrl);
+        $qrCode = GenerateQrCode::generateBookingQrCode($booking->booking_code);
 
         return response()->json([
             'booking' => $booking,
@@ -111,9 +110,7 @@ class UserBookingHistoryController extends Controller
             ->where('booking_code', $bookingCode)
             ->firstOrFail();
 
-        $qrString = url("/user/booking-history/{$booking->booking_code}/qr-code");
-
-        $qrUrl = GenerateQrCode::generate($qrString);
+        $qrUrl = GenerateQrCode::generateBookingQrCode($booking->booking_code);
 
         return view('user.pages.booking_history.qr-view-modal', compact('booking', 'qrUrl'));
     }
