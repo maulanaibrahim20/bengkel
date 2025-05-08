@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\GenerateQrCode;
 use App\Models\Booking;
 use App\Models\BookingSlot;
 use App\Models\Motorcycle;
@@ -11,23 +12,53 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class UserBookingController extends Controller
 {
     public function getSlots($date)
     {
         $date = Carbon::parse($date);
-
         $slots = BookingSlot::whereDate('date', $date)->get();
 
-        $morningSlots = $slots->filter(fn($slot) => Carbon::parse($slot->time)->format('H:i') < '12:00')->values();
-        $afternoonSlots = $slots->filter(fn($slot) => Carbon::parse($slot->time)->format('H:i') >= '13:00' && Carbon::parse($slot->time)->format('H:i') <= '18:00')->values();
+        $now = Carbon::now();
+
+        $morningSlots = [];
+        $afternoonSlots = [];
+
+        foreach ($slots as $slot) {
+            $slotTime = Carbon::parse($slot->time);
+            $isToday = $date->isToday();
+
+            $isPast = false;
+            if ($isToday && $slotTime->lessThanOrEqualTo($now)) {
+                $isPast = true;
+            }
+
+            $isFull = $slot->current_bookings >= $slot->max_bookings;
+
+            $data = [
+                'id' => $slot->id,
+                'time' => $slotTime->format('H:i'),
+                'isFull' => $isFull,
+                'isPast' => $isPast,
+                'current_bookings' => $slot->current_bookings,
+                'max_bookings' => $slot->max_bookings,
+            ];
+
+            if ($slotTime->hour < 12) {
+                $morningSlots[] = $data;
+            } else {
+                $afternoonSlots[] = $data;
+            }
+        }
 
         return response()->json([
             'morningSlots' => $morningSlots,
             'afternoonSlots' => $afternoonSlots,
         ]);
     }
+
 
     public function index()
     {
@@ -61,6 +92,7 @@ class UserBookingController extends Controller
 
         return view('user.pages.booking.choose-service', compact('slot', 'services'));
     }
+
 
     public function store(Request $request)
     {
@@ -96,7 +128,7 @@ class UserBookingController extends Controller
 
             $totalBooking = Booking::count() + 100 + 1;
 
-            $code = sprintf('DNL-%s-%03d', $serviceInitial, $totalBooking);
+            $code = sprintf('DL-FR-%s-%03d', $serviceInitial, $totalBooking);
 
             $booking = Booking::create([
                 'booking_code' => $code,
@@ -112,10 +144,21 @@ class UserBookingController extends Controller
 
             DB::commit();
 
-            return redirect('/user/booking')->with('success', 'Booking berhasil dibuat.');
+            return redirect()->route('user.booking.qrcode', $booking->id)->with('success', 'Booking berhasil dibuat.');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan saat membuat booking: ' . $e->getMessage());
         }
+    }
+
+    public function showQrCode($id)
+    {
+        $booking = Booking::with('user')->findOrFail($id);
+
+        $qrContent = url('/user/booking-history/' . $booking->booking_code . '/qrcode-view');
+
+        $qrBase64 = GenerateQrCode::generate($qrContent);
+
+        return view('user.pages.booking.qrcode', compact('booking', 'qrBase64'));
     }
 }

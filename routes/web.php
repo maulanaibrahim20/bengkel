@@ -178,10 +178,16 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', 'index');
             Route::get('/create', 'create');
             Route::post('/create', 'store');
+            Route::get('/{id}/qrcode', 'showQrCode')->name('user.booking.qrcode');
         });
 
         Route::group(['prefix' => 'booking-history', 'controller' => UserBookingHistoryController::class], function () {
+            Route::get('/datatable', 'getDataTable');
             Route::get('/', 'index');
+            Route::get('/{id}/details', 'show');
+            Route::post('/{id}/status', 'updateStatus');
+            Route::put('/{id}/cancel', 'cancel');
+            Route::get('/{booking_code}/qr-view', 'qrView');
         });
 
         Route::group(['prefix' => 'motorcycle', 'controller' => MotorCycleUserController::class], function () {

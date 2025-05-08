@@ -23,11 +23,11 @@
 </style>
 
 <script>
-    window.showLoading = function() {
+    window.showLoading = function () {
         $('#loadingOverlay').fadeIn(150);
     }
 
-    window.hideLoading = function() {
+    window.hideLoading = function () {
         $('#loadingOverlay').fadeOut(150);
     }
 </script>
@@ -65,8 +65,8 @@
 @endif
 
 <script>
-    $(document).ready(function() {
-        $('.logoutBtn').on('click', function(e) {
+    $(document).ready(function () {
+        $('.logoutBtn').on('click', function (e) {
             e.preventDefault();
 
             let logoutUrl = $(this).attr('href');

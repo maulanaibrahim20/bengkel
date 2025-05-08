@@ -138,7 +138,7 @@
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a href="{{ url()->previous() }}" class="btn btn-outline-secondary me-md-2">Kembali</a>
                     <button type="submit" class="btn btn-primary px-4">
-                        <i class="bi bi-calendar-check me-2"></i>Lanjutkan Booking
+                        <i class="la la-calendar-check me-2"></i>Lanjutkan Booking
                     </button>
                 </div>
             </form>
@@ -183,6 +183,7 @@
             $('.form-check-input').on('change', function() {
                 updateConfirmation();
             });
+
         });
     </script>
 @endsection

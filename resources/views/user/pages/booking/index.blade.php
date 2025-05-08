@@ -220,7 +220,7 @@
                     </h5>
                     <div class="d-flex align-items-center small">
                         <span class="d-flex align-items-center me-3">
-                            <span class="badge bg-success me-2">&nbsp;</span>Tersedia
+                            <span class="badge bg-primary me-2">&nbsp;</span>Tersedia
                         </span>
                         <span class="d-flex align-items-center">
                             <span class="badge bg-secondary me-2">&nbsp;</span>Penuh
@@ -302,18 +302,6 @@
     </div>
 
     @include('user.pages.booking.modal-has-motor')
-
-    <!-- Fullscreen Loading Advertisement -->
-    <div id="bookingAdOverlay"
-        style="display: none; position: fixed; inset: 0; background: white; z-index: 9999; justify-content: center; align-items: center; flex-direction: column;">
-        <img src="/images/iklan-placeholder.jpg" alt="Iklan Booking"
-            style="max-width: 80%; max-height: 60%; margin-bottom: 30px;">
-        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <p class="mt-3 text-muted">Mohon tunggu sebentar...</p>
-    </div>
-
 @endsection
 @section('script')
     @if (!$hasMotor)
@@ -331,27 +319,29 @@
 
                 if (slots.length > 0) {
                     slots.forEach(function (slot) {
-                        const isFull = slot.current_bookings >= slot.max_bookings;
-                        const statusClass = isFull ? 'btn-secondary' : 'time-btn';
-                        const statusIcon = isFull ? '<i class="bi bi-x-circle me-1"></i>' : '<i class="bi bi-check-circle me-1"></i>';
+                        const isDisabled = slot.isFull || slot.isPast;
+                        const statusClass = isDisabled ? 'btn-secondary' : 'time-btn';
+                        const statusIcon = slot.isFull ? '<i class="bi bi-x-circle me-1"></i>' : '<i class="bi bi-check-circle me-1"></i>';
+
 
                         html += `
-                    <div class="time-badge">
-                        <button onclick="window.location.href='/user/booking/create?slot_id=${slot.id}'"
-                        class="btn ${statusClass}"
-                        ${isFull ? 'disabled' : ''}>
-                        ${statusIcon}${slot.time.slice(0, 5)}
-                        </button>
-                    </div>
-                `;
+                                    <div class="time-badge">
+                                       <button onclick="window.location.href='/user/booking/create?slot_id=${slot.id}'"
+            class="btn ${statusClass}"
+            ${isDisabled ? 'disabled' : ''}>
+            ${statusIcon}${slot.time}
+        </button>
+
+                                    </div>
+                                `;
                     });
                 } else {
                     html = `
-                    <div class="text-center w-100 py-3">
-                        <i class="bi bi-calendar-x text-muted mb-2" style="font-size: 1.5rem;"></i>
-                        <p class="text-muted mb-0">Tidak ada slot tersedia untuk sesi ini.</p>
-                    </div>
-                `;
+                                <div class="text-center w-100 py-3">
+                                    <i class="bi bi-calendar-x text-muted mb-2" style="font-size: 1.5rem;"></i>
+                                    <p class="text-muted mb-0">Tidak ada slot tersedia untuk sesi ini.</p>
+                                </div>
+                            `;
                 }
 
                 $(containerSelector).html(html);
@@ -374,13 +364,13 @@
 
                 // Show loading indicators
                 const loadingHTML = `
-                                                                                    <div class="d-flex justify-content-center align-items-center w-100 py-3">
-                                                                                        <div class="spinner-border spinner-border-sm text-primary me-2" role="status">
-                                                                                            <span class="visually-hidden">Loading...</span>
-                                                                                        </div>
-                                                                                        <span class="text-muted small">Memuat slot tersedia...</span>
-                                                                                    </div>
-                                                                                `;
+                                                                                                                        <div class="d-flex justify-content-center align-items-center w-100 py-3">
+                                                                                                                            <div class="spinner-border spinner-border-sm text-primary me-2" role="status">
+                                                                                                                                <span class="visually-hidden">Loading...</span>
+                                                                                                                            </div>
+                                                                                                                            <span class="text-muted small">Memuat slot tersedia...</span>
+                                                                                                                        </div>
+                                                                                                                    `;
 
                 $('#' + tabId + ' .morning-slots').html(loadingHTML);
                 $('#' + tabId + ' .afternoon-slots').html(loadingHTML);
@@ -397,11 +387,11 @@
                     },
                     error: function () {
                         const errorHTML = `
-                                                                                            <div class="text-center w-100 py-3">
-                                                                                                <i class="bi bi-exclamation-triangle text-danger mb-2" style="font-size: 1.5rem;"></i>
-                                                                                                <p class="text-danger mb-0">Gagal memuat data. Silakan coba lagi.</p>
-                                                                                            </div>
-                                                                                        `;
+                                                                                                                                <div class="text-center w-100 py-3">
+                                                                                                                                    <i class="bi bi-exclamation-triangle text-danger mb-2" style="font-size: 1.5rem;"></i>
+                                                                                                                                    <p class="text-danger mb-0">Gagal memuat data. Silakan coba lagi.</p>
+                                                                                                                                </div>
+                                                                                                                            `;
                         $('#' + tabId + ' .morning-slots').html(errorHTML);
                         $('#' + tabId + ' .afternoon-slots').html(errorHTML);
 

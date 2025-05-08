@@ -17,4 +17,9 @@ class Booking extends Model
     {
         return $this->belongsTo(BookingSlot::class, 'booking_slot_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

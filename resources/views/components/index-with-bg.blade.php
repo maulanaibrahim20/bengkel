@@ -62,7 +62,6 @@
 
         .btn-yellow {
             background-color: #d81324;
-            ;
             border: none;
             color: white;
             font-weight: 600;
@@ -70,7 +69,6 @@
 
         .btn-yellow:hover {
             background-color: #d81324;
-            ;
         }
 
         .btn-skip {
@@ -80,6 +78,31 @@
             z-index: 3;
             color: white;
             text-decoration: none;
+        }
+
+        /* Responsif logo */
+        .logo-large {
+            max-width: 70%;
+            /* Maksimal lebar 70% dari container */
+            height: auto;
+        }
+
+        /* Responsif container */
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        @media (max-width: 576px) {
+            .logo-large {
+                max-width: 60%;
+                /* Lebar logo lebih kecil di perangkat kecil */
+            }
+
+            .btn-warning {
+                width: 100%;
+                /* Tombol mengambil seluruh lebar layar pada mobile */
+            }
         }
     </style>
 </head>
@@ -94,7 +117,6 @@
         <img src="{{ url('/img/background.jpg') }}" alt="Background" class="bg-img">
     @endauth
     <div class="overlay"></div>
-
 
     @yield('content')
 
