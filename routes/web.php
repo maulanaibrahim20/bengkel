@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\BookingListSuperAdminController;
 use App\Http\Controllers\BookingSlotSuperAdminController;
 use App\Http\Controllers\CheckBookingController;
 use App\Http\Controllers\Cms\PageController;
@@ -87,6 +88,15 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}/edit', 'edit');
             Route::put('/{id}/update', 'update');
             Route::delete('/{id}/delete', 'destroy');
+        });
+
+        Route::group(['prefix' => 'booking-list', 'controller' => BookingListSuperAdminController::class], function () {
+            Route::get('/datatable', 'getDataTable');
+            Route::get('/', 'index');
+            Route::get('/{id}/qrcode', 'getQrCode');
+            Route::get('/{id}/detail', 'getMotorcycleDetail');
+            Route::get('/{id}/services', 'getBookingServices');
+            Route::get('/{id}/motorcycle-detail', 'getMotorcycleServiceDetail');
         });
 
         Route::prefix('master')->group(function () {

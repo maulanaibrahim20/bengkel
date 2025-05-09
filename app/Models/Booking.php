@@ -8,6 +8,15 @@ class Booking extends Model
 {
     protected $guarded = ['id'];
 
+    public function bookingServices()
+    {
+        return $this->hasMany(BookingService::class);
+    }
+    public function motorCycleDetail()
+    {
+        return $this->hasOne(MotorCycleDetails::class, 'booking_id');
+    }
+
     public function services()
     {
         return $this->belongsToMany(Service::class, 'booking_service');
