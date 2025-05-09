@@ -56,62 +56,83 @@
         </div>
     </div>
 
+    <!-- Modal Konfirmasi WhatsApp -->
+    <div class="modal fade" id="waConfirmModal" tabindex="-1" role="dialog" aria-labelledby="waConfirmModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Konfirmasi Kedatangan via WhatsApp</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea id="wa-message-text" class="form-control" rows="6"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="send-wa-message" class="btn btn-success">Kirim WhatsApp</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('script')
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             let currentBookingId = null;
+            let currentBookingCode = null;
 
             let table = $('#motorcycle-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: '{{ url('/user/booking-history/datatable') }}',
                 columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'created_at',
-                    name: 'created_at'
-                },
-                {
-                    data: 'booking_code',
-                    name: 'booking_code'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                }
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'booking_code',
+                        name: 'booking_code'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    }
                 ]
             });
 
-            $(document).on('click', '.qrBtn', function () {
+            $(document).on('click', '.qrBtn', function() {
                 const bookingCode = $(this).data('code');
                 showLoading();
-
                 $.ajax({
                     url: `/user/booking-history/${bookingCode}/qr-view`,
                     type: 'GET',
-                    success: function (response) {
+                    success: function(response) {
                         $('#modal-content-qr').html(response);
                         $('#qrCodeModal').modal('show');
                         hideLoading();
                     },
-                    error: function () {
+                    error: function() {
                         Swal.fire('Gagal', 'Gagal memuat QR Code.', 'error');
                     }
                 });
             });
 
-            $('#motorcycle-table').on('click', '.editBtn', function () {
+            $('#motorcycle-table').on('click', '.editBtn', function() {
                 const bookingId = $(this).data('id');
                 currentBookingId = bookingId;
                 showLoading();
@@ -122,59 +143,72 @@
                 $.ajax({
                     url: `/user/booking-history/${bookingId}/details`,
                     method: 'GET',
-                    success: function (response) {
-                        $('#modal-booking-code').text(response.booking.booking_code);
+                    success: function(response) {
+                        currentBookingCode = response.booking.booking_code;
+
+                        $('#modal-booking-code').text(currentBookingCode);
                         $('#modal-slot-date').text(response.slot.date);
                         $('#modal-slot-time').text(response.slot.time);
-                        $('#modal-complaint').text(response.booking.complaint || 'Tidak memberikan keluhan');
+                        $('#modal-complaint').text(response.booking.complaint ||
+                            'Tidak memberikan keluhan');
 
                         let servicesHtml = '';
                         if (response.services.length > 0) {
                             response.services.forEach(service => {
                                 servicesHtml += `<li class="list-group-item d-flex justify-content-between align-items-center">
-                            ${service.name}
-                            <span class="badge bg-primary">Rp${Number(service.price).toLocaleString()}</span>
-                        </li>`;
+                                ${service.name}
+                                <span class="badge bg-primary">Rp${Number(service.price).toLocaleString()}</span>
+                            </li>`;
                             });
                         } else {
                             servicesHtml = `<li class="list-group-item">-</li>`;
                         }
                         $('#modal-services-list').html(servicesHtml);
 
+
                         let statusBadge = $('#modal-status');
                         statusBadge.removeClass().addClass('badge');
-                        if (response.booking.status === 'pending') {
+
+                        let status = response.booking.status;
+
+                        if (status === 'pending') {
                             statusBadge.addClass('bg-warning text-dark').text('Pending');
-                        } else if (response.booking.status === 'confirmed') {
-                            statusBadge.addClass('bg-success').text('Confirmed');
+                        } else if (status === 'confirmed') {
+                            statusBadge.css('background-color', '#0d6efd').css('color', '#fff')
+                                .text('Confirmed');
+                        } else if (status === 'registered') {
+                            statusBadge.css('background-color', '#198754').css('color', '#fff')
+                                .text('Registered');
+                        } else if (status === 'cancelled') {
+                            statusBadge.css('background-color', '#dc3545').css('color', '#fff')
+                                .text('Cancelled');
                         } else {
-                            statusBadge.addClass('bg-secondary').text('Cancelled');
+                            statusBadge.addClass('bg-secondary').text('Unknown');
                         }
 
                         if (response.booking.status === 'pending') {
-                            $('#confirm-booking-btn').show();
-                            $('#cancel-booking-btn').show();
+                            $('#confirm-booking-btn, #cancel-booking-btn, #wa-confirm-btn')
+                                .show();
                         } else {
-                            $('#confirm-booking-btn').hide();
-                            $('#cancel-booking-btn').hide();
+                            $('#confirm-booking-btn, #cancel-booking-btn, #wa-confirm-btn')
+                                .hide();
                         }
 
                         $('#booking-qrcode').attr('src', response.qrCodeUrl);
-
                         $('#bookingDetailModal').modal('show');
                         hideLoading();
                     },
-                    error: function () {
+                    error: function() {
                         alert('Gagal memuat detail booking.');
                     }
                 });
             });
 
-            $('#confirm-booking-btn').on('click', function () {
+            $('#confirm-booking-btn').on('click', function() {
                 updateBookingStatus('confirmed');
             });
 
-            $('#cancel-booking-btn').on('click', function () {
+            $('#cancel-booking-btn').on('click', function() {
                 const reasonContainer = $('#cancel-reason-container');
                 if (reasonContainer.hasClass('d-none')) {
                     reasonContainer.removeClass('d-none');
@@ -191,6 +225,31 @@
                 updateBookingStatus('cancelled', reason);
             });
 
+            $('#wa-confirm-btn').on('click', function() {
+                const bookingCode = currentBookingCode;
+                const defaultMessage =
+                    `Halo Admin, saya ingin mengkonfirmasi kedatangan untuk booking dengan kode: *${bookingCode}*.\n\nTerima kasih.`;
+
+                $('#wa-message-text').val(defaultMessage);
+                $('#waConfirmModal').modal('show');
+            });
+
+            $('#send-wa-message').on('click', function() {
+                const phoneAdmin = '{{ env('WA_ADMIN_NUMBER', '6281234567890') }}';
+                const message = $('#wa-message-text').val().trim();
+
+                if (!message) {
+                    alert('Pesan tidak boleh kosong!');
+                    return;
+                }
+
+                const encodedMessage = encodeURIComponent(message);
+                const waUrl = `https://wa.me/${phoneAdmin}?text=${encodedMessage}`;
+
+                window.open(waUrl, '_blank');
+                $('#waConfirmModal').modal('hide');
+            });
+
             function updateBookingStatus(status, reason = null) {
                 $.ajax({
                     url: `/user/booking-history/${currentBookingId}/status`,
@@ -200,19 +259,19 @@
                         status: status,
                         reason: reason
                     },
-                    beforeSend: function () {
+                    beforeSend: function() {
                         $('#confirm-booking-btn, #cancel-booking-btn').prop('disabled', true).text(
                             'Memproses...');
                     },
-                    success: function (response) {
+                    success: function(response) {
                         alert('Status booking berhasil diperbarui!');
                         $('#bookingDetailModal').modal('hide');
-                        table.ajax.reload(); // Reload DataTable untuk menampilkan data terbaru
+                        table.ajax.reload();
                     },
-                    error: function (xhr) {
+                    error: function() {
                         alert('Gagal memperbarui status. Silakan coba lagi.');
                     },
-                    complete: function () {
+                    complete: function() {
                         $('#confirm-booking-btn').prop('disabled', false).html(
                             '<i class="fa fa-check-circle me-1"></i> Konfirmasi Kedatangan');
                         $('#cancel-booking-btn').prop('disabled', false).html(

@@ -5,8 +5,8 @@
             <div class="card-header bg-primary text-white">
                 <h3 class="mb-0 fs-5">Detail Servis</h3>
             </div>
+
             <div class="card-body">
-                <!-- Booking Info -->
                 <div class="booking-info mb-4">
                     <div class="row g-3">
                         <div class="col-md-4">
@@ -30,7 +30,6 @@
                     </div>
                 </div>
 
-                <!-- Service Form -->
                 <form action="{{ url('check-booking', ['booking_code' => $booking->booking_code]) }}" method="POST"
                     class="needs-validation" novalidate>
                     @csrf
@@ -147,14 +146,11 @@
 @endsection
 @section('script')
     <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
             'use strict'
 
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.querySelectorAll('.needs-validation')
 
-            // Loop over them and prevent submission
             Array.prototype.slice.call(forms)
                 .forEach(function(form) {
                     form.addEventListener('submit', function(event) {

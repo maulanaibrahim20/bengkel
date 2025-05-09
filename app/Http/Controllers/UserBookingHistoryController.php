@@ -33,9 +33,13 @@ class UserBookingHistoryController extends Controller
                 if ($status === 'pending') {
                     return '<span class="badge bg-warning text-dark">Pending</span>';
                 } elseif ($status === 'confirmed') {
-                    return '<span class="badge bg-success">Confirmed</span>';
+                    return '<span class="badge" style="background-color: #0d6efd;">Confirmed</span>';
+                } elseif ($status === 'registered') {
+                    return '<span class="badge" style="background-color: #198754;">Registered</span>';
+                } elseif ($status === 'cancelled') {
+                    return '<span class="badge" style="background-color: #dc3545;">Cancelled</span>';
                 } else {
-                    return '<span class="badge bg-secondary">Cancelled</span>';
+                    return '<span class="badge bg-secondary">Unknown</span>';
                 }
             })
             ->addColumn('action', function ($row) {
@@ -113,5 +117,19 @@ class UserBookingHistoryController extends Controller
         $qrUrl = GenerateQrCode::generateBookingQrCode($booking->booking_code);
 
         return view('user.pages.booking_history.qr-view-modal', compact('booking', 'qrUrl'));
+    }
+
+    public function confirmViaWhatsApp(Request $request)
+    {
+        $booking = Booking::where('booking_code', $request->booking_code)->first();
+
+        if (!$booking) {
+            return response()->json(['success' => false, 'message' => 'Booking tidak ditemukan.']);
+        }
+
+        $booking->status = 'confirmed';
+        $booking->save();
+
+        return response()->json(['success' => true]);
     }
 }

@@ -1,5 +1,4 @@
-<div class="modal fade" id="bookingDetailModal" tabindex="-1" aria-labelledby="bookingDetailModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="bookingDetailModal" tabindex="-1" aria-labelledby="bookingDetailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content border-0 shadow-lg rounded-4">
             <div class="modal-header bg-primary text-white rounded-top-4">
@@ -55,16 +54,15 @@
             <div class="modal-footer justify-content-between">
                 <div class="w-100 d-none" id="cancel-reason-container">
                     <label class="form-label fw-semibold">Alasan Pembatalan</label>
-                    <textarea class="form-control" id="cancel-reason" rows="2"
-                        placeholder="Masukkan alasan..."></textarea>
+                    <textarea class="form-control" id="cancel-reason" rows="2" placeholder="Masukkan alasan..."></textarea>
                 </div>
                 <div class="d-flex justify-content-end w-100 gap-2">
                     <button type="button" class="btn btn-danger" id="cancel-booking-btn">
                         <i class="fa fa-times-circle me-1"></i> Batalkan Booking
                     </button>
-                    <button type="button" class="btn btn-success" id="confirm-booking-btn">
-                        <i class="fa fa-check-circle me-1"></i> Konfirmasi Kedatangan
-                    </button>
+                    <a href="#" id="wa-confirm-btn" class="btn btn-success">
+                        <i class="fa fa-whatsapp me-1"></i> Konfirmasi via WhatsApp
+                    </a>
                 </div>
             </div>
 
