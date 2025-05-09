@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('oil_before')->nullable();
             $table->integer('kilometer_after')->nullable();
             $table->string('oil_after')->nullable();
+            $table->text('note')->nullable();
+            $table->boolean('is_finished')->default(false);
+            $table->timestamp('finished_at')->nullable();
             $table->timestamps();
         });
     }
