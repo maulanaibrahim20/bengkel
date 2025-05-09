@@ -2,7 +2,7 @@
 @push('css')
     <style>
         :root {
-            --primary-color: #ff9b44;
+            --primary-color: #d81324;
             --primary-light: #e9f4ff;
             --dark-color: #212529;
             --success-color: #198754;
@@ -206,7 +206,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/user/dashboard" class="text-decoration-none">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Booking Servis</li>
+                        <li class="breadcrumb-item active" aria-current="page">Booking Service</li>
                     </ol>
                 </nav>
             </div>
@@ -250,7 +250,8 @@
             </div>
 
             @foreach ($dates as $i => $day)
-                <div id="tab-{{ $i }}" class="schedule-tab fade-in" style="display: {{ $i == 0 ? 'block' : 'none' }};">
+                <div id="tab-{{ $i }}" class="schedule-tab fade-in"
+                    style="display: {{ $i == 0 ? 'block' : 'none' }};">
                     <h5 class="fw-bold mb-3">
                         <i class="bi bi-calendar-event me-2 text-primary"></i>
                         {{ $day['date']->translatedFormat('l, d F Y') }}
@@ -306,22 +307,23 @@
 @section('script')
     @if (!$hasMotor)
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('#motorWarningModal').modal('show');
                 $('.date-card').addClass('disabled').css('pointer-events', 'none').css('opacity', '0.6');
             });
         </script>
     @endif
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             function renderSlotButtons(slots, containerSelector) {
                 let html = '';
 
                 if (slots.length > 0) {
-                    slots.forEach(function (slot) {
+                    slots.forEach(function(slot) {
                         const isDisabled = slot.isFull || slot.isPast;
                         const statusClass = isDisabled ? 'btn-secondary' : 'time-btn';
-                        const statusIcon = slot.isFull ? '<i class="bi bi-x-circle me-1"></i>' : '<i class="bi bi-check-circle me-1"></i>';
+                        const statusIcon = slot.isFull ? '<i class="bi bi-x-circle me-1"></i>' :
+                            '<i class="bi bi-check-circle me-1"></i>';
 
 
                         html += `
@@ -347,7 +349,7 @@
                 $(containerSelector).html(html);
             }
 
-            $('.date-card').on('click', function () {
+            $('.date-card').on('click', function() {
                 if ($(this).hasClass('disabled')) return;
 
                 $('.schedule-tab').hide();
@@ -379,14 +381,17 @@
                 $.ajax({
                     url: '/user/booking/slot/' + selectedDate,
                     type: 'GET',
-                    success: function (response) {
-                        setTimeout(function () {
-                            renderSlotButtons(response.morningSlots, '#' + tabId + ' .morning-slots');
-                            renderSlotButtons(response.afternoonSlots, '#' + tabId + ' .afternoon-slots');
+                    success: function(response) {
+                        setTimeout(function() {
+                            renderSlotButtons(response.morningSlots, '#' + tabId +
+                                ' .morning-slots');
+                            renderSlotButtons(response.afternoonSlots, '#' + tabId +
+                                ' .afternoon-slots');
                         }, 300); // Small delay for better UX
                     },
-                    error: function () {
-                        const errorHTML = `
+                    error: function() {
+                        const errorHTML =
+                            `
                                                                                                                                 <div class="text-center w-100 py-3">
                                                                                                                                     <i class="bi bi-exclamation-triangle text-danger mb-2" style="font-size: 1.5rem;"></i>
                                                                                                                                     <p class="text-danger mb-0">Gagal memuat data. Silakan coba lagi.</p>
