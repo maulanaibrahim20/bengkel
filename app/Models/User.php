@@ -62,4 +62,27 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Roles::class, 'role_id');
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    // Relasi ke Transaction (seorang user bisa memiliki banyak transaksi)
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    // Relasi ke Transaction sebagai pembuat transaksi
+    public function createdTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'created_by');
+    }
+
+    // Relasi ke Technician (teknisi)
+    public function technicianTransactions()
+    {
+        return $this->belongsToMany(Transaction::class, 'transaction_technicians');
+    }
 }
