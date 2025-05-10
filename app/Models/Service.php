@@ -10,7 +10,7 @@ class Service extends Model
 
     public function detail()
     {
-        return $this->hasMany(ServiceDetail::class);
+        return $this->hasMany(ServiceDetail::class, 'service_id');
     }
     public function bookings()
     {

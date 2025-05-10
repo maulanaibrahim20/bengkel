@@ -97,6 +97,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}/detail', 'getMotorcycleDetail');
             Route::get('/{id}/services', 'getBookingServices');
             Route::get('/{id}/motorcycle-detail', 'getMotorcycleServiceDetail');
+            Route::put('/{id}/motorcycle-service-detail', 'updateMotorcycleServiceDetail');
         });
 
         Route::prefix('master')->group(function () {

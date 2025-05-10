@@ -17,4 +17,9 @@ class Motorcycle extends Model
     {
         return $this->belongsTo(BrandEngine::class, 'brand_id');
     }
+
+    public function latestMotorCycleDetail()
+    {
+        return $this->hasOne(MotorCycleDetails::class, 'motorcycle_id')->latestOfMany();
+    }
 }

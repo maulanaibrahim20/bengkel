@@ -60,6 +60,12 @@
     <!-- /Main Wrapper -->
 
     @include('admin.component.style_js')
+    @if (session('session_expired'))
+        <script type="text/javascript">
+            alert("Sesi Anda telah habis, silakan login kembali.");
+        </script>
+    @endif
+
 
     @yield('script')
 

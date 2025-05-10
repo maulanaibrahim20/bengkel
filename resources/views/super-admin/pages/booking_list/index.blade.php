@@ -15,22 +15,25 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <div class="card mb-0">
+            <div class="card shadow-sm">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped mb-0" id="booking-tracking-table">
-                            <thead>
+                        <table class="table table-borderless table-hover align-middle" id="booking-tracking-table">
+                            <thead class="table-light">
                                 <tr>
-                                    <th>No</th>
-                                    <th>User</th>
-                                    <th>Booking Code</th>
-                                    <th>Schedule</th>
-                                    <th>Vehicle</th>
-                                    <th>Services</th>
-                                    <th>Detail Servis</th>
-                                    <th>Status</th>
+                                    <th width="5%">No</th>
+                                    <th width="15%">Pengguna</th>
+                                    <th width="15%">Booking Code</th>
+                                    <th width="15%">Jadwal</th>
+                                    <th width="15%">Kendaraan</th>
+                                    <th width="15%">Layanan</th>
+                                    <th width="10%">Detail</th>
+                                    <th width="10%">Status</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <!-- Data will be filled by DataTables -->
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -54,57 +57,85 @@
 
 @section('script')
     <script>
-        $(function () {
+        $(function() {
             $('#booking-tracking-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ url('super-admin/booking-list/datatable') }}",
-                columns: [
-                    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                    { data: 'user_name', name: 'user.name' },
-                    { data: 'booking_code', name: 'booking_code' },
-                    { data: 'schedule', name: 'slot.date' },
-                    { data: 'vehicle', name: 'motorCycleDetail.motorcycle.plate', orderable: false, searchable: false },
-                    { data: 'services', name: 'bookingServices.service.name', orderable: false, searchable: false },
-                    { data: 'detail_service', name: 'motorCycleDetail.id', orderable: false, searchable: false },
-                    { data: 'status', name: 'status' }
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'user_name',
+                        name: 'user.name'
+                    },
+                    {
+                        data: 'booking_code',
+                        name: 'booking_code'
+                    },
+                    {
+                        data: 'schedule',
+                        name: 'slot.date'
+                    },
+                    {
+                        data: 'vehicle',
+                        name: 'motorCycleDetail.motorcycle.plate',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'services',
+                        name: 'bookingServices.service.name',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'detail_service',
+                        name: 'motorCycleDetail.id',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    }
                 ]
             });
 
-            $(document).on('click', '.show-qr', function (e) {
+            $(document).on('click', '.show-qr', function(e) {
                 e.preventDefault();
                 const id = $(this).data('id');
-                $.get(`/super-admin/booking-list/${id}/qrcode`, function (res) {
-                    $('#modal-content').html(`
-                                    <p><strong>Kode Booking:</strong> ${res.booking_code}</p>
-                                    <img src="${res.qr}" alt="QR Code">
-                                `);
-                    $('#generalModal').modal('show');
-                });
-            });
-
-            $(document).on('click', '.show-vehicle', function (e) {
-                e.preventDefault();
-                const id = $(this).data('id');
-                $.get(`/super-admin/booking-list/${id}/detail`, function (res) {
+                $.get(`/super-admin/booking-list/${id}/qrcode`, function(res) {
                     $('#modal-content').html(res.html);
                     $('#generalModal').modal('show');
                 });
             });
 
-            $(document).on('click', '.show-services', function (e) {
+            $(document).on('click', '.show-vehicle', function(e) {
                 e.preventDefault();
                 const id = $(this).data('id');
-                $.get(`/super-admin/booking-list/${id}/services`, function (res) {
+                $.get(`/super-admin/booking-list/${id}/detail`, function(res) {
                     $('#modal-content').html(res.html);
                     $('#generalModal').modal('show');
                 });
             });
 
-            $(document).on('click', '.show-detail-service', function (e) {
+            $(document).on('click', '.show-services', function(e) {
                 e.preventDefault();
                 const id = $(this).data('id');
-                $.get(`/super-admin/booking-list/${id}/motorcycle-detail`, function (res) {
+                $.get(`/super-admin/booking-list/${id}/services`, function(res) {
+                    $('#modal-content').html(res.html);
+                    $('#generalModal').modal('show');
+                });
+            });
+
+            $(document).on('click', '.show-detail-service', function(e) {
+                e.preventDefault();
+                const id = $(this).data('id');
+                $.get(`/super-admin/booking-list/${id}/motorcycle-detail`, function(res) {
                     $('#modal-content').html(res.html);
                     $('#generalModal').modal('show');
                 });

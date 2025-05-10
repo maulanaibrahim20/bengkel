@@ -33,27 +33,29 @@
                     <li class="menu-title"><span>Transaksi</span></li>
                     <li class="{{ Request::segment(2) == 'kasir' ? 'active' : '' }}">
                         <a href="{{ url('/app/kasir') }}"><i class="la la-cash-register"></i>
-                            <span>Kasir
-                                (Prototype)</span></a>
+                            <span>Kasir (Prototype)</span></a>
+                    </li>
+                    <li class="{{ Request::segment(2) == 'booking-list' ? 'active' : '' }}">
+                        <a href="{{ url('/super-admin/booking-list') }}"><i class="la la-book"></i>
+                            <span>Daftar Booking</span></a>
                     </li>
 
-                    {{-- PRODUK & INVENTORI --}}
-                    <li class="menu-title"><span>Produk & Inventori</span></li>
+                    {{-- PRODUK & LAYANAN --}}
+                    <li class="menu-title"><span>Produk & Layanan</span></li>
                     <li class="{{ Request::segment(2) == 'product' ? 'active' : '' }}">
-                        <a href="{{ url('/super-admin/product') }}"><i class="la la-box"></i> <span>Daftar
-                                Produk</span></a>
+                        <a href="{{ url('/super-admin/product') }}"><i class="la la-box"></i> <span>Produk</span></a>
                     </li>
                     <li class="{{ Request::segment(2) == 'motorcycle' ? 'active' : '' }}">
-                        <a href="{{ url('/super-admin/motorcycle') }}"><i class="la la-motorcycle"></i> <span>List
-                                Motor</span></a>
+                        <a href="{{ url('/super-admin/motorcycle') }}"><i class="la la-motorcycle"></i>
+                            <span>Kendaraan</span></a>
                     </li>
                     <li class="{{ Request::segment(2) == 'service' ? 'active' : '' }}">
                         <a href="{{ url('/super-admin/service') }}"><i class="la la-tools"></i>
-                            <span>Service</span></a>
+                            <span>Layanan Servis</span></a>
                     </li>
                     <li class="{{ Request::segment(2) == 'booking-slot' ? 'active' : '' }}">
-                        <a href="{{ url('/super-admin/booking-slot') }}"><i class="la la-book"></i>
-                            <span>Booking Slot</span></a>
+                        <a href="{{ url('/super-admin/booking-slot') }}"><i class="la la-calendar"></i>
+                            <span>Slot Booking</span></a>
                     </li>
 
                     {{-- MASTER DATA --}}
@@ -78,10 +80,11 @@
 
                     {{-- Master Umum --}}
                     <li class="submenu {{ $activeMasterUmum ? 'active menu-open' : '' }}">
-                        <a href="#"><i class="la la-cogs"></i> <span>Master Umum</span> <span class="menu-arrow"></span></a>
+                        <a href="#"><i class="la la-cogs"></i> <span>Master Umum</span> <span
+                                class="menu-arrow"></span></a>
                         <ul style="{{ $activeMasterUmum ? 'display: block;' : 'display: none;' }}">
                             <li><a class="{{ Request::segment(3) == 'brand-engine' ? 'active' : '' }}"
-                                    href="{{ url('/super-admin/master/brand-engine') }}">Brand Mesin</a></li>
+                                    href="{{ url('/super-admin/master/brand-engine') }}">Merek Mesin</a></li>
                             <li><a class="{{ Request::segment(3) == 'technician' ? 'active' : '' }}"
                                     href="{{ url('/super-admin/master/technician') }}">Teknisi</a></li>
                         </ul>
@@ -91,10 +94,6 @@
                     <li class="menu-title"><span>Manajemen Sistem</span></li>
                     <li class="{{ Request::segment(2) == 'user' ? 'active' : '' }}">
                         <a href="{{ url('/super-admin/user') }}"><i class="la la-user"></i> <span>Pengguna</span></a>
-                    </li>
-                    <li class="{{ Request::segment(2) == 'booking-list' ? 'active' : '' }}">
-                        <a href="{{ url('/super-admin/booking-list') }}"><i class="la la-book"></i> <span>Daftar
-                                Booking</span></a>
                     </li>
                 @endcan
                 @can('admin')
