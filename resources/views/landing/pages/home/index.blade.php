@@ -21,7 +21,7 @@
                                         More<i class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
-                                    <img class="img-fluid" src="{{ url('/landing') }}/img/carousel-1.png" alt="Car Repair">
+                                    <img class="img-fluid" src="{{ url('/landing') }}/img/carousel-12.png" alt="Car Repair">
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                                         More<i class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
-                                    <img class="img-fluid" src="{{ url('/landing') }}/img/carousel-2.png" alt="Car Wash">
+                                    <img class="img-fluid" src="{{ url('/landing') }}/img/carousel-22.png" alt="Car Wash">
                                 </div>
                             </div>
                         </div>
