@@ -28,7 +28,7 @@
 
     <!-- Header Title -->
     <div class="page-title-box">
-        <h3>Bengkel Technologies</h3>
+        <h3>DL Service</h3>
     </div>
     <!-- /Header Title -->
 
