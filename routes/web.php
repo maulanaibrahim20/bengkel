@@ -10,7 +10,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BookingListSuperAdminController;
 use App\Http\Controllers\BookingSlotSuperAdminController;
 use App\Http\Controllers\CheckBookingController;
-use App\Http\Controllers\Cms\PageController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BrandEngineController;
 use App\Http\Controllers\Master\ProductCategoryController;
@@ -163,6 +163,12 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/{id}/delete', 'destroy');
             Route::get('/details-booking/{date}', 'showSlotDetailPage');
             Route::post('/generate', 'generate');
+        });
+
+        Route::group(['prefix' => 'setting'], function () {
+            Route::group(['prefix' => 'cms'], function () {
+                Route::get('/', [ConfigController::class, 'index']);
+            });
         });
     });
 

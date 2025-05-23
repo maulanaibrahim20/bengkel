@@ -80,8 +80,7 @@
 
                     {{-- Master Umum --}}
                     <li class="submenu {{ $activeMasterUmum ? 'active menu-open' : '' }}">
-                        <a href="#"><i class="la la-cogs"></i> <span>Master Umum</span> <span
-                                class="menu-arrow"></span></a>
+                        <a href="#"><i class="la la-cogs"></i> <span>Master Umum</span> <span class="menu-arrow"></span></a>
                         <ul style="{{ $activeMasterUmum ? 'display: block;' : 'display: none;' }}">
                             <li><a class="{{ Request::segment(3) == 'brand-engine' ? 'active' : '' }}"
                                     href="{{ url('/super-admin/master/brand-engine') }}">Merek Mesin</a></li>
@@ -94,6 +93,11 @@
                     <li class="menu-title"><span>Manajemen Sistem</span></li>
                     <li class="{{ Request::segment(2) == 'user' ? 'active' : '' }}">
                         <a href="{{ url('/super-admin/user') }}"><i class="la la-user"></i> <span>Pengguna</span></a>
+                    </li>
+                    </li>
+                    <li class="{{ Request::segment(3) == 'cms' ? 'active' : '' }}">
+                        <a href="{{ url('/super-admin/setting/cms') }}"><i class="la la-pen-nib"></i> <span>CMS
+                                Konten</span></a>
                     </li>
                 @endcan
                 @can('admin')

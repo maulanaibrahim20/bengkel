@@ -7,6 +7,7 @@ use App\Models\Technician;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use PSpell\Config;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             BookingSlotSeeder::class,
             ServiceSeeder::class,
+            ConfigSeeder::class,
         ]);
     }
 }
