@@ -96,23 +96,24 @@
             <div class="row g-4 g-md-5">
                 <div class="col-12 col-lg-6 mb-4 mb-lg-0" style="min-height: 300px;">
                     <div class="position-relative h-100 wow fadeIn" data-wow-delay="0.1s">
-                        <img class="position-absolute img-fluid w-100 h-100" src="{{ url('/landing') }}/img/about.jpg"
-                            style="object-fit: cover;" alt="Car Service Center">
+                        <img class="position-absolute img-fluid w-100 h-100"
+                            src="{{ Storage::url($config['about_image'] ?? '') }}" style="object-fit: cover;"
+                            alt="{{ $config['about_title'] ?? 'Tentang Kami' }}">
                         <div class="position-absolute top-0 end-0 mt-n4 me-n4 py-3 py-md-4 px-4 px-md-5"
                             style="background: rgba(0, 0, 0, .08);">
-                            <h1 class="display-4 text-white mb-0">15 <span class="fs-5 fs-md-4">Years</span></h1>
+                            <h1 class="display-4 text-white mb-0">
+                                <span class="fs-5 fs-md-4 text-lowercase">since</span>
+                                <span class="fs-1 fs-md-2 fw-bold">2013</span>
+                            </h1>
                             <h4 class="text-white">Experience</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <h6 class="text-primary text-uppercase">// About Us //</h6>
-                    <h1 class="mb-3 mb-md-4"><span class="text-primary">CarServ</span> Is The Best Place For Your Auto
-                        Care
+                    <h6 class="text-primary text-uppercase">{{$config['about_title']}}</h6>
+                    <h1 class="mb-3 mb-md-4"><span class="text-primary">{{ config('app.name') }}</span> Berani Beda
                     </h1>
-                    <p class="mb-3 mb-md-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet
-                        diam et
-                        eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet
+                    <p class="mb-3 mb-md-4">{{ $config['about_content'] ?? 'Kami Adalah Tempat Perawatan Motor Terbaik' }}
                     </p>
                     <div class="row g-3 g-md-4 mb-3 pb-3">
                         <div class="col-12 wow fadeIn" data-wow-delay="0.1s">
@@ -122,8 +123,8 @@
                                     <span class="fw-bold text-secondary">01</span>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>Professional & Expert</h6>
-                                    <span>Diam dolor diam ipsum sit amet diam et eos</span>
+                                    <h6>Profesional & Ahli</h6>
+                                    <span>Kami memiliki tim berpengalaman dan terlatih di bidangnya.</span>
                                 </div>
                             </div>
                         </div>
@@ -134,8 +135,8 @@
                                     <span class="fw-bold text-secondary">02</span>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>Quality Servicing Center</h6>
-                                    <span>Diam dolor diam ipsum sit amet diam et eos</span>
+                                    <h6>Pusat Layanan Berkualitas</h6>
+                                    <span>Kami menyediakan layanan terbaik dengan standar tinggi.</span>
                                 </div>
                             </div>
                         </div>
@@ -146,14 +147,15 @@
                                     <span class="fw-bold text-secondary">03</span>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>Awards Winning Workers</h6>
-                                    <span>Diam dolor diam ipsum sit amet diam et eos</span>
+                                    <h6>Teknisi Berprestasi</h6>
+                                    <span>Teknisi kami telah meraih berbagai penghargaan atas dedikasinya.</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <a href="" class="btn btn-primary py-2 py-md-3 px-4 px-md-5">Read More<i
-                            class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
+                    {{-- <a href="" class="btn btn-primary py-2 py-md-3 px-4 px-md-5">Read More<i
+                            class="fa fa-arrow-right ms-2 ms-md-3"></i>
+                    </a> --}}
                 </div>
             </div>
         </div>
@@ -162,7 +164,7 @@
     <div class="container-xxl service py-4 py-md-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="text-primary text-uppercase">// Layanan Kami //</h6>
+                <h6 class="text-primary text-uppercase">Layanan Kami</h6>
                 <h1 class="mb-4 mb-md-5">Jelajahi Layanan Kami</h1>
             </div>
             <div class="row g-3 g-md-4 wow fadeInUp" data-wow-delay="0.3s">
@@ -214,17 +216,18 @@
             <div class="row gx-4 gx-md-5">
                 <div class="col-12 py-4 py-md-5 text-center">
                     <div class="py-3 py-md-5">
-                        <h1 class="text-white mb-3 mb-md-4">Certified and Award Winning Car Repair Service Provider</h1>
-                        <p class="text-white mb-3 mb-md-4">Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd
-                            ipsum.
-                            Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua.</p>
-
+                        <h1 class="text-white mb-3 mb-md-4">Penyedia Layanan Perbaikan Motor Bersertifikat dan
+                            Berpengalaman</h1>
+                        <p class="text-white mb-3 mb-md-4">
+                            Kami menghadirkan layanan perbaikan motor profesional dengan kualitas terbaik dan didukung
+                            teknisi bersertifikat. Kepuasan Anda adalah prioritas utama kami.
+                        </p>
                         @guest
-                            <a href="{{ url('/booking/register') }}" class="btn btn-primary px-4 px-md-5 py-2 py-md-3">Booking
-                                Now</a>
+                            <a href="{{ url('/booking/register') }}" class="btn btn-primary px-4 px-md-5 py-2 py-md-3">Pesan
+                                Sekarang</a>
                         @else
-                            <a href="{{ url('booking.create') }}" class="btn btn-light px-4 px-md-5 py-2 py-md-3">Booking
-                                Now</a>
+                            <a href="{{ url('booking.create') }}" class="btn btn-light px-4 px-md-5 py-2 py-md-3">Pesan
+                                Sekarang</a>
                         @endguest
                     </div>
                 </div>
@@ -236,54 +239,34 @@
     <div class="container-xxl py-4 py-md-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="text-primary text-uppercase">// Our Technicians //</h6>
-                <h1 class="mb-4 mb-md-5">Our Expert Technicians</h1>
+                <h6 class="text-primary text-uppercase"> Teknisi Kami</h6>
+                <h1 class="mb-4 mb-md-5">Teknisi Berpengalaman Kami</h1>
             </div>
             <div class="row g-3 g-md-4">
-                <div class="col-6 col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item">
-                        <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ url('/landing') }}/img/team-1.jpg" alt="Technician 1">
-                        </div>
-                        <div class="bg-light text-center p-3 p-md-4">
-                            <h5 class="fw-bold mb-0">Full Name</h5>
-                            <small>Designation</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="team-item">
-                        <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ url('/landing') }}/img/team-2.jpg" alt="Technician 2">
-                        </div>
-                        <div class="bg-light text-center p-3 p-md-4">
-                            <h5 class="fw-bold mb-0">Full Name</h5>
-                            <small>Designation</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="team-item">
-                        <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ url('/landing') }}/img/team-3.jpg" alt="Technician 3">
-                        </div>
-                        <div class="bg-light text-center p-3 p-md-4">
-                            <h5 class="fw-bold mb-0">Full Name</h5>
-                            <small>Designation</small>
+                @php
+                    $defaultImages = ['team-1.jpg', 'team-2.jpg', 'team-3.jpg', 'team-4.jpg'];
+                    $i = 0;
+                @endphp
+                @foreach ($technician as $tech)
+                    @php
+                        $imagePath = $tech->photo ?? null;
+                        $imageToShow = $imagePath && file_exists(public_path('storage/' . $imagePath))
+                            ? asset('storage/' . $imagePath)
+                            : url('/landing/img/' . $defaultImages[$i % 4]);
+                        $i++;
+                    @endphp
+                    <div class="col-6 col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="team-item">
+                            <div class="position-relative overflow-hidden">
+                                <img class="img-fluid" src="{{ $imageToShow }}" alt="{{ $tech->name }}">
+                            </div>
+                            <div class="bg-light text-center p-3 p-md-4">
+                                <h5 class="fw-bold mb-0">{{ $tech->name }}</h5>
+                                <small>Teknisi</small>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-6 col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="team-item">
-                        <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ url('/landing') }}/img/team-4.jpg" alt="Technician 4">
-                        </div>
-                        <div class="bg-light text-center p-3 p-md-4">
-                            <h5 class="fw-bold mb-0">Full Name</h5>
-                            <small>Designation</small>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -291,7 +274,7 @@
     <div class="container-fluid news-section bg-dark my-4 my-md-5 py-4 py-md-5">
         <div class="container">
             <div class="text-center mb-4 mb-md-5">
-                <h6 class="text-primary text-uppercase">// Berita dan Info //</h6>
+                <h6 class="text-primary text-uppercase">Berita dan Info</h6>
                 <h1 class="text-white">Informasi Terbaru</h1>
             </div>
             <div class="owl-carousel news-carousel position-relative">
@@ -318,49 +301,44 @@
     <div class="container-xxl py-4 py-md-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="text-center">
-                <h6 class="text-primary text-uppercase">// Testimonial //</h6>
-                <h1 class="mb-4 mb-md-5">Our Clients Say!</h1>
+                <h6 class="text-primary text-uppercase">Testimoni</h6>
+                <h1 class="mb-4 mb-md-5">Apa Kata Klien Kami!</h1>
             </div>
             <!-- Modified for touch-friendly swiping -->
             <div class="owl-carousel testimonial-carousel position-relative">
                 <div class="testimonial-item text-center">
                     <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-1.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
+                    <h5 class="mb-3">Nama Klien</h5>
                     <div class="testimonial-text bg-light text-center p-3 p-md-4">
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et
-                            eos. Clita erat ipsum et lorem et sit.</p>
+                        <p class="mb-0">Pelayanan yang sangat memuaskan dan profesional. Saya sangat merekomendasikan jasa
+                            ini untuk siapa saja yang membutuhkan.</p>
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
                     <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-2.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
+                    <h5 class="mb-3">Nama Klien</h5>
                     <div class="testimonial-text bg-light text-center p-3 p-md-4">
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et
-                            eos. Clita erat ipsum et lorem et sit.</p>
+                        <p class="mb-0">Teknisi yang ramah dan cepat tanggap. Hasil perbaikan motor saya sangat memuaskan.
+                        </p>
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
                     <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-3.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
+                    <h5 class="mb-3">Nama Klien</h5>
                     <div class="testimonial-text bg-light text-center p-3 p-md-4">
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et
-                            eos. Clita erat ipsum et lorem et sit.</p>
+                        <p class="mb-0">Layanan cepat dan harga terjangkau. Sangat puas dengan pelayanan di sini.</p>
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
                     <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-4.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
+                    <h5 class="mb-3">Nama Klien</h5>
                     <div class="testimonial-text bg-light text-center p-3 p-md-4">
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et
-                            eos. Clita erat ipsum et lorem et sit.</p>
+                        <p class="mb-0">Sangat puas dengan pelayanan ramah dan hasil kerja yang sangat rapi. Terima kasih!
+                        </p>
                     </div>
                 </div>
             </div>

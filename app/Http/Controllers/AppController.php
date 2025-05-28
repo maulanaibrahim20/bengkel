@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Config;
 use App\Models\Product;
 use App\Models\Service;
+use App\Models\Technician;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
@@ -12,7 +14,13 @@ class AppController extends Controller
     {
         $data = [
             'services' => Service::with('detail')->get(),
-            'products' => Product::latest()->where('status', 'active')->take(3)->get()
+            'products' => Product::latest()->where('status', 'active')->take(3)->get(),
+            'technician' => Technician::orderByDesc('id')->take(4)->get(),
+            'config' => Config::whereIn('key', [
+                'about_title',
+                'about_image',
+                'about_content'
+            ])->pluck('value', 'key'),
         ];
         return view('landing.pages.home.index', $data);
     }
