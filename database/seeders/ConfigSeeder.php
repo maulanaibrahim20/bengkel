@@ -14,36 +14,26 @@ class ConfigSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['key' => 'hero_title', 'value' => 'Bengkel Terpercaya di Kota Anda', 'type' => 'text'],
-            ['key' => 'hero_subtitle', 'value' => 'Layanan Cepat, Andal, dan Terjangkau', 'type' => 'text'],
-            ['key' => 'hero_image', 'value' => 'uploads/images/hero.jpg', 'type' => 'image'],
+            ['key' => 'hero_title_1', 'value' => 'Bengkel Motor Terpercaya di Kota Anda', 'type' => 'text'],
+            ['key' => 'hero_subtitle_1', 'value' => 'Perbaikan Motor Cepat, Andal, dan Terjangkau', 'type' => 'text'],
+            ['key' => 'hero_image_1', 'value' => 'uploads/images/hero.jpg', 'type' => 'image'],
+
+            ['key' => 'hero_title_2', 'value' => 'Ahli Perbaikan Motor Semua Merek', 'type' => 'text'],
+            ['key' => 'hero_subtitle_2', 'value' => 'Teknisi Profesional dan Berpengalaman', 'type' => 'text'],
+            ['key' => 'hero_image_2', 'value' => 'uploads/images/hero1.jpg', 'type' => 'image'],
+
+            ['key' => 'hero_title_3', 'value' => 'Servis Motor dengan Harga Terjangkau', 'type' => 'text'],
+            ['key' => 'hero_subtitle_3', 'value' => 'Memberikan Pelayanan Terbaik untuk Anda', 'type' => 'text'],
+            ['key' => 'hero_image_3', 'value' => 'uploads/images/hero2.jpg', 'type' => 'image'],
 
             ['key' => 'about_title', 'value' => 'Tentang Kami', 'type' => 'text'],
             ['key' => 'about_content', 'value' => 'Kami telah melayani pelanggan sejak 2005 dengan layanan otomotif yang andal dan profesional.', 'type' => 'text'],
             ['key' => 'about_image', 'value' => 'uploads/images/about.jpg', 'type' => 'image'],
 
-            ['key' => 'service_1_title', 'value' => 'Ganti Oli', 'type' => 'text'],
-            ['key' => 'service_1_description', 'value' => 'Layanan ganti oli cepat dengan oli berkualitas tinggi.', 'type' => 'text'],
-            ['key' => 'service_1_image', 'value' => 'uploads/images/services/oil_change.jpg', 'type' => 'image'],
-
-            ['key' => 'service_2_title', 'value' => 'Servis Rem', 'type' => 'text'],
-            ['key' => 'service_2_description', 'value' => 'Pemeriksaan dan perbaikan sistem rem untuk keselamatan Anda.', 'type' => 'text'],
-            ['key' => 'service_2_image', 'value' => 'uploads/images/services/brake_service.jpg', 'type' => 'image'],
-
             ['key' => 'contact_address', 'value' => 'Jl. Merdeka No. 123, Jakarta', 'type' => 'text'],
             ['key' => 'contact_phone', 'value' => '0812-3456-7890', 'type' => 'text'],
             ['key' => 'contact_email', 'value' => 'info@bengkelku.com', 'type' => 'text'],
             ['key' => 'contact_open_hours', 'value' => 'Senin - Sabtu: 08:00 - 17:00', 'type' => 'text'],
-
-            ['key' => 'testimonial_1_name', 'value' => 'John Doe', 'type' => 'text'],
-            ['key' => 'testimonial_1_position', 'value' => 'Pelanggan', 'type' => 'text'],
-            ['key' => 'testimonial_1_comment', 'value' => 'Pelayanan yang sangat memuaskan dan cepat!', 'type' => 'text'],
-            ['key' => 'testimonial_1_image', 'value' => 'uploads/images/testimonials/john_doe.jpg', 'type' => 'image'],
-
-            ['key' => 'team_1_name', 'value' => 'Andi Mechanic', 'type' => 'text'],
-            ['key' => 'team_1_position', 'value' => 'Kepala Teknisi', 'type' => 'text'],
-            ['key' => 'team_1_description', 'value' => 'Berpengalaman lebih dari 10 tahun dalam perbaikan otomotif.', 'type' => 'text'],
-            ['key' => 'team_1_image', 'value' => 'uploads/images/team/andi_mechanic.jpg', 'type' => 'image'],
         ];
 
         foreach ($data as $item) {

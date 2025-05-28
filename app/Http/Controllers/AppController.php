@@ -19,7 +19,7 @@ class AppController extends Controller
             'config' => Config::whereIn('key', [
                 'about_title',
                 'about_image',
-                'about_content'
+                'about_content',
             ])->pluck('value', 'key'),
         ];
         return view('landing.pages.home.index', $data);

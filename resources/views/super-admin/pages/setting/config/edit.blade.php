@@ -10,10 +10,25 @@
                 $fieldLabel = ucwords(str_replace('_', ' ', $fieldName));
             @endphp
 
-            <div class="mb-3">
-                <label class="form-label">{{ $fieldLabel }}</label>
+            @if($config->type !== 'image')
+                <div class="mb-3">
+                    <label class="form-label">{{ $fieldLabel }}</label>
+                    <input type="text" class="form-control" name="{{ $config->key }}"
+                        value="{{ old($config->key, $config->value ?? '') }}">
+                    <input type="hidden" name="{{ $config->key }}_id" value="{{ $config->id }}">
+                </div>
+            @endif
+        @endforeach
 
-                @if($config->type === 'image')
+        @foreach($configs as $config)
+            @php
+                $fieldName = str_replace($section . '_', '', $config->key);
+                $fieldLabel = ucwords(str_replace('_', ' ', $fieldName));
+            @endphp
+
+            @if($config->type === 'image')
+                <div class="mb-3">
+                    <label class="form-label">{{ $fieldLabel }}</label>
                     <input type="file" class="form-control" name="{{ $config->key }}" accept="image/*">
                     <input type="hidden" name="{{ $config->key }}_id" value="{{ $config->id }}">
                     <small class="text-muted">Current:</small>
@@ -22,14 +37,11 @@
                     @else
                         <span class="text-muted">No image</span>
                     @endif
-                @else
-                    <input type="text" class="form-control" name="{{ $config->key }}"
-                        value="{{ old($config->key, $config->value ?? '') }}">
-                    <input type="hidden" name="{{ $config->key }}_id" value="{{ $config->id }}">
-                @endif
-            </div>
+                </div>
+            @endif
         @endforeach
     </div>
+
 
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

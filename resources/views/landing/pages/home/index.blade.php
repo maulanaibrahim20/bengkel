@@ -11,13 +11,22 @@
                         <div class="container">
                             <div class="row align-items-center justify-content-center justify-content-lg-start">
                                 <div class="col-12 col-lg-7 text-center text-lg-start">
-                                    <h6 class="text-white text-uppercase mb-2 mb-md-3 animated slideInDown">// Car Servicing
-                                        //</h6>
+                                    <h6 class="text-white text-uppercase mb-2 mb-md-3 animated slideInDown">Bengkel Motor
+                                        Terpercaya</h6>
                                     <h1
                                         class="display-5 display-md-3 text-white mb-3 mb-md-4 pb-2 pb-md-3 animated slideInDown">
-                                        Qualified Car Repair Service Center</h1>
-                                    <a href="" class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
-                                        More<i class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
+                                        Perbaikan Motor Cepat, Andal, dan Terjangkau</h1>
+                                    @auth
+                                        <a href="{{ url('/user/booking/create') }}"
+                                            class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Booking
+                                            Sekarang<i class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
+                                    @else
+                                        <a href="{{ url('/booking/register') }}"
+                                            class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Booking
+                                            Sekarang<i class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
+
+                                    @endauth
+
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
                                     <img class="img-fluid" src="{{ url('/landing') }}/img/carousel-12.png" alt="Car Repair">
@@ -33,13 +42,14 @@
                         <div class="container">
                             <div class="row align-items-center justify-content-center justify-content-lg-start">
                                 <div class="col-12 col-lg-7 text-center text-lg-start">
-                                    <h6 class="text-white text-uppercase mb-2 mb-md-3 animated slideInDown">// Car Servicing
-                                        //</h6>
+                                    <h6 class="text-white text-uppercase mb-2 mb-md-3 animated slideInDown">Ahli Perbaikan
+                                        Motor Semua Merek</h6>
                                     <h1
                                         class="display-5 display-md-3 text-white mb-3 mb-md-4 pb-2 pb-md-3 animated slideInDown">
-                                        Qualified Car Wash Service Center</h1>
-                                    <a href="" class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
-                                        More<i class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
+                                        Teknisi Profesional dan Berpengalaman</h1>
+                                    <a href=""
+                                        class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Booking
+                                        Sekarang<i class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
                                     <img class="img-fluid" src="{{ url('/landing') }}/img/carousel-22.png" alt="Car Wash">
@@ -111,7 +121,7 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <h6 class="text-primary text-uppercase">{{$config['about_title']}}</h6>
-                    <h1 class="mb-3 mb-md-4"><span class="text-primary">{{ config('app.name') }}</span> Berani Beda
+                    <h1 class="mb-3 mb-md-4"><span class="text-primary">{{ config('app.name') }}</span> #Berani Beda
                     </h1>
                     <p class="mb-3 mb-md-4">{{ $config['about_content'] ?? 'Kami Adalah Tempat Perawatan Motor Terbaik' }}
                     </p>
@@ -226,7 +236,7 @@
                             <a href="{{ url('/booking/register') }}" class="btn btn-primary px-4 px-md-5 py-2 py-md-3">Pesan
                                 Sekarang</a>
                         @else
-                            <a href="{{ url('booking.create') }}" class="btn btn-light px-4 px-md-5 py-2 py-md-3">Pesan
+                            <a href="{{ url('user/booking/create') }}" class="btn btn-light px-4 px-md-5 py-2 py-md-3">Pesan
                                 Sekarang</a>
                         @endguest
                     </div>
