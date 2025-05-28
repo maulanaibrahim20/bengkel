@@ -16,8 +16,7 @@
                                     <h1
                                         class="display-5 display-md-3 text-white mb-3 mb-md-4 pb-2 pb-md-3 animated slideInDown">
                                         Qualified Car Repair Service Center</h1>
-                                    <a href=""
-                                        class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
+                                    <a href="" class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
                                         More<i class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
@@ -39,8 +38,7 @@
                                     <h1
                                         class="display-5 display-md-3 text-white mb-3 mb-md-4 pb-2 pb-md-3 animated slideInDown">
                                         Qualified Car Wash Service Center</h1>
-                                    <a href=""
-                                        class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
+                                    <a href="" class="btn btn-primary py-2 py-md-3 px-4 px-md-5 animated slideInDown">Learn
                                         More<i class="fa fa-arrow-right ms-2 ms-md-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
@@ -175,12 +173,10 @@
                                 <h2 class="accordion-header" id="heading-{{ $service->id }}">
                                     <button
                                         class="accordion-button d-flex align-items-center p-3 {{ $loop->first ? '' : 'collapsed' }}"
-                                        type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse-{{ $service->id }}"
+                                        type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $service->id }}"
                                         aria-expanded="{{ $loop->first ? 'true' : 'false' }}"
                                         aria-controls="collapse-{{ $service->id }}">
-                                        <i
-                                            class="fa {{ $service->icon ?? 'fa-cogs' }} fa-lg fa-md-2x me-3 text-primary"></i>
+                                        <i class="fa {{ $service->icon ?? 'fa-cogs' }} fa-lg fa-md-2x me-3 text-primary"></i>
                                         <h5 class="m-0">{{ $service->name }}</h5>
                                     </button>
                                 </h2>
@@ -224,8 +220,7 @@
                             Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua.</p>
 
                         @guest
-                            <a href="{{ url('/booking/register') }}"
-                                class="btn btn-primary px-4 px-md-5 py-2 py-md-3">Booking
+                            <a href="{{ url('/booking/register') }}" class="btn btn-primary px-4 px-md-5 py-2 py-md-3">Booking
                                 Now</a>
                         @else
                             <a href="{{ url('booking.create') }}" class="btn btn-light px-4 px-md-5 py-2 py-md-3">Booking
@@ -329,8 +324,7 @@
             <!-- Modified for touch-friendly swiping -->
             <div class="owl-carousel testimonial-carousel position-relative">
                 <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3"
-                        src="{{ url('/landing') }}/img/testimonial-1.jpg"
+                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-1.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
@@ -340,8 +334,7 @@
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3"
-                        src="{{ url('/landing') }}/img/testimonial-2.jpg"
+                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-2.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
@@ -351,8 +344,7 @@
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3"
-                        src="{{ url('/landing') }}/img/testimonial-3.jpg"
+                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-3.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
@@ -362,8 +354,7 @@
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3"
-                        src="{{ url('/landing') }}/img/testimonial-4.jpg"
+                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-4.jpg"
                         style="width: 70px; height: 70px; object-fit: cover;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>

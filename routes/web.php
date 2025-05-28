@@ -27,6 +27,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\UserSuperAdminController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', [AppController::class, 'home']);
 
 
 
@@ -168,6 +169,9 @@ Route::middleware(['auth'])->group(function () {
         Route::group(['prefix' => 'setting'], function () {
             Route::group(['prefix' => 'cms'], function () {
                 Route::get('/', [ConfigController::class, 'index']);
+                Route::get('/{section}/edit', [ConfigController::class, 'edit']);
+                Route::get('/{section}/show', [ConfigController::class, 'show']);
+                Route::put('/{section}/update', [ConfigController::class, 'update']);
             });
         });
     });

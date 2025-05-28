@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
     <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
         <img src="{{ url('img/logo.png') }}" alt="Logo" style="height: 95px;" class="me-2">
-        <h2 class="m-0 text-primary">DL Service</h2>
+        <h2 class="m-0 text-primary">{{ config('app.name') }}</h2>
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
@@ -12,16 +12,16 @@
                 <i class="fa fa-home me-2"></i>Home
             </a>
             <a href="{{ url('/about') }}" class="nav-item nav-link {{ Request::is('about') ? 'active' : '' }}">
-                <i class="fa fa-info-circle me-2"></i>About
+                <i class="fa fa-info-circle me-2"></i>Tentang
             </a>
             <a href="{{ url('/service') }}" class="nav-item nav-link {{ Request::is('service') ? 'active' : '' }}">
-                <i class="fa fa-tools me-2"></i>Service
+                <i class="fa fa-tools me-2"></i>Layanan
             </a>
             <a href="{{ url('/booking') }}" class="nav-item nav-link {{ Request::is('booking') ? 'active' : '' }}">
                 <i class="fa fa-calendar-check me-2"></i>Booking
             </a>
             <a href="{{ url('/contact') }}" class="nav-item nav-link {{ Request::is('contact') ? 'active' : '' }}">
-                <i class="fa fa-envelope me-2"></i>Contact
+                <i class="fa fa-envelope me-2"></i>Kontak
             </a>
         </div>
 

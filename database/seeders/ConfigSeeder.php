@@ -19,15 +19,15 @@ class ConfigSeeder extends Seeder
             ['key' => 'hero_image', 'value' => 'uploads/images/hero.jpg', 'type' => 'image'],
 
             ['key' => 'about_title', 'value' => 'Tentang Kami', 'type' => 'text'],
-            ['key' => 'about_content', 'value' => '<p>Kami telah melayani pelanggan sejak 2005 dengan layanan otomotif yang andal dan profesional.</p>', 'type' => 'html'],
+            ['key' => 'about_content', 'value' => 'Kami telah melayani pelanggan sejak 2005 dengan layanan otomotif yang andal dan profesional.', 'type' => 'text'],
             ['key' => 'about_image', 'value' => 'uploads/images/about.jpg', 'type' => 'image'],
 
             ['key' => 'service_1_title', 'value' => 'Ganti Oli', 'type' => 'text'],
-            ['key' => 'service_1_description', 'value' => 'Layanan ganti oli cepat dengan oli berkualitas tinggi.', 'type' => 'textarea'],
+            ['key' => 'service_1_description', 'value' => 'Layanan ganti oli cepat dengan oli berkualitas tinggi.', 'type' => 'text'],
             ['key' => 'service_1_image', 'value' => 'uploads/images/services/oil_change.jpg', 'type' => 'image'],
 
             ['key' => 'service_2_title', 'value' => 'Servis Rem', 'type' => 'text'],
-            ['key' => 'service_2_description', 'value' => 'Pemeriksaan dan perbaikan sistem rem untuk keselamatan Anda.', 'type' => 'textarea'],
+            ['key' => 'service_2_description', 'value' => 'Pemeriksaan dan perbaikan sistem rem untuk keselamatan Anda.', 'type' => 'text'],
             ['key' => 'service_2_image', 'value' => 'uploads/images/services/brake_service.jpg', 'type' => 'image'],
 
             ['key' => 'contact_address', 'value' => 'Jl. Merdeka No. 123, Jakarta', 'type' => 'text'],
@@ -37,12 +37,12 @@ class ConfigSeeder extends Seeder
 
             ['key' => 'testimonial_1_name', 'value' => 'John Doe', 'type' => 'text'],
             ['key' => 'testimonial_1_position', 'value' => 'Pelanggan', 'type' => 'text'],
-            ['key' => 'testimonial_1_comment', 'value' => 'Pelayanan yang sangat memuaskan dan cepat!', 'type' => 'textarea'],
+            ['key' => 'testimonial_1_comment', 'value' => 'Pelayanan yang sangat memuaskan dan cepat!', 'type' => 'text'],
             ['key' => 'testimonial_1_image', 'value' => 'uploads/images/testimonials/john_doe.jpg', 'type' => 'image'],
 
             ['key' => 'team_1_name', 'value' => 'Andi Mechanic', 'type' => 'text'],
             ['key' => 'team_1_position', 'value' => 'Kepala Teknisi', 'type' => 'text'],
-            ['key' => 'team_1_description', 'value' => 'Berpengalaman lebih dari 10 tahun dalam perbaikan otomotif.', 'type' => 'textarea'],
+            ['key' => 'team_1_description', 'value' => 'Berpengalaman lebih dari 10 tahun dalam perbaikan otomotif.', 'type' => 'text'],
             ['key' => 'team_1_image', 'value' => 'uploads/images/team/andi_mechanic.jpg', 'type' => 'image'],
         ];
 
